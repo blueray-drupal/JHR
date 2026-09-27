@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import './Job.css';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 const formatDate = (date) => {
     if (!date) return '';
@@ -11,7 +12,7 @@ const formatDate = (date) => {
 };
 
 function Job() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
 

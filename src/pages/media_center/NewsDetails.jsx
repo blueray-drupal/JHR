@@ -3,11 +3,12 @@ import { useLocation, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalSingleNode } from '../../utils/drupalParser';
 import './NewsDetails.css';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function NewsDetails() {
     const { id } = useParams();
     const location = useLocation();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [news, setNews] = useState(location.state?.newsData || null);
     const [loading, setLoading] = useState(!location.state?.newsData);
 

@@ -16,53 +16,28 @@ const Card = ({
 }) => {
 
     const location = useLocation();
-    console.log(location.pathname)
+    const isNews = location.pathname === "/news";
+
     return (
-        location.pathname !== "/news" ? (
-            <article className={`custom-card ${className}`}>
-                {image && (
-                    <div className="card-image-wrapper">
-                        <img src={image} alt={imageAlt || title} className="card-image" />
-                    </div>
-                )}
-
-                <div className="card-info">
-                    {date && <span className="card-date">{date}</span>}
-                    {title && <h3 className="card-title">{title}</h3>}
-                    {description && <p className="card-description">{description}</p>}
-
-                    {link && (
-                        <Link to={link} className="card-link">
-                            {linkText} <span className="arrow"><img src="../../../assets/learn-more.png" alt="" /></span>
-                        </Link>
-                    )}
+        <article className={`custom-card ${className}${isNews ? " news-cards" : ""}`}>
+            {image && (
+                <div className="card-image-wrapper">
+                    <img src={image} alt={imageAlt || title} className="card-image" />
                 </div>
+            )}
 
+            <div className="card-info">
+                {date && <span className="card-date">{date}</span>}
+                {title && <h3 className="card-title">{title}</h3>}
+                {description && <p className="card-description">{description}</p>}
 
-            </article>) : (
-            <div>
-                <article className={`custom-card ${className} news-cards`}>
-                    {image && (
-                        <div className="card-image-wrapper">
-                            <img src={image} alt={imageAlt || title} className="card-image" />
-                        </div>
-                    )}
-
-                    <div className="card-info">
-                        {date && <span className="card-date">{date}</span>}
-                        {title && <h3 className="card-title">{title}</h3>}
-                        {description && <p className="card-description">{description}</p>}
-
-                        {link && (
-                            <Link to={link} className="card-link">
-                                {linkText} <span className="arrow"><img src="../../../assets/learn-more.png" alt="" /></span>
-                            </Link>
-                        )}
-                    </div>
-                </article>
+                {link && (
+                    <Link to={link} className="card-link">
+                        {linkText} <span className="arrow"><img src="../../../assets/learn-more.png" alt="" /></span>
+                    </Link>
+                )}
             </div>
-
-        )
+        </article>
     );
 };
 

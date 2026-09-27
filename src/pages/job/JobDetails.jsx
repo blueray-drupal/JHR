@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalSingleNode } from '../../utils/drupalParser';
 import './Job.css';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 const formatDate = (date) => {
     if (!date) return '';
@@ -13,7 +14,7 @@ const formatDate = (date) => {
 function JobDetails() {
     const { id } = useParams();
     const location = useLocation();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [job, setJob] = useState(location.state?.jobData || null);
     const [loading, setLoading] = useState(!location.state?.jobData);
 

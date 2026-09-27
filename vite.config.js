@@ -41,13 +41,32 @@ export default defineConfig(({ mode }) => {
           target: drupalUrl,
           changeOrigin: true,
           secure: drupalUrl.startsWith('https'),
-          rewrite: (path) => path.replace(/^\/api/, '')
+          rewrite: (path) => path.replace(/^\/api/, ''),
+          cookieDomainRewrite: 'localhost',
+          // مهم: لا تتبع 303 لصفحة confirmation على دومين دروبال (كانت تسبب 500 بالمتصفح)
+          followRedirects: false,
+        },
+        '/webform': {
+          target: drupalUrl,
+          changeOrigin: true,
+          secure: drupalUrl.startsWith('https'),
+          cookieDomainRewrite: 'localhost',
+          followRedirects: false,
+        },
+        '/form': {
+          target: drupalUrl,
+          changeOrigin: true,
+          secure: drupalUrl.startsWith('https'),
+          cookieDomainRewrite: 'localhost',
+          followRedirects: false,
         },
         // ✅ Proxy for custom file upload module — NO rewrite, path stays as-is
         '/webform-file-upload': {
           target: drupalUrl,
           changeOrigin: true,
           secure: drupalUrl.startsWith('https'),
+          cookieDomainRewrite: 'localhost',
+          followRedirects: false,
         }
       }
     },

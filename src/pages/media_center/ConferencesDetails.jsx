@@ -3,11 +3,12 @@ import { useLocation, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalSingleNode } from '../../utils/drupalParser';
 import './NewsDetails.css';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function ConferencesDetails() {
     const { id } = useParams();
     const location = useLocation();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [item, setItem] = useState(location.state?.itemData || null);
     const [loading, setLoading] = useState(!location.state?.itemData);
 

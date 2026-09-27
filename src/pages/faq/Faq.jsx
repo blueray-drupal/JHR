@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import { parseDrupalMultipleNodes } from "../../utils/drupalParser";
 import "./Faq.css";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function Faq() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
 

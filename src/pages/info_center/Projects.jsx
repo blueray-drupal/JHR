@@ -3,6 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { Link } from "react-router-dom";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 const ITEMS_PER_PAGE = 3;
 
@@ -20,7 +21,7 @@ function Projects() {
     const [projects, setProjects] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
 
     useEffect(() => {
         const fetchData = async () => {

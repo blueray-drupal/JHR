@@ -369,3 +369,18 @@
         width: 100%;
     }
 }
+
+/* Drupal webform inside FOI page */
+.foi-webform {
+    width: 100%;
+}
+
+.foi-webform .dwf-form {
+    gap: 18px;
+}
+
+.foi-webform .dwf-legend,
+.foi-webform .dwf-label {
+    color: var(--foi-teal-dark);
+    font-weight: 700;
+}

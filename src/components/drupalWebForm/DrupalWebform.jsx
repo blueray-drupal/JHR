@@ -40,8 +40,9 @@ import './DrupalWebform.css';
 
 // ─── Initial Values ───────────────────────────────────────────────────────────
 
-const getInitialValue = (type, defaultValue) => {
-  if (type === 'file') return null;
+const getInitialValue = (type, defaultValue, multiple = false) => {
+  if (type === 'file') return multiple ? [] : null;
+  if (type === 'checkbox') return Boolean(defaultValue);
   if (type === 'checkboxes') {
     if (Array.isArray(defaultValue)) return defaultValue.filter(Boolean).map(String);
     if (defaultValue && typeof defaultValue === 'object') {
@@ -54,7 +55,12 @@ const getInitialValue = (type, defaultValue) => {
 };
 
 const getInitialFormData = (fields) =>
-  Object.fromEntries(fields.map(({ key, type, defaultValue }) => [key, getInitialValue(type, defaultValue)]));
+  Object.fromEntries(
+    fields.map(({ key, type, defaultValue, multiple }) => [
+      key,
+      getInitialValue(type, defaultValue, multiple),
+    ])
+  );
 
 // ─── Field Ordering & Layout ──────────────────────────────────────────────────
 
@@ -120,6 +126,11 @@ const buildPayload = (fields, formData, submitKeyMap = {}) => {
     const outKey = submitKeyMap[key] ?? key;
     const val    = formData[key] ?? formData[outKey];
 
+    if (type === 'checkbox') {
+      if (val) out[outKey] = 1;
+      continue;
+    }
+
     if (type === 'checkboxes') {
       const arr = Array.isArray(val) ? val.filter(Boolean) : [];
       if (arr.length === 0 && !required) continue;
@@ -165,7 +176,19 @@ const validateForm = (fields, formData, excludeSet, messages) => {
     const reqMsg    = customMsg ?? messages.fieldRequired(title);
 
     if (type === 'file') {
-      if (required && !(formData[key] instanceof File)) errors[key] = reqMsg;
+      if (required) {
+        const files = Array.isArray(formData[key])
+          ? formData[key]
+          : formData[key] instanceof File
+            ? [formData[key]]
+            : [];
+        if (files.length === 0) errors[key] = reqMsg;
+      }
+      continue;
+    }
+
+    if (type === 'checkbox') {
+      if (required && !formData[key]) errors[key] = reqMsg;
       continue;
     }
 
@@ -351,8 +374,19 @@ const DrupalWebform = ({
       };
 
       const fileData = {};
-      for (const { key, type } of fields) {
-        if (type === 'file' && formData[key] instanceof File) fileData[key] = formData[key];
+      for (const { key, type, multiple } of fields) {
+        if (type !== 'file') continue;
+        const value = formData[key];
+        if (multiple) {
+          const files = Array.isArray(value)
+            ? value.filter((f) => f instanceof File)
+            : value instanceof File
+              ? [value]
+              : [];
+          if (files.length > 0) fileData[key] = files;
+        } else if (value instanceof File) {
+          fileData[key] = value;
+        }
       }
 
       let response;
@@ -377,6 +411,10 @@ const DrupalWebform = ({
 
       onSuccess?.(response);
     } catch (err) {
+      if (err.fieldErrors && Object.keys(err.fieldErrors).length > 0) {
+        setErrors(err.fieldErrors);
+      }
+
       Swal.fire({
         icon: 'error',
         title: messages.errorTitle,
@@ -398,14 +436,14 @@ const DrupalWebform = ({
 
     return (
       <div key={field.key} className="dwf-field">
-        {field.type !== 'checkboxes' && field.type !== 'radios' && (
+        {field.type !== 'checkboxes' && field.type !== 'radios' && field.type !== 'checkbox' && (
           <label className="dwf-label" htmlFor={fieldId}>
             {field.title}
             {field.required && <span className="dwf-required" aria-hidden="true"> *</span>}
           </label>
         )}
 
-        {field.description && (
+        {field.description && field.type !== 'checkbox' && (
           <span id={`${fieldId}-desc`} className="dwf-description">{field.description}</span>
         )}
 
@@ -468,16 +506,48 @@ const DrupalWebform = ({
               ))}
             </div>
           </fieldset>
+        ) : field.type === 'checkbox' ? (
+          <label className="dwf-checkbox-label dwf-checkbox-label--single" htmlFor={fieldId}>
+            <input
+              id={fieldId}
+              type="checkbox"
+              className="dwf-checkbox"
+              checked={Boolean(formData[field.key])}
+              onChange={(e) => handleChange(field.key, e.target.checked)}
+              aria-invalid={hasError}
+              aria-required={field.required}
+            />
+            <span>
+              {field.description || field.title}
+              {field.required && <span className="dwf-required" aria-hidden="true"> *</span>}
+            </span>
+          </label>
         ) : field.type === 'file' ? (
           <label className="dwf-file-label" htmlFor={fieldId}>
-            <input id={fieldId} type="file" className="dwf-file-input"
-              accept={field.fileAccept || undefined}
-              onChange={(e) => handleChange(field.key, e.target.files?.[0] ?? null)}
-              aria-invalid={hasError} aria-required={field.required} />
+            <input
+              id={fieldId}
+              type="file"
+              className="dwf-file-input"
+              accept={field.fileAccept || '.jpg,.jpeg,.png,.pdf'}
+              multiple={Boolean(field.multiple)}
+              onChange={(e) => {
+                const files = Array.from(e.target.files || []);
+                if (field.multiple) handleChange(field.key, files);
+                else handleChange(field.key, files[0] ?? null);
+              }}
+              aria-invalid={hasError}
+              aria-required={field.required}
+            />
             <span className="dwf-file-text">
-              {formData[field.key] instanceof File ? formData[field.key].name : field.placeholder || 'Click to upload or drag a file here'}
+              {Array.isArray(formData[field.key]) && formData[field.key].length > 0
+                ? formData[field.key].map((f) => f.name).join(', ')
+                : formData[field.key] instanceof File
+                  ? formData[field.key].name
+                  : field.placeholder || 'اضغط لاختيار ملف'}
             </span>
-            {field.fileAccept && <span className="dwf-file-hint">Accepted: {field.fileAccept}</span>}
+            {(field.fileAccept || field.description) && (
+              <span className="dwf-file-hint">{field.description || `الملفات المسموح بها: ${field.fileAccept}`}</span>
+            )}
           </label>
         ) : (
           <input

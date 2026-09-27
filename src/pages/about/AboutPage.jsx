@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { ABOUT_SIDEBAR } from './aboutConfig';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 import './About.css';
 
 const formatYear = (date) => {
@@ -17,7 +18,7 @@ const getPositionClass = (position) => {
 };
 
 function AboutPage({ sectionPosition }) {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [section, setSection] = useState(null);
     const [loading, setLoading] = useState(true);
 

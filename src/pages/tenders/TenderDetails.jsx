@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalSingleNode } from '../../utils/drupalParser';
 import { mapTenderNode } from '../../services/api/tendersApi';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 import './Tenders.css';
 
 const formatDateRange = (startDate, endDate) => {
@@ -15,7 +16,7 @@ const formatDateRange = (startDate, endDate) => {
 function TenderDetails() {
     const { id } = useParams();
     const location = useLocation();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [tender, setTender] = useState(location.state?.tenderData || null);
     const [loading, setLoading] = useState(!location.state?.tenderData?.bodyHtml);
 

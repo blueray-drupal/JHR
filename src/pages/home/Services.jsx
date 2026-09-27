@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { fetchServices } from '../../services/api/servicesApi';
 import { ServicesHomeSkeleton } from '../../components/skeleton/PageSkeletons';
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const stripHtml = (html) => {
     if (!html) return '';
@@ -17,21 +15,8 @@ function Services() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(
-                    `${baseUrl}/jsonapi/node/services?include=field_services,field_services.field_media_image,field_services.field_media_image.field_media_image`
-                );
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const allSections = parseDrupalMultipleNodes(data, baseUrl);
-                const homeSection = allSections.find(
-                    (item) => item.field_section === 'home'
-                );
-
-                setSection(homeSection ?? null);
+                const homeSection = await fetchServices('home');
+                setSection(homeSection);
             } catch (error) {
                 console.error('Error fetching home services:', error);
             } finally {

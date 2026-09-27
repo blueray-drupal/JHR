@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./Services.css";
-import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { fetchServices } from "../../services/api/servicesApi";
 
 function CargoService() {
     const breadcrumb = [
@@ -18,7 +18,6 @@ function CargoService() {
         { id: 5, title: "المتحف", link: "/services/museum" },
     ];
 
-    const baseUrl = import.meta.env.VITE_BASE_URL;
     const [section, setSection] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -26,27 +25,16 @@ function CargoService() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`${baseUrl}/jsonapi/node/services?include=field_services,field_services.field_media_image,field_services.field_media_image.field_media_image`);
-                if (!response.ok) {
-                    console.log(response.status)
-                }
-
-                const data = await response.json()
-                const allFiles = parseDrupalMultipleNodes(data, baseUrl)
-
-                const filtered = allFiles.filter(section => section.field_section == "freight_transport")
-
-                setSection(filtered[0]);
-
-            }
-            catch (error) {
-                console.log(error)
+                const found = await fetchServices("freight_transport");
+                setSection(found);
+            } catch (error) {
+                console.log(error);
             } finally {
                 setLoading(false);
             }
-        }
-        fetchData()
-    }, [])
+        };
+        fetchData();
+    }, []);
 
     const item = section?.files?.[0];
     const bodyParts = item?.body ? item.body.match(/<p>.*?<\/p>/gs) || [] : [];

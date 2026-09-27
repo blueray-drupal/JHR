@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,7 +10,7 @@ import './Home.css';
 import { Navigation } from 'swiper/modules';
 import { SliderHeroSkeleton } from '../../components/skeleton/PageSkeletons';
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = drupalBaseUrl;
 
 export default function Slider() {
     const [sliderData, setSliderData] = useState([]);

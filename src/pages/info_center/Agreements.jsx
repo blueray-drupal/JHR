@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from "../../utils/drupalParser";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 const ITEMS_PER_PAGE = 4;
 
@@ -9,7 +10,7 @@ function Agreements() {
     const [searchInput, setSearchInput] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
 
