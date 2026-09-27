@@ -1,0 +1,28 @@
+.basic-page-body {
+    direction: rtl;
+    color: var(--text-color);
+    font-family: Cairo, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 2;
+    text-align: justify;
+}
+
+.basic-page-body p {
+    margin: 0 0 16px;
+    color: var(--text-color);
+}
+
+.basic-page-body p:last-child {
+    margin-bottom: 0;
+}
+
+.basic-page-body a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.basic-page-body a:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+}

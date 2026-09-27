@@ -1,0 +1,371 @@
+/* Freedom of information request form — "foi-" prefix to avoid collisions. */
+
+.foi-form {
+    --foi-teal: var(--primary-color);
+    --foi-teal-dark: var(--accent-color);
+    --foi-red: #cc2b2b;
+    --foi-border: var(--border-color);
+    --foi-input-bg: var(--card-bg);
+    --foi-text: var(--text-color);
+    --foi-muted: var(--text-muted);
+
+    font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--foi-text);
+    font-size: 14px;
+}
+
+.foi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 28px;
+    background: var(--content-bg);
+    border: 1px solid var(--foi-border);
+    border-radius: 6px;
+}
+
+/* ─── Submission date bar ────────────────────────────────────────────────── */
+.foi-date-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--vision-box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.foi-date-label {
+    font-weight: 700;
+    color: var(--foi-teal-dark);
+}
+
+.foi-date-value {
+    color: var(--foi-text);
+    direction: ltr;
+}
+
+/* ─── Sections ───────────────────────────────────────────────────────────── */
+.foi-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.foi-fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.foi-section-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--foi-teal-dark);
+}
+
+.foi-required-note {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--foi-red);
+}
+
+/* ─── Grids ──────────────────────────────────────────────────────────────── */
+.foi-grid {
+    display: grid;
+    gap: 14px 18px;
+}
+
+.foi-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.foi-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ─── Fields ─────────────────────────────────────────────────────────────── */
+.foi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.foi-label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--foi-teal-dark);
+}
+
+.foi-input,
+.foi-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    background: var(--foi-input-bg);
+    border: 1px solid var(--foi-border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--foi-text);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.foi-input {
+    height: 38px;
+}
+
+.foi-textarea {
+    min-height: 84px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.foi-input::placeholder,
+.foi-textarea::placeholder {
+    color: var(--foi-muted);
+}
+
+.foi-input:focus,
+.foi-textarea:focus {
+    border-color: var(--foi-teal);
+    box-shadow: 0 0 0 3px rgba(13, 116, 141, 0.12);
+}
+
+.foi-input--ltr {
+    direction: ltr;
+    text-align: right;
+}
+
+/* ─── Radios ─────────────────────────────────────────────────────────────── */
+.foi-radios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+}
+
+.foi-radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--foi-text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.foi-radio {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: var(--foi-teal);
+    cursor: pointer;
+}
+
+/* ─── Upload boxes ───────────────────────────────────────────────────────── */
+.foi-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 16px;
+    background: #fbfbfc;
+    border: 1px dashed #c7cdd3;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.foi-upload-icon {
+    color: var(--foi-muted);
+}
+
+.foi-upload-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.foi-upload-btn {
+    padding: 7px 26px;
+    background: var(--foi-teal);
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.foi-upload-btn:hover {
+    background: var(--foi-teal-dark);
+}
+
+.foi-upload-files {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: var(--foi-text);
+}
+
+.foi-upload-hint {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--foi-red);
+}
+
+/* ─── Terms notice ───────────────────────────────────────────────────────── */
+.foi-notice {
+    padding: 16px 18px;
+    background: #fdf7e3;
+    border: 1px solid #eddfae;
+    border-radius: 4px;
+}
+
+.foi-notice-list {
+    margin: 0;
+    padding-inline-start: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #5f5435;
+}
+
+/* ─── Consent checkboxes ─────────────────────────────────────────────────── */
+.foi-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--foi-text);
+    cursor: pointer;
+}
+
+.foi-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-top: 4px;
+    flex-shrink: 0;
+    accent-color: var(--foi-teal);
+    cursor: pointer;
+}
+
+.foi-consent-strong {
+    color: var(--foi-teal-dark);
+}
+
+/* ─── Captcha ────────────────────────────────────────────────────────────── */
+.foi-captcha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.foi-captcha-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--foi-teal-dark);
+}
+
+.foi-captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background: var(--foi-input-bg);
+    border: 1px solid var(--foi-border);
+    border-radius: 4px;
+}
+
+.foi-captcha-code {
+    font-family: "Courier New", monospace;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: var(--foi-text);
+    user-select: none;
+}
+
+.foi-captcha-refresh {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background: none;
+    border: none;
+    color: var(--foi-teal);
+    cursor: pointer;
+}
+
+.foi-captcha-input {
+    max-width: 220px;
+    text-align: center;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────────── */
+.foi-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.foi-submit {
+    min-width: 120px;
+    padding: 9px 30px;
+    background: var(--foi-teal);
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.foi-submit:hover {
+    background: var(--foi-teal-dark);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .foi-card {
+        padding: 18px;
+    }
+
+    .foi-grid--2,
+    .foi-grid--3 {
+        grid-template-columns: 1fr;
+    }
+
+    .foi-actions {
+        justify-content: stretch;
+    }
+
+    .foi-submit {
+        width: 100%;
+    }
+}

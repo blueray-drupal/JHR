@@ -1,0 +1,155 @@
+/* ==========================================
+   Page Layout & Container Styles
+   ========================================== */
+
+.inner-page-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 15px 60px;
+    box-sizing: border-box;
+}
+
+.inner-page-wrapper {
+    background: var(--surface-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header Section & Breadcrumb */
+.page-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--gold-accent);
+    flex-direction: column;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.main-page-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--heading-color);
+    text-align: right;
+    font-family: Cairo;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 45.5px;
+    margin: 0 0 16px 0;
+}
+
+.main-page-title::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 16px;
+    flex-shrink: 0;
+    background-color: var(--primary-color);
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.page-header-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.page-share-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--link-color);
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.page-share-btn:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: var(--link-color);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+}
+
+.breadcrumb span {
+    color: var(--text-color);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.breadcrumb .separator {
+    color: var(--link-color);
+    font-size: 10px;
+}
+
+/* ==========================================
+   Grid System (Main Content + Sidebar)
+   ========================================== */
+
+.page-content-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    padding-top: 40px;
+    gap: 24px;
+    align-items: start;
+    background: var(--surface-color);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   Main Content Area & Cards Styling
+   ========================================== */
+
+.main-content {
+    background-color: var(--content-bg);
+    color: var(--text-color);
+    padding: 24px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.full-content {
+    max-width: 1150px;
+    margin: auto;
+    margin-top: 40px !important;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 24px;
+}

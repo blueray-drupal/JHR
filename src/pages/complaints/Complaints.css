@@ -1,0 +1,197 @@
+/* =========================================================
+   Complaints & Suggestions Styles
+   ========================================================= */
+.complaints-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.complaint-card {
+    border-radius: 8px;
+    padding: 28px 32px;
+}
+
+/* Card 1: Main Platform */
+.main-platform-card {
+    background-color: var(--vision-box-bg);
+    border-right: 4px solid var(--primary-color);
+}
+
+.platform-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.platform-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.platform-title {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0;
+}
+
+.platform-logo-wrapper {
+    box-shadow: 0 2px 8px var(--shadow-color);
+    flex-shrink: 0;
+}
+
+.platform-logo {
+    object-fit: contain;
+    display: block;
+    width: 185px;
+    height: 86px;
+    aspect-ratio: 185/86;
+}
+
+.platform-description {
+    color: var(--text-color);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    margin: 0;
+}
+
+.platform-description p {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.btn-link {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+    margin-top: 4px;
+}
+
+.btn-link:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-link svg {
+    flex-shrink: 0;
+}
+
+/* Card 2: Mobile Apps */
+.apps-download-card {
+    border: 1px solid var(--border-color);
+    background-color: var(--content-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.apps-title {
+    color: var(--heading-color);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+}
+
+.app-buttons-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.app-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: var(--card-bg);
+    min-width: 150px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-btn:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.app-btn-icon-img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.app-btn-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+}
+
+.app-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--heading-color);
+    line-height: 1.3;
+}
+
+.app-store {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.app-store p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.external-icon {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .platform-body {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .platform-logo-wrapper {
+        align-self: center;
+    }
+
+    .app-buttons-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .app-btn {
+        width: 100%;
+    }
+}

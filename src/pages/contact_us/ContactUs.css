@@ -1,0 +1,298 @@
+.contact-us-container {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    direction: rtl;
+    width: 100%;
+}
+
+/* الخريطة */
+.map-wrapper {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    line-height: 0;
+}
+
+.map-wrapper p {
+    margin: 0;
+}
+
+.map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 320px;
+    border: 0;
+}
+
+.contact-main-section {
+    display: flex;
+    gap: 48px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* ==========================================
+   معلومات الاتصال
+   ========================================== */
+
+.contact-info-container {
+    flex: 1;
+}
+
+.info-header-title {
+    margin: 0 0 18px;
+    color: var(--primary-color);
+    font-family: Cairo, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #364153;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 18px;
+    height: 24px;
+}
+
+.info-icon img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.social-media-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.social-media-block h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-family: Cairo, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.social-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.social-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.social-btn.fb {
+    background-color: #3b5998;
+}
+
+.social-btn.ig {
+    background-color: #e1306c;
+}
+
+.social-btn.yt {
+    background-color: #ff0000;
+}
+
+/* ==========================================
+   نموذج التواصل
+   ========================================== */
+
+.contact-form-container {
+    flex: 1;
+}
+
+/* تخصيص شكل الـ DrupalWebform ليطابق تصميم الصفحة */
+
+.contact-webform .dwf-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-webform .dwf-label,
+.contact-webform .dwf-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.contact-webform .dwf-input,
+.contact-webform .dwf-textarea,
+.contact-webform .dwf-select {
+    width: 100%;
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+    color: #364153;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+}
+
+.contact-webform .dwf-input::placeholder,
+.contact-webform .dwf-textarea::placeholder {
+    color: #99a1af;
+}
+
+.contact-webform .dwf-input:focus,
+.contact-webform .dwf-textarea:focus,
+.contact-webform .dwf-select:focus {
+    border-bottom-color: var(--primary-color);
+    box-shadow: none;
+}
+
+.contact-webform .dwf-input--error,
+.contact-webform .dwf-textarea--error {
+    border-bottom-color: #d64545;
+}
+
+.contact-webform .dwf-error {
+    display: block;
+    margin-top: 4px;
+    color: #d64545;
+    font-family: Cairo, sans-serif;
+    font-size: 12px;
+}
+
+.contact-webform .dwf-actions {
+    margin-top: 20px;
+}
+
+.contact-webform .dwf-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 8px 34px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.contact-webform .dwf-btn:hover:not(:disabled) {
+    background-color: #094e65;
+}
+
+.contact-webform .dwf-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   الأرقام الفرعية
+   ========================================== */
+
+.extensions-section {
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.extensions-header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.extensions-content {
+    padding: 24px 20px;
+    background-color: var(--content-bg);
+    text-align: center;
+}
+
+.sub-header-title {
+    margin: 0 0 24px;
+    color: var(--primary-color);
+    font-family: Cairo, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.sub-header-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #C8A86B;
+    margin: 6px auto 0;
+}
+
+.extensions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.ext-box {
+    border: 1px solid var(--primary-color);
+    padding: 10px 14px;
+    border-radius: 4px;
+    background-color: var(--content-bg);
+    color: #364153;
+    font-family: Cairo, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .contact-main-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .extensions-grid {
+        grid-template-columns: 1fr;
+    }
+}

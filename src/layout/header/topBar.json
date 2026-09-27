@@ -1,0 +1,52 @@
+{
+    "contact": [
+        {
+            "type": "phone",
+            "href": "tel:0096264895413",
+            "icon": "fa-solid fa-phone",
+            "text": "00962 - 6 - 4895413"
+        },
+        {
+            "type": "email",
+            "href": "mailto:info@jhr.gov.jo",
+            "icon": "fa-regular fa-envelope",
+            "text": "info@jhr.gov.jo"
+        }
+    ],
+    "tools": [
+        {
+            "type": "language",
+            "icon": "fa-solid fa-globe",
+            "text": "English"
+        },
+        {
+            "type": "search",
+            "icon": "fa-solid fa-magnifying-glass",
+            "title": "Search"
+        },
+        {
+            "type": "accessibility",
+            "icon": "fa-solid fa-eye-slash",
+            "title": "Accessibility Mode"
+        },
+        {
+            "type": "theme",
+            "title": "Toggle Theme"
+        },
+        {
+            "type": "zoom-in",
+            "icon": "fa-solid fa-magnifying-glass-plus",
+            "title": "Zoom In"
+        },
+        {
+            "type": "zoom-out",
+            "icon": "fa-solid fa-magnifying-glass-minus",
+            "title": "Zoom Out"
+        },
+        {
+            "type": "reset",
+            "icon": "fa-solid fa-rotate-right",
+            "title": "Reset"
+        }
+    ]
+}
