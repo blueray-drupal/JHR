@@ -11,7 +11,7 @@
 
 export const RENDERABLE_TYPES = new Set([
   'textfield', 'email', 'tel', 'url', 'number', 'date', 'datetime',
-  'textarea', 'select', 'radios', 'checkboxes',
+  'textarea', 'select', 'radios', 'checkboxes', 'checkbox',
   'file', 'webform_document_file', 'hidden',
 ]);
 
@@ -104,6 +104,43 @@ export const parseOptions = (el) => {
 };
 
 /**
+ * Drupal often returns titles/descriptions as nested render arrays, e.g.
+ * {#markup: "..."} or {content: {#markup: "..."}}. Flatten to a plain string.
+ */
+export const normalizeDrupalText = (value) => {
+  if (value == null) return '';
+  if (typeof value === 'string' || typeof value === 'number') {
+    return String(value).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  if (typeof value !== 'object') return '';
+
+  if (typeof value['#markup'] === 'string') {
+    return normalizeDrupalText(value['#markup']);
+  }
+  if (typeof value.content === 'string') {
+    return normalizeDrupalText(value.content);
+  }
+  if (value.content && typeof value.content === 'object') {
+    return normalizeDrupalText(value.content);
+  }
+  if (typeof value.file_upload_help === 'string') {
+    return normalizeDrupalText(value.file_upload_help);
+  }
+  if (value.file_upload_help && typeof value.file_upload_help === 'object') {
+    return normalizeDrupalText(value.file_upload_help);
+  }
+
+  for (const nested of Object.values(value)) {
+    if (nested && typeof nested === 'object') {
+      const text = normalizeDrupalText(nested);
+      if (text) return text;
+    }
+  }
+
+  return '';
+};
+
+/**
  * @param {object} rawSchema - Raw JSON from `GET /webform_rest/{id}/elements`
  * @returns {Array<object>} Flat field list sorted by Drupal weight
  */
@@ -119,11 +156,11 @@ export const buildFieldList = (rawSchema) => {
   const fields = [...byKey.values()].map(({ key, el, type }) => ({
     key,
     type,
-    title:        el['#title']          ?? '',
-    placeholder:  el['#placeholder']    ?? '',
+    title:        normalizeDrupalText(el['#title']),
+    placeholder:  normalizeDrupalText(el['#placeholder']),
     required:     Boolean(el['#required']),
-    requiredError:el['#required_error'] ?? '',
-    description:  el['#description']    ?? '',
+    requiredError:normalizeDrupalText(el['#required_error']),
+    description:  normalizeDrupalText(el['#description']),
     options:      ['select', 'radios', 'checkboxes'].includes(type) ? parseOptions(el) : [],
     defaultValue: el['#default_value'],
     multiple:     Boolean(el['#multiple']),

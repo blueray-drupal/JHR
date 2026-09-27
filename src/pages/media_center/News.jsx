@@ -1,10 +1,21 @@
 import { React, useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import Card from "../../components/card/Card";
-import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
-const News = () => {
+import { fetchMediaCenterNews } from '../../services/api/mediaCenterApi';
 
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+const stripHtml = (html) => {
+    if (!html) return "";
+    return html
+        .replace(/<[^>]*>/g, " ")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;|&apos;/gi, "'")
+        .replace(/\s+/g, " ")
+        .trim();
+};
+
+const News = () => {
 
     const breadcrumb = [
         { title: "الرئيسية", link: "/" },
@@ -44,13 +55,7 @@ const News = () => {
             setLoading(true);
             try {
 
-                const response = await fetch(`${baseUrl}/jsonapi/node/media_center?include=field_media_image.field_media_image`);
-                if (!response.ok) return
-                const data = await response.json();
-                const allData = parseDrupalMultipleNodes(data, baseUrl);
-                const newsCard = allData.filter(card => card.field_media_center_classificatio == "news")
-                console.log(newsCard)
-
+                const newsCard = await fetchMediaCenterNews();
                 setNews(newsCard);
             } catch (error) {
                 console.log(error)
@@ -79,7 +84,7 @@ const News = () => {
                         key={item.id}
                         title={item.title}
                         date={item.field_date}
-                        description={item.field_body?.value}
+                        description={stripHtml(item.field_body?.processed || item.field_body?.value)}
                         image={item.image}
                         link={`/news/${item.id}`}
                     />

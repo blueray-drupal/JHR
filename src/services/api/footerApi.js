@@ -1,6 +1,7 @@
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from './drupalUrl';
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = drupalBaseUrl;
 
 const stripHtml = (html) => {
     if (!html) return '';

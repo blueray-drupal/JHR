@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
 import Home from './pages/home/Home';
@@ -21,6 +21,7 @@ import Complaints from './pages/complaints/Complaints';
 import BasicPage from './pages/basic_page/BasicPage';
 import Agreements from './pages/info_center/Agreements';
 import Projects from './pages/info_center/Projects';
+import ProjectDetails from './pages/info_center/ProjectDetails';
 import Budget from './pages/info_center/Budget';
 import AnnualReports from './pages/info_center/AnnualReports';
 import Laws from "./pages/legislations/Laws";
@@ -61,6 +62,7 @@ function App() {
           <Route path="/conferences/:id" element={<ConferencesDetails />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:id" element={<GalleryDetails />} />
+          <Route path="/services" element={<Navigate to="/services/trips" replace />} />
           <Route path="/services/trips" element={<TripsService />} />
           <Route path="/services/venue-booking" element={<VenueBooking />} />
           <Route path="/services/museum" element={<Museum />} />
@@ -73,6 +75,7 @@ function App() {
           <Route path="/complaints" element={<Complaints />} />
           <Route path="/info-center/agreements" element={<Agreements />} />
           <Route path="/info-center/projects" element={<Projects />} />
+          <Route path="/info-center/projects/:id" element={<ProjectDetails />} />
           <Route path="/info-center/budget" element={<Budget />} />
           <Route path="/info-center/annual-reports" element={<AnnualReports />} />
           <Route path="/legislations/laws" element={<Laws />} />

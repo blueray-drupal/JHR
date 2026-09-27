@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./Gallery.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function Gallery() {
     const breadcrumb = [
@@ -48,7 +49,7 @@ function Gallery() {
     ];
 
 
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
 
 
     const [images, setImages] = useState([]);
@@ -94,7 +95,13 @@ function Gallery() {
         >
 
             <div className="albums-grid">
-                {images.map((album) => (
+                {images.map((album) => {
+                    const photos = Array.isArray(album.field_media_gallery)
+                        ? album.field_media_gallery
+                        : [];
+                    const cover = photos[0] || album.image;
+
+                    return (
                     <Link
                         to={`/gallery/${album.id}`}
                         state={{ albumData: album }}
@@ -102,14 +109,15 @@ function Gallery() {
                         className="album-card"
                     >
                         <div className="album-image-wrapper">
-                            <img src={album.image} alt={album.title} className="album-image" />
+                            {cover && <img src={cover} alt={album.title} className="album-image" />}
                         </div>
                         <div className="album-info">
                             <h3 className="album-title">{album.title}</h3>
-                            <span className="album-count">📷 {album.images?.length || 0} صورة</span>
+                            <span className="album-count">📷 {photos.length} صورة</span>
                         </div>
                     </Link>
-                ))}
+                    );
+                })}
             </div>
         </PageLayout>
     );

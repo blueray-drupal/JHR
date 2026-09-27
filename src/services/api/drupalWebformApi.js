@@ -153,7 +153,17 @@ export const submitWebform = async (webformId, data) => {
       { webform_id: webformId, ...data },
       {
         params: { _format: 'json' },
-        headers: csrfToken ? { 'X-CSRF-Token': csrfToken } : {},
+        timeout: 45000,
+        headers: csrfToken
+          ? {
+              'X-CSRF-Token': csrfToken,
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            }
+          : {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
       }
     );
     return response ?? {};
@@ -165,86 +175,144 @@ export const submitWebform = async (webformId, data) => {
 
 // ─── Submit (with file upload) ────────────────────────────────────────────────
 
+const extractInputValue = (html, name) => {
+  const re = new RegExp(
+    `name=["']${name}["'][^>]*value=["']([^"']*)["']|value=["']([^"']*)["'][^>]*name=["']${name}["']`,
+    'i'
+  );
+  const match = html.match(re);
+  return match?.[1] || match?.[2] || '';
+};
+
+const getWebformOrigin = () => {
+  // في التطوير نمر عبر بروكسي Vite (/api) لتجنب CORS وتتبع التحويلات
+  if (import.meta.env.DEV) return '/api';
+  return (import.meta.env.VITE_DRUPAL_URL || '').replace(/\/$/, '') || '';
+};
+
 /**
- * Submits a webform that includes one or more file fields.
- * Falls back to submitWebform() automatically if no actual File objects are found.
+ * Submits a webform that includes file fields via Drupal's HTML form endpoint.
+ * Uses fetch + redirect:manual because browser XHR/axios follows 303 and that
+ * breaks against the absolute Drupal confirmation URL (often surfaces as 500).
  *
- * The primary (first) file field drives the upload URL and is sent as
- * `files[file]`, which is what the custom endpoint expects. Any further file
- * fields are appended as `files[{fieldKey}][]` so multi-file fields such as
- * `additional_documents` survive the round trip.
- *
- * @param {string} webformId   - Drupal webform machine name
- * @param {object} textData    - Non-file field values
- * @param {object} fileData    - { fieldKey: File | File[] } — one entry per file field
- * @param {object} [options]
- * @param {string} [options.uploadPath] - Custom upload path template.
- *                                        Defaults to "/webform-file-upload/{webformId}/{fieldName}".
- *                                        Tokens: {webformId}, {fieldName}
- * @returns {Promise<object>}
+ * File inputs are posted as:
+ *   files[{fieldKey}]      — single file
+ *   files[{fieldKey}][]    — multiple files
  */
-export const submitWebformWithFile = async (webformId, textData, fileData, options = {}) => {
+export const submitWebformWithFile = async (webformId, textData, fileData) => {
   const fileEntries = Object.entries(fileData)
-    .map(([key, value]) => [key, (Array.isArray(value) ? value : [value]).filter((f) => f instanceof File)])
+    .map(([key, value]) => {
+      const multiple = Array.isArray(value);
+      const files = (multiple ? value : [value]).filter((f) => f instanceof File);
+      return [key, files, multiple];
+    })
     .filter(([, files]) => files.length > 0);
 
-  // No real files — use the plain JSON endpoint
   if (fileEntries.length === 0) {
     return submitWebform(webformId, textData);
   }
 
-  const [primaryField, primaryFiles] = fileEntries[0];
-
-  const uploadPathTemplate =
-    options.uploadPath ?? '/webform-file-upload/{webformId}/{fieldName}';
-
-  const uploadPath = uploadPathTemplate
-    .replace('{webformId}', encodeURIComponent(webformId))
-    .replace('{fieldName}', encodeURIComponent(primaryField));
-
-  // Build FormData
-  const form = new FormData();
-  form.append('files[file]', primaryFiles[0], primaryFiles[0].name);
-
-  // Everything beyond the primary file keeps its own field key
-  primaryFiles.slice(1).forEach((file) => form.append(`files[${primaryField}][]`, file, file.name));
-  for (const [fieldName, files] of fileEntries.slice(1)) {
-    files.forEach((file) => form.append(`files[${fieldName}][]`, file, file.name));
-  }
-
-  form.append('webform_id', webformId);
-
-  for (const [key, value] of Object.entries(textData)) {
-    if (value === null || value === undefined) continue;
-
-    if (Array.isArray(value)) {
-      value
-        .filter((v) => v !== null && v !== undefined && v !== '')
-        .forEach((v) => form.append(`${key}[]`, String(v)));
-      continue;
-    }
-
-    if (typeof value === 'object') {
-      form.append(key, JSON.stringify(value));
-      continue;
-    }
-
-    if (String(value).trim() !== '') {
-      form.append(key, String(value));
-    }
-  }
+  const origin = getWebformOrigin();
+  const formUrl = `${origin}/webform/${encodeURIComponent(webformId)}`;
 
   try {
-    const { data } = await drupalApi.post(uploadPath, form, {
-      // Let axios set Content-Type + boundary automatically for FormData
-      headers: { 'Content-Type': 'multipart/form-data' },
+    const pageRes = await fetch(formUrl, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { Accept: 'text/html' },
     });
-    return data ?? {};
+
+    if (!pageRes.ok) {
+      throw new Error(`تعذر تحميل النموذج (${pageRes.status})`);
+    }
+
+    const html = await pageRes.text();
+    const formBuildId = extractInputValue(html, 'form_build_id');
+    const formId = extractInputValue(html, 'form_id');
+    const formToken = extractInputValue(html, 'form_token');
+
+    if (!formBuildId || !formId) {
+      throw new Error('تعذر تحميل نموذج الإرسال من الخادم.');
+    }
+
+    const form = new FormData();
+    form.append('form_build_id', formBuildId);
+    form.append('form_id', formId);
+    if (formToken) form.append('form_token', formToken);
+    form.append('op', textData.op || 'إرسال');
+
+    for (const [key, value] of Object.entries(textData)) {
+      if (key === 'op' || value === null || value === undefined) continue;
+
+      if (Array.isArray(value)) {
+        value
+          .filter((v) => v !== null && v !== undefined && v !== '')
+          .forEach((v) => form.append(key, String(v)));
+        continue;
+      }
+
+      if (typeof value === 'boolean') {
+        if (value) form.append(key, '1');
+        continue;
+      }
+
+      if (typeof value === 'object') {
+        form.append(key, JSON.stringify(value));
+        continue;
+      }
+
+      if (String(value).trim() !== '' || value === 0) {
+        form.append(key, String(value));
+      }
+    }
+
+    for (const [fieldName, files, multiple] of fileEntries) {
+      if (multiple) {
+        files.forEach((file) => form.append(`files[${fieldName}][]`, file, file.name));
+      } else {
+        form.append(`files[${fieldName}]`, files[0], files[0].name);
+      }
+    }
+
+    const response = await fetch(formUrl, {
+      method: 'POST',
+      body: form,
+      credentials: 'include',
+      redirect: 'manual',
+      headers: { Accept: 'text/html' },
+    });
+
+    const location = response.headers.get('location') || '';
+    const status = response.status;
+    // opaque redirect / 0 can happen with some browsers on manual redirect
+    const redirected =
+      status === 0 ||
+      status === 301 ||
+      status === 302 ||
+      status === 303 ||
+      status === 307 ||
+      status === 308 ||
+      /confirmation/i.test(location);
+
+    if (redirected) {
+      return {
+        sid: location.match(/token=([^&]+)/)?.[1] || null,
+        location: location || null,
+        status,
+      };
+    }
+
+    const body = await response.text();
+    if (/confirmation|webform-confirmation|تم إرسال|شكراً|thank you/i.test(body)) {
+      return { sid: null, location: null, status };
+    }
+
+    if (!response.ok) {
+      throw new Error(`تعذر الإرسال (رمز ${status})`);
+    }
+
+    throw new Error('تعذر إرسال النموذج. تحقق من الحقول المطلوبة والملفات.');
   } catch (err) {
-    throw new Error(
-      err.response?.data?.message ||
-      err.response?.data?.error  ||
-      `File submission failed (${err.response?.status ?? 'network'}): ${parseAxiosError(err)}`
-    );
+    throw new Error(err.message || 'تعذر إرسال النموذج مع الملفات.');
   }
 };

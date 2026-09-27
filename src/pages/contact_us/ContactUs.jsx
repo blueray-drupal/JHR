@@ -3,6 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import DrupalWebform from "../../components/drupalWebForm/DrupalWebform";
 import { parseDrupalSingleNode } from "../../utils/drupalParser";
 import "./ContactUs.css";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 // روابط التواصل الاجتماعي ثابتة حالياً لحين ربطها بالقائمة
 const SOCIAL_LINKS = [
@@ -30,7 +31,7 @@ const FORM_MESSAGES = {
 const stripHtml = (html) => (html || "").replace(/<[^>]*>/g, "").trim();
 
 function ContactUs() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [page, setPage] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -47,7 +48,8 @@ function ContactUs() {
                 }
 
                 const data = await response.json();
-                setPage(parseDrupalSingleNode(data, baseUrl));
+                const node = Array.isArray(data.data) ? { ...data, data: data.data[0] } : data;
+                setPage(parseDrupalSingleNode(node, baseUrl));
             } catch (error) {
                 console.log(error);
             } finally {

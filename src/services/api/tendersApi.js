@@ -1,6 +1,5 @@
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import { drupalBaseUrl, fetchAllDrupal } from './drupalUrl';
 
 const getFormattedField = (field) => {
     if (!field) return '';
@@ -34,14 +33,8 @@ export function mapTenderNode(node) {
 }
 
 export async function fetchTenders() {
-    const response = await fetch(`${baseUrl}/jsonapi/node/tenders`);
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const nodes = parseDrupalMultipleNodes(data, baseUrl);
+    const data = await fetchAllDrupal('/jsonapi/node/tenders?page[limit]=50');
+    const nodes = parseDrupalMultipleNodes(data, drupalBaseUrl);
 
     return nodes.map(mapTenderNode);
 }

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import "./Complaints.css";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function Complaints() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [mainSection, setMainSection] = useState(null);
     const [bottomSection, setBottomSection] = useState(null);
     const [loading, setLoading] = useState(true);

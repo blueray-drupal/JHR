@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { FactsHomeSkeleton } from '../../components/skeleton/PageSkeletons';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = drupalBaseUrl;
 
 const stripHtml = (html) => {
     if (!html) return '';

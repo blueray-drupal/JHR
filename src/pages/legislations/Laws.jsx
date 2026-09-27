@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "../info_center/InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 
 
@@ -9,7 +10,7 @@ import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 
 function Laws() {
 
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
 
 
     const [files, setFiles] = useState([]);

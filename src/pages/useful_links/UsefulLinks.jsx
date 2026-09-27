@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import { parseDrupalMultipleNodes } from "../../utils/drupalParser";
 import "./UsefulLinks.css";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 // تجميع الروابط حسب التصنيف (Taxonomy Term) مع الحفاظ على ترتيب المصطلحات
 const groupLinksByType = (links) => {
@@ -22,7 +23,7 @@ const groupLinksByType = (links) => {
 };
 
 function UsefulLinks() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [groups, setGroups] = useState([]);
     const [loading, setLoading] = useState(true);
 

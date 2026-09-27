@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 const BUDGET_DATA = [
     {
@@ -49,7 +50,7 @@ const BUDGET_DATA = [
 ];
 
 function Budget() {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
 

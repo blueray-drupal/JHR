@@ -3,10 +3,11 @@ import { useLocation } from "react-router-dom";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import { parseDrupalMultipleNodes } from "../../utils/drupalParser";
 import "./BasicPage.css";
+import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 function BasicPage() {
     const location = useLocation();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const baseUrl = drupalBaseUrl;
     const [page, setPage] = useState(null);
     const [loading, setLoading] = useState(true);
 
