@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import aboutImage from '../../../assets/about.png';
 
 function AboutHome() {
     return (
@@ -24,7 +25,7 @@ function AboutHome() {
                     </Link>
                 </div>
                 <div className="about-image">
-                    <img src="../../../assets/about.png" alt="نبذة عن المؤسسة - محطة عمان" />
+                    <img src={aboutImage} alt="نبذة عن المؤسسة - محطة عمان" />
                 </div>
             </div>
         </section>

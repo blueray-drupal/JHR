@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom';
 import './home.css';
 import { fetchMediaCenterNews } from '../../services/api/mediaCenterApi';
 import { NewsRowSkeleton } from '../../components/skeleton/PageSkeletons';
-
-const stripHtml = (html) => {
-    if (!html) return '';
-    return html.replace(/<[^>]*>/g, '').trim();
-};
+import { excerptText } from '../../utils/drupalParser';
 
 const mapNewsItem = (item) => ({
     id: item.id,
     image: item.image,
     date: item.field_date || item.created || '',
     title: item.title,
-    summary:
+    summary: excerptText(
         item.summary ||
-        stripHtml(item.field_body?.processed || item.field_body?.value || item.body || ''),
+            item.field_body?.processed ||
+            item.field_body?.value ||
+            item.body ||
+            '',
+        140
+    ),
     link: `/news/${item.id}`,
 });
 

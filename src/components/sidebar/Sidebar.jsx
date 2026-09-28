@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./sidebar.css";
+import learnMoreIcon from "../../../assets/learn-more.png";
 
 const Sidebar = ({ title, items = [] }) => {
     const location = useLocation();
@@ -15,7 +16,7 @@ const Sidebar = ({ title, items = [] }) => {
                         <li key={item.id || item.link} className={`sidebar-item ${isActive ? "active" : ""}`}>
                             <Link to={item.link}>
                                 <span>{item.title}</span>
-                                <span className="arrow"><img src="../../../assets/learn-more.png" alt="" /></span>
+                                <span className="arrow"><img src={learnMoreIcon} alt="" /></span>
                             </Link>
                         </li>
                     );

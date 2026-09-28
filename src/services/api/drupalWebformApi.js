@@ -184,11 +184,7 @@ const extractInputValue = (html, name) => {
   return match?.[1] || match?.[2] || '';
 };
 
-const getWebformOrigin = () => {
-  // في التطوير نمر عبر بروكسي Vite (/api) لتجنب CORS وتتبع التحويلات
-  if (import.meta.env.DEV) return '/api';
-  return (import.meta.env.VITE_DRUPAL_URL || '').replace(/\/$/, '') || '';
-};
+const getWebformOrigin = () => '/api';
 
 /**
  * Submits a webform that includes file fields via Drupal's HTML form endpoint.

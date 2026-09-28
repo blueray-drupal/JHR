@@ -2,18 +2,7 @@ import { React, useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import Card from "../../components/card/Card";
 import { fetchMediaCenterByClassification } from "../../services/api/mediaCenterApi";
-
-const stripHtml = (html) => {
-    if (!html) return "";
-    return html
-        .replace(/<[^>]*>/g, " ")
-        .replace(/&nbsp;/gi, " ")
-        .replace(/&amp;/gi, "&")
-        .replace(/&quot;/gi, '"')
-        .replace(/&#39;|&apos;/gi, "'")
-        .replace(/\s+/g, " ")
-        .trim();
-};
+import { excerptText } from "../../utils/drupalParser";
 
 const Events = () => {
     const breadcrumb = [
@@ -62,7 +51,14 @@ const Events = () => {
                         key={item.id}
                         title={item.title}
                         date={item.field_date}
-                        description={stripHtml(item.field_body?.processed || item.field_body?.value)}
+                        description={excerptText(
+                            item.summary ||
+                                item.field_body?.processed ||
+                                item.field_body?.value ||
+                                item.body ||
+                                "",
+                            160
+                        )}
                         image={item.image}
                         link={`/events/${item.id}`}
                     />

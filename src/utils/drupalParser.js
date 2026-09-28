@@ -6,9 +6,48 @@ const extractFormattedText = (field) => {
     if (!field) return '';
     if (typeof field === 'string') return field;
     if (typeof field === 'object') {
-        return field.processed || field.value || '';
+        return field.processed || field.value || field.summary || '';
     }
     return '';
+};
+
+/**
+ * تحويل HTML / كيانات مثل &nbsp; و &amp;nbsp; إلى نص نظيف
+ */
+export const toPlainText = (html) => {
+    if (!html) return '';
+
+    let text = String(html)
+        .replace(/<br\s*\/?>/gi, ' ')
+        .replace(/<\/(p|div|li|h[1-6])>/gi, ' ')
+        .replace(/<[^>]*>/g, ' ');
+
+    let previous = '';
+    while (text !== previous) {
+        previous = text;
+        text = text
+            .replace(/&nbsp;/gi, ' ')
+            .replace(/&amp;/gi, '&')
+            .replace(/&quot;/gi, '"')
+            .replace(/&#39;|&apos;/gi, "'")
+            .replace(/&lt;/gi, '<')
+            .replace(/&gt;/gi, '>')
+            .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+            .replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
+                String.fromCharCode(parseInt(hex, 16))
+            );
+    }
+
+    return text.replace(/\s+/g, ' ').trim();
+};
+
+/**
+ * ملخص قصير نظيف لبطاقات الأخبار
+ */
+export const excerptText = (html, maxLength = 140) => {
+    const plain = toPlainText(html);
+    if (plain.length <= maxLength) return plain;
+    return `${plain.slice(0, maxLength).trim()}...`;
 };
 
 /**
@@ -40,7 +79,9 @@ const getFileOrMediaDetails = (entityId, included = [], domainUrl = '') => {
 
     if (fileEntity?.attributes?.uri?.url) {
         const rawUrl = fileEntity.attributes.uri.url;
-        const fullUrl = rawUrl.startsWith('http') ? rawUrl : `${domainUrl}${rawUrl}`;
+        const assetOrigin = (import.meta.env.VITE_DRUPAL_URL || '').replace(/\/$/, '');
+        const prefix = domainUrl === '/api' && assetOrigin ? assetOrigin : domainUrl;
+        const fullUrl = rawUrl.startsWith('http') ? rawUrl : `${prefix}${rawUrl}`;
 
         return {
             url: fullUrl,
@@ -225,8 +266,11 @@ export const parseDrupalMultipleNodes = (jsonResponse, domainUrl = '') => {
         const mediaFields = extractMediaFields(rel, included, domainUrl);
         const paragraphFields = extractParagraphs(rel, included, domainUrl);
 
-        const rawSummary = extractFormattedText(attr.body?.summary) || extractFormattedText(attr.body);
-        const cleanSummary = rawSummary.replace(/<[^>]*>?/gm, '').trim();
+        const rawSummary =
+            extractFormattedText(attr.body?.summary) ||
+            extractFormattedText(attr.field_body?.summary) ||
+            extractFormattedText(attr.body) ||
+            extractFormattedText(attr.field_body);
 
         const mainImage =
             mediaFields.field_media_image ||
@@ -238,8 +282,8 @@ export const parseDrupalMultipleNodes = (jsonResponse, domainUrl = '') => {
             title: attr.title || '',
             created: attr.created ? attr.created.split('T')[0] : '',
             changed: attr.changed ? attr.changed.split('T')[0] : '',
-            summary: cleanSummary.length > 150 ? cleanSummary.slice(0, 150) + '...' : cleanSummary,
-            body: extractFormattedText(attr.body),
+            summary: excerptText(rawSummary, 140),
+            body: extractFormattedText(attr.body) || extractFormattedText(attr.field_body),
 
             image: Array.isArray(mainImage) ? mainImage[0] : mainImage,
 

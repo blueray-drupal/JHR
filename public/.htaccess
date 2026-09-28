@@ -1,0 +1,18 @@
+Options -MultiViews
+RewriteEngine On
+
+# Handle Authorization Header
+RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# ─── Proxy API + webforms to Drupal (must come BEFORE the SPA fallback) ───
+# Requires: mod_rewrite + mod_proxy + mod_proxy_http
+RewriteRule ^api/(.*)$ http://backend.jhr.com.dedi8785.your-server.de/$1 [P,L]
+RewriteRule ^webform/(.*)$ http://backend.jhr.com.dedi8785.your-server.de/webform/$1 [P,L]
+RewriteRule ^form/(.*)$ http://backend.jhr.com.dedi8785.your-server.de/form/$1 [P,L]
+
+# If the requested file or directory exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise fall back to index.html (React Router takes over)
+RewriteRule ^ index.html [QSA,L]

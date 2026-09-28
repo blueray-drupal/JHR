@@ -10,6 +10,7 @@ import resetIcon from "../../../assets/reset.svg";
 import hideImagesIcon from "../../../assets/hide.svg";
 import searchIcon from "../../../assets/search.svg";
 import langIcon from "../../../assets/lang.svg";
+import logoIcon from "../../../assets/logo.svg";
 
 // ================= DATA =================
 
@@ -327,7 +328,7 @@ function Header() {
 
                         <div className="brand-logo">
                             <img
-                                src="../../../assets/logo.svg"
+                                src={logoIcon}
                                 alt="Jordan Hejaz Railway Logo"
                                 className="keep-visible"
                             />
