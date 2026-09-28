@@ -6,6 +6,9 @@ import { Navigation } from "swiper/modules";
 import "./home.css";
 import "swiper/css";
 import "swiper/css/navigation";
+import toTopIcon from "../../../assets/totop.png";
+import servicesBanner from "../../../assets/services.png";
+import dataImageIcon from "../../../assets/data_image.svg";
 
 
 const BackToTop = () => {
@@ -23,14 +26,14 @@ const BackToTop = () => {
             onClick={scrollToTop}
             aria-label="العودة إلى أعلى الصفحة"
         >
-            <img src="../../../assets/totop.png" alt="" />
+            <img src={toTopIcon} alt="" />
         </button>
     );
 };
 
 const ExploreSection = () => {
     const bannerData = {
-        image: "/assets/services.png",
+        image: servicesBanner,
         text: "متحف الخط الحديدي الحجازي الاردني حكاية بدأت من سكة حملت التاريخ الى متحف يحفظ الذاكرة ويحييها.",
     };
 
@@ -146,7 +149,7 @@ const ExploreSection = () => {
                                     >
                                         <span className="explore-link-icon">
                                             <img
-                                                src="/assets/data_image.svg"
+                                                src={dataImageIcon}
                                                 alt=""
                                             />
                                         </span>

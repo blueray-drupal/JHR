@@ -4,6 +4,9 @@ import { getMenuByMachineName } from "../../utils/menuService";
 import { fetchFooterData, parseContactLine } from "../../services/api/footerApi";
 import { Skeleton } from "../../components/skeleton/Skeleton";
 import "./footer.css";
+import facebookIcon from "../../../assets/facebook.svg";
+import instagramIcon from "../../../assets/insta.svg";
+import youtubeIcon from "../../../assets/youtube.svg";
 
 const defaultContactItems = [
     { id: "default-1", text: "العنوان: عمان - المحطة - شارع الملك عبدالله الأول" },
@@ -22,10 +25,9 @@ const defaultImportantLinks = [
 ];
 
 const defaultSocialIcons = [
-    { id: "default-fb", title: "Facebook", image: "/assets/facebook.svg", link: "#" },
-    { id: "default-ig", title: "Instagram", image: "/assets/instagram.svg", link: "#" },
-    { id: "default-yt", title: "YouTube", image: "/assets/youtube.svg", link: "#" },
-    { id: "default-rss", title: "RSS", image: "/assets/rss.svg", link: "#" },
+    { id: "default-fb", title: "Facebook", image: facebookIcon, link: "#" },
+    { id: "default-ig", title: "Instagram", image: instagramIcon, link: "#" },
+    { id: "default-yt", title: "YouTube", image: youtubeIcon, link: "#" },
 ];
 
 const copyrightMenu = {

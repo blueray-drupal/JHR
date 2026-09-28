@@ -38,7 +38,8 @@
   align-items: center;
   white-space: nowrap;
   width: max-content;
-  animation: scrollRTL 30s linear infinite;
+  animation: scrollRTL 72s linear infinite;
+  will-change: transform;
 }
 
 /* Pause Scrolling on Hover */
@@ -173,6 +174,10 @@
   line-height: 1.6;
   margin: 0 0 20px 0;
   flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .news-card-link {

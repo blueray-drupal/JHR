@@ -1,19 +1,11 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useMemo, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import Card from "../../components/card/Card";
+import Pagination from "../../components/pagination/Pagination";
 import { fetchMediaCenterByClassification } from "../../services/api/mediaCenterApi";
+import { excerptText } from "../../utils/drupalParser";
 
-const stripHtml = (html) => {
-    if (!html) return "";
-    return html
-        .replace(/<[^>]*>/g, " ")
-        .replace(/&nbsp;/gi, " ")
-        .replace(/&amp;/gi, "&")
-        .replace(/&quot;/gi, '"')
-        .replace(/&#39;|&apos;/gi, "'")
-        .replace(/\s+/g, " ")
-        .trim();
-};
+const ITEMS_PER_PAGE = 8;
 
 const Events = () => {
     const breadcrumb = [
@@ -31,6 +23,7 @@ const Events = () => {
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,6 +31,7 @@ const Events = () => {
             try {
                 const events = await fetchMediaCenterByClassification("events");
                 setItems(events);
+                setCurrentPage(1);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -46,6 +40,19 @@ const Events = () => {
         };
         fetchData();
     }, []);
+
+    const totalPages = Math.max(1, Math.ceil(items.length / ITEMS_PER_PAGE));
+
+    const pageItems = useMemo(() => {
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        return items.slice(start, start + ITEMS_PER_PAGE);
+    }, [items, currentPage]);
+
+    const handlePageChange = (page) => {
+        if (page < 1 || page > totalPages || page === currentPage) return;
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     return (
         <PageLayout
@@ -57,17 +64,33 @@ const Events = () => {
             loadingType="cards"
         >
             <div className="cards-list">
-                {items.map((item) => (
+                {pageItems.map((item) => (
                     <Card
                         key={item.id}
                         title={item.title}
-                        date={item.field_date}
-                        description={stripHtml(item.field_body?.processed || item.field_body?.value)}
+                        date={item.field_date || item.created}
+                        description={excerptText(
+                            item.summary ||
+                                item.field_body?.processed ||
+                                item.field_body?.value ||
+                                item.body ||
+                                "",
+                            160
+                        )}
                         image={item.image}
                         link={`/events/${item.id}`}
                     />
                 ))}
             </div>
+
+            {!loading && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    totalItems={items.length}
+                    onPageChange={handlePageChange}
+                />
+            )}
         </PageLayout>
     );
 };

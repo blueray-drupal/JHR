@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./card.css";
+import learnMoreIcon from "../../../assets/learn-more.png";
 
 
 const Card = ({
@@ -33,7 +34,7 @@ const Card = ({
 
                 {link && (
                     <Link to={link} className="card-link">
-                        {linkText} <span className="arrow"><img src="../../../assets/learn-more.png" alt="" /></span>
+                        {linkText} <span className="arrow"><img src={learnMoreIcon} alt="" /></span>
                     </Link>
                 )}
             </div>

@@ -1,3 +1,5 @@
+import { apiBaseUrl } from '../services/api/drupalUrl';
+
 /**
  * جلب قائمة المنيو بناءً على الـ Machine Name الخاص بها من Drupal
  * @param {string} machineName - اسم القائمة (مثل: 'main', 'footer', 'admin')
@@ -5,8 +7,7 @@
  */
 export const getMenuByMachineName = async (machineName) => {
     try {
-        const baseUrl = "http://backend.sinokrotholding.com.dedi8785.your-server.de";
-        const response = await fetch(`${baseUrl}/jsonapi/menu_items/${machineName}`);
+        const response = await fetch(`${apiBaseUrl}/jsonapi/menu_items/${machineName}`);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch menu '${machineName}': ${response.statusText}`);
