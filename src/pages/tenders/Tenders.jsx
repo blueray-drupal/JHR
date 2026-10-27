@@ -11,29 +11,6 @@ const formatDateRange = (startDate, endDate) => {
     return startDate || endDate || '';
 };
 
-function PageRating() {
-    const [rating, setRating] = useState(0);
-
-    return (
-        <div className="page-rating">
-            <span className="page-rating-label">كيف تقيم محتوى الصفحة</span>
-            <div className="page-rating-stars" role="group" aria-label="تقييم الصفحة">
-                {[1, 2, 3, 4, 5].map((value) => (
-                    <button
-                        key={value}
-                        type="button"
-                        className={`page-rating-star ${value <= rating ? 'is-active' : ''}`}
-                        onClick={() => setRating(value)}
-                        aria-label={`${value} من 5`}
-                    >
-                        ★
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-}
-
 function Tenders() {
     const [tenders, setTenders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -106,8 +83,6 @@ function Tenders() {
                     ))}
                 </div>
             )}
-
-            <PageRating />
         </PageLayout>
     );
 }

@@ -45,9 +45,17 @@
     text-align: center;
 }
 
-.col-size {
+.col-size,
+.main-content .col-size,
+.full-content .col-size {
     width: 20%;
+    color: #4A5565 !important;
     text-align: center;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
 }
 
 .col-action {

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
+import PageRating from './components/pageRating/PageRating';
 import Home from './pages/home/Home';
 import Conferences from './pages/media_center/Conferences';
 import News from './pages/media_center/News';
@@ -88,6 +89,7 @@ function App() {
           <Route path="*" element={<BasicPage />} />
         </Routes>
 
+        <PageRating />
         <Footer />
       </div>
     </SitePreferencesProvider>

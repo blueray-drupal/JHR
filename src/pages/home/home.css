@@ -750,7 +750,7 @@
   gap: 16px;
 }
 
-.service-card {
+.service-cards .service-card {
   background-color: var(--content-bg);
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -764,7 +764,7 @@
   height: 178px;
 }
 
-.service-card:hover {
+.service-cards .service-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }

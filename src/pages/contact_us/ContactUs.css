@@ -104,27 +104,22 @@
 }
 
 .social-btn {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 12px;
     text-decoration: none;
+    overflow: hidden;
+    background: transparent;
 }
 
-.social-btn.fb {
-    background-color: #3b5998;
-}
-
-.social-btn.ig {
-    background-color: #e1306c;
-}
-
-.social-btn.yt {
-    background-color: #ff0000;
+.social-btn-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 /* ==========================================
@@ -176,6 +171,18 @@
 .contact-webform .dwf-input::placeholder,
 .contact-webform .dwf-textarea::placeholder {
     color: #99a1af;
+}
+
+.contact-webform #phone,
+.contact-webform input[type="tel"].dwf-input {
+    direction: rtl;
+    text-align: right;
+}
+
+.contact-webform #phone::placeholder,
+.contact-webform input[type="tel"].dwf-input::placeholder {
+    direction: rtl;
+    text-align: right;
 }
 
 .contact-webform .dwf-input:focus,
@@ -236,7 +243,7 @@
 
 .extensions-header {
     background-color: var(--primary-color);
-    color: #ffffff;
+    color: #ffffff !important;
     text-align: center;
     padding: 10px;
     font-family: Cairo, sans-serif;

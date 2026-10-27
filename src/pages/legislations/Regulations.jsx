@@ -3,6 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "../info_center/InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { formatFileSizeAr } from '../../utils/formatFileSize';
 
 
 
@@ -91,7 +92,7 @@ function Regulations() {
                                             background: "blue"
                                         }}>DOCS</span>)} </span>
                                     </td>
-                                    <td className="col-size">{item.file.filesize % 1024} kb</td>
+                                    <td className="col-size">{formatFileSizeAr(item.file.filesize)}</td>
                                     <td className="col-action">
                                         <a
                                             href={item.file.url}

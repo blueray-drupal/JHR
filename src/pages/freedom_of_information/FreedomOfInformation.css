@@ -1,13 +1,15 @@
-/* Freedom of information request form — "foi-" prefix to avoid collisions. */
+/* Freedom of information — matches reference form layout */
 
 .foi-form {
-    --foi-teal: var(--primary-color);
-    --foi-teal-dark: var(--accent-color);
+    --foi-teal: #0d748d;
+    --foi-teal-dark: #0b5e72;
+    --foi-teal-soft: #e8f4f7;
     --foi-red: #cc2b2b;
-    --foi-border: var(--border-color);
-    --foi-input-bg: var(--card-bg);
-    --foi-text: var(--text-color);
-    --foi-muted: var(--text-muted);
+    --foi-border: #d5dbe3;
+    --foi-input-bg: #ffffff;
+    --foi-text: #2c333a;
+    --foi-muted: #8b949e;
+    --foi-label: #1f2a32;
 
     font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--foi-text);
@@ -17,52 +19,88 @@
 .foi-card {
     display: flex;
     flex-direction: column;
-    gap: 22px;
-    padding: 28px;
-    background: var(--content-bg);
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
     border: 1px solid var(--foi-border);
-    border-radius: 6px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(15, 40, 60, 0.06);
 }
 
-/* ─── Submission date bar ────────────────────────────────────────────────── */
+/* ─── Date bar ───────────────────────────────────────────────────────────── */
 .foi-date-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 18px;
-    background: var(--vision-box-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 12px 22px;
+    background: var(--foi-teal-soft);
+    border-bottom: 1px solid #d0e4ea;
 }
 
-.foi-date-label {
+.foi-form .foi-date-label,
+.main-content .foi-date-label {
     font-weight: 700;
     color: var(--foi-teal-dark);
 }
 
+.foi-date-label::after {
+    content: ":";
+    margin-inline-start: 2px;
+}
+
 .foi-date-value {
     color: var(--foi-text);
+    font-weight: 600;
     direction: ltr;
 }
 
-/* ─── Sections ───────────────────────────────────────────────────────────── */
-.foi-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* ─── Webform shell ──────────────────────────────────────────────────────── */
+.foi-webform.dwf {
+    gap: 0;
+    padding: 28px 26px 30px;
+    --dwf-accent: var(--foi-teal);
+    --dwf-accent-hover: var(--foi-teal-dark);
+    --dwf-error: var(--foi-red);
+    --dwf-border: var(--foi-border);
+    --dwf-border-focus: var(--foi-teal);
+    --dwf-bg-input: var(--foi-input-bg);
+    --dwf-bg-file: #fbfcfd;
+    --dwf-text: var(--foi-text);
+    --dwf-text-label: var(--foi-label);
+    --dwf-text-muted: var(--foi-muted);
+    --dwf-text-placeholder: #a0a8b0;
+    --dwf-radius: 3px;
+    --dwf-radius-btn: 3px;
+    --dwf-font: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --dwf-font-size: 14px;
+    --dwf-btn-bg: var(--foi-teal);
+    --dwf-btn-bg-hover: var(--foi-teal-dark);
+    --dwf-gap: 18px;
 }
 
-.foi-fieldset {
+.foi-webform .dwf-fields {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin: 0;
-    padding: 0;
-    border: none;
+    gap: 18px;
 }
 
-.foi-section-title {
+.foi-webform .dwf-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 20px;
+}
+
+.foi-webform .dwf-field {
+    gap: 8px;
+}
+
+/* ─── Labels / legends ───────────────────────────────────────────────────── */
+.foi-form .foi-webform .dwf-label,
+.foi-form .foi-webform .dwf-legend,
+.main-content .foi-webform .dwf-label,
+.main-content .foi-webform .dwf-legend {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -71,316 +109,315 @@
     padding: 0;
     font-size: 14px;
     font-weight: 700;
-    color: var(--foi-teal-dark);
+    color: var(--foi-label);
+    text-align: right;
 }
 
-.foi-required-note {
+.foi-webform .dwf-fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-inline-size: 0;
+}
+
+.foi-webform .dwf-required {
+    font-size: 0;
+    line-height: 0;
+}
+
+.foi-webform .dwf-required::before {
+    content: "حقل إجباري";
     font-size: 12px;
     font-weight: 600;
     color: var(--foi-red);
+    line-height: 1.4;
 }
 
-/* ─── Grids ──────────────────────────────────────────────────────────────── */
-.foi-grid {
-    display: grid;
-    gap: 14px 18px;
+.foi-webform .dwf-description {
+    display: none;
 }
 
-.foi-grid--2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.foi-grid--3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-/* ─── Fields ─────────────────────────────────────────────────────────────── */
-.foi-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.foi-label {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--foi-teal-dark);
-}
-
-.foi-input,
-.foi-textarea {
+/* ─── Inputs ─────────────────────────────────────────────────────────────── */
+.foi-webform .dwf-input,
+.foi-webform .dwf-textarea,
+.foi-webform .dwf-select {
     width: 100%;
     box-sizing: border-box;
-    padding: 9px 12px;
     background: var(--foi-input-bg);
     border: 1px solid var(--foi-border);
-    border-radius: 4px;
+    border-radius: 3px;
+    padding: 10px 12px;
     font-family: inherit;
     font-size: 13px;
     color: var(--foi-text);
+    text-align: right;
+    direction: rtl;
     outline: none;
+    box-shadow: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.foi-input {
-    height: 38px;
+.foi-webform .dwf-input {
+    height: 42px;
+    min-height: 42px;
 }
 
-.foi-textarea {
-    min-height: 84px;
+.foi-webform .dwf-textarea {
+    min-height: 110px;
     resize: vertical;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-.foi-input::placeholder,
-.foi-textarea::placeholder {
+.foi-webform .dwf-input::placeholder,
+.foi-webform .dwf-textarea::placeholder {
     color: var(--foi-muted);
+    text-align: right;
+    direction: rtl;
 }
 
-.foi-input:focus,
-.foi-textarea:focus {
+.foi-webform .dwf-input:focus,
+.foi-webform .dwf-textarea:focus,
+.foi-webform .dwf-select:focus {
     border-color: var(--foi-teal);
     box-shadow: 0 0 0 3px rgba(13, 116, 141, 0.12);
 }
 
-.foi-input--ltr {
-    direction: ltr;
+.foi-webform #phone_number,
+.foi-webform #fax_number,
+.foi-webform #email,
+.foi-webform #national_number,
+.foi-webform input[type="tel"],
+.foi-webform input[type="email"] {
+    direction: rtl;
     text-align: right;
 }
 
 /* ─── Radios ─────────────────────────────────────────────────────────────── */
-.foi-radios {
+.foi-webform .dwf-radios {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 28px;
+    gap: 10px 28px;
+    margin-top: 4px;
 }
 
-.foi-radio-label {
+.foi-webform .dwf-radio-label {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     font-size: 13px;
+    font-weight: 500;
     color: var(--foi-text);
     cursor: pointer;
     user-select: none;
 }
 
-.foi-radio {
-    width: 15px;
-    height: 15px;
+.foi-webform .dwf-radio {
+    width: 16px;
+    height: 16px;
     margin: 0;
     accent-color: var(--foi-teal);
     cursor: pointer;
 }
 
-/* ─── Upload boxes ───────────────────────────────────────────────────────── */
-.foi-upload {
+/* ─── File upload (dashed box + blue button) ─────────────────────────────── */
+.foi-webform .dwf-file-label {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 22px 16px;
-    background: #fbfbfc;
-    border: 1px dashed #c7cdd3;
+    justify-content: center;
+    gap: 12px;
+    min-height: 150px;
+    padding: 28px 18px 22px;
+    background: #fff;
+    border: 1.5px dashed #c5ccd4;
     border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.foi-webform .dwf-file-label:hover {
+    border-color: var(--foi-teal);
+    background: #f3f9fb;
+}
+
+.foi-webform .dwf-file-label::before {
+    content: "";
+    width: 34px;
+    height: 34px;
+    background-color: #8a96a3;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.foi-form .foi-webform .dwf-file-text,
+.main-content .foi-webform .dwf-file-text,
+.full-content .foi-webform .dwf-file-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    min-height: 26px;
+    padding: 8px 26px;
+    background: var(--foi-teal);
+    border-radius: 3px;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
     text-align: center;
 }
 
-.foi-upload-icon {
-    color: var(--foi-muted);
-}
-
-.foi-upload-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.foi-upload-btn {
-    padding: 7px 26px;
-    background: var(--foi-teal);
-    border: none;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-}
-
-.foi-upload-btn:hover {
+.foi-webform .dwf-file-label:hover .dwf-file-text {
     background: var(--foi-teal-dark);
 }
 
-.foi-upload-files {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 12px;
-    color: var(--foi-text);
-}
-
-.foi-upload-hint {
+.foi-webform .dwf-file-hint {
+    max-width: 420px;
     margin: 0;
     font-size: 11px;
-    line-height: 1.6;
+    font-weight: 600;
+    line-height: 1.7;
     color: var(--foi-red);
 }
 
-/* ─── Terms notice ───────────────────────────────────────────────────────── */
-.foi-notice {
-    padding: 16px 18px;
-    background: #fdf7e3;
-    border: 1px solid #eddfae;
-    border-radius: 4px;
-}
-
-.foi-notice-list {
-    margin: 0;
-    padding-inline-start: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 12px;
-    line-height: 1.9;
-    color: #5f5435;
-}
-
-/* ─── Consent checkboxes ─────────────────────────────────────────────────── */
-.foi-consent {
+/* ─── Consent checkbox ───────────────────────────────────────────────────── */
+.foi-webform .dwf-checkbox-label--single {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    font-size: 12px;
-    line-height: 1.9;
+    padding: 4px 0;
+    font-size: 13px;
+    line-height: 1.8;
     color: var(--foi-text);
     cursor: pointer;
 }
 
-.foi-checkbox {
-    width: 15px;
-    height: 15px;
+.foi-webform .dwf-checkbox {
+    width: 16px;
+    height: 16px;
     margin-top: 4px;
     flex-shrink: 0;
     accent-color: var(--foi-teal);
     cursor: pointer;
 }
 
-.foi-consent-strong {
-    color: var(--foi-teal-dark);
+.foi-webform .dwf-checkbox-label--single .dwf-required::before {
+    margin-inline-start: 6px;
 }
 
-/* ─── Captcha ────────────────────────────────────────────────────────────── */
-.foi-captcha {
+/* ─── Errors / actions ───────────────────────────────────────────────────── */
+.foi-webform .dwf-error {
+    font-size: 12px;
+    color: var(--foi-red);
+}
+
+/* ─── Legal notice box ───────────────────────────────────────────────────── */
+.foi-notice {
+    margin: 6px 0 4px;
+    padding: 16px 18px;
+    background: #fdf8e8;
+    border: 1px solid #d6c07a;
+    border-radius: 2px;
+}
+
+.foi-form .foi-notice-list,
+.main-content .foi-notice-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
-.foi-captcha-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--foi-teal-dark);
+.foi-form .foi-notice-list li,
+.main-content .foi-notice-list li {
+    position: relative;
+    padding-inline-start: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.85;
+    color: #5a5340;
+    text-align: right;
 }
 
-.foi-captcha-box {
+.foi-form .foi-notice-list li::before,
+.main-content .foi-notice-list li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    background: #c6a84d;
+}
+
+.foi-webform .dwf-actions {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    background: var(--foi-input-bg);
-    border: 1px solid var(--foi-border);
-    border-radius: 4px;
+    justify-content: flex-start;
+    margin-top: 10px;
 }
 
-.foi-captcha-code {
-    font-family: "Courier New", monospace;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 6px;
-    color: var(--foi-text);
-    user-select: none;
-}
-
-.foi-captcha-refresh {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    background: none;
-    border: none;
-    color: var(--foi-teal);
-    cursor: pointer;
-}
-
-.foi-captcha-input {
-    max-width: 220px;
-    text-align: center;
-}
-
-/* ─── Actions ────────────────────────────────────────────────────────────── */
-.foi-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.foi-submit {
+.foi-webform .dwf-btn {
     min-width: 120px;
-    padding: 9px 30px;
+    min-height: 42px;
+    padding: 10px 34px;
+    border-radius: 3px;
     background: var(--foi-teal);
-    border: none;
-    border-radius: 4px;
-    font-family: inherit;
+    color: #ffffff;
     font-size: 14px;
     font-weight: 700;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
+    box-shadow: none;
 }
 
-.foi-submit:hover {
+.foi-webform .dwf-btn:hover:not(:disabled) {
     background: var(--foi-teal-dark);
+}
+
+/* ─── Dark theme compatibility ───────────────────────────────────────────── */
+[data-theme="dark"] .foi-card {
+    background: var(--content-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .foi-date-bar {
+    background: var(--vision-box-bg);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .foi-webform.dwf {
+    --foi-input-bg: var(--input-bg, var(--content-bg));
+    --foi-text: var(--text-color);
+    --foi-label: var(--heading-color);
+    --foi-muted: var(--text-muted);
+    --foi-border: var(--border-color);
+}
+
+[data-theme="dark"] .foi-webform .dwf-file-label {
+    background: var(--card-bg);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .foi-card {
-        padding: 18px;
+    .foi-webform.dwf {
+        padding: 20px 16px 24px;
     }
 
-    .foi-grid--2,
-    .foi-grid--3 {
+    .foi-date-bar {
+        padding: 12px 16px;
+    }
+
+    .foi-webform .dwf-row {
         grid-template-columns: 1fr;
     }
 
-    .foi-actions {
+    .foi-webform .dwf-actions {
         justify-content: stretch;
     }
 
-    .foi-submit {
+    .foi-webform .dwf-btn {
         width: 100%;
     }
-}
-
-/* Drupal webform inside FOI page */
-.foi-webform {
-    width: 100%;
-}
-
-.foi-webform .dwf-form {
-    gap: 18px;
-}
-
-.foi-webform .dwf-legend,
-.foi-webform .dwf-label {
-    color: var(--foi-teal-dark);
-    font-weight: 700;
 }

@@ -68,8 +68,9 @@
     font-weight: 700;
 }
 
-.sidebar-item.active .arrow {
+.sidebar-item.active .arrow,
+.sidebar-item.active .arrow img {
     color: #ffffff;
-    filter: brightness(42.5);
-    -webkit-filter: brightness(42.5);
+    filter: brightness(0) invert(1);
+    -webkit-filter: brightness(0) invert(1);
 }

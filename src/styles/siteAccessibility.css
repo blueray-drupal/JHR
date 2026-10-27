@@ -23,7 +23,7 @@
   color: var(--text-color);
 }
 
-.main-content div,
+.main-content div:not(.extensions-header),
 .main-content p,
 /* .main-content span:not(.tender-number-badge), */
 .main-content li,
@@ -38,10 +38,15 @@
 .main-content .basic-page-body,
 .main-content .news-details-body,
 .main-content .faq-answer,
-.full-content div,
+.full-content div:not(.extensions-header),
 .full-content p,
 .full-content span:not(.tender-number-badge) {
   color: var(--text-color);
+}
+
+.main-content .extensions-header,
+.full-content .extensions-header {
+  color: #ffffff;
 }
 
 .main-content h1,
@@ -91,8 +96,6 @@
   background-color: var(--vision-box-bg);
 }
 
-.contact-info-box,
-.service-card-header,
 .vision-box,
 .mission-box,
 .complaint-card,
@@ -101,7 +104,6 @@
 .album-card,
 .gallery-image-card,
 .foi-card,
-.job-card,
 .faq-item,
 .app-btn,
 .venue-image-wrapper,
@@ -330,7 +332,6 @@
 [data-theme="dark"] .sidebar-content,
 [data-theme="dark"] .page-content-box,
 [data-theme="dark"] .info-card,
-[data-theme="dark"] .job-card,
 [data-theme="dark"] .gallery-card,
 [data-theme="dark"] .contact-card,
 [data-theme="dark"] .complaints-form-wrapper,
@@ -453,12 +454,12 @@
 
 /* ─── Hide images (site-wide) ──────────────────────────────────────────── */
 
-html[data-hide-images="true"] img:not(.keep-visible),
+html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 html[data-hide-images="true"] picture,
 html[data-hide-images="true"] video,
 html[data-hide-images="true"] iframe,
 html[data-hide-images="true"] svg image,
-body.site-hide-images img:not(.keep-visible),
+body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 body.site-hide-images picture,
 body.site-hide-images video,
 body.site-hide-images iframe {
@@ -466,9 +467,9 @@ body.site-hide-images iframe {
   opacity: 0 !important;
 }
 
-html[data-hide-images="true"] img:not(.keep-visible),
+html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 html[data-hide-images="true"] video,
-body.site-hide-images img:not(.keep-visible),
+body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 body.site-hide-images video {
   max-height: 0 !important;
   max-width: 0 !important;
@@ -476,6 +477,27 @@ body.site-hide-images video {
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
+}
+
+/* Keep header UI icons visible while content images are hidden */
+html[data-hide-images="true"] .site-header img,
+html[data-hide-images="true"] .site-header .tool-btn-fa,
+body.site-hide-images .site-header img,
+body.site-hide-images .site-header .tool-btn-fa {
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-height: none !important;
+  max-width: none !important;
+  overflow: visible !important;
+  padding: unset !important;
+  margin: unset !important;
+  border: unset !important;
+  display: block !important;
+}
+
+html[data-hide-images="true"] .site-header .tool-btn-fa,
+body.site-hide-images .site-header .tool-btn-fa {
+  display: inline-block !important;
 }
 
 html[data-hide-images="true"] [style*="background-image"],

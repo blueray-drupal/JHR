@@ -2,15 +2,55 @@ import React, { useEffect, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import DrupalWebform from "../../components/drupalWebForm/DrupalWebform";
 import { parseDrupalSingleNode } from "../../utils/drupalParser";
+import { fetchFooterData } from "../../services/api/footerApi";
 import "./ContactUs.css";
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import facebookIcon from "../../../assets/contact-facebook.png";
+import instagramIcon from "../../../assets/contact-instagram.png";
+import youtubeIcon from "../../../assets/contact-youtube.png";
 
-// روابط التواصل الاجتماعي ثابتة حالياً لحين ربطها بالقائمة
-const SOCIAL_LINKS = [
-    { id: 1, title: "YouTube", icon: "fa-brands fa-youtube", className: "yt", link: "#" },
-    { id: 2, title: "Instagram", icon: "fa-brands fa-instagram", className: "ig", link: "#" },
-    { id: 3, title: "Facebook", icon: "fa-brands fa-facebook-f", className: "fb", link: "#" },
+const SOCIAL_DEFAULTS = [
+    {
+        id: "facebook",
+        title: "Facebook",
+        className: "fb",
+        icon: facebookIcon,
+        link: "https://www.facebook.com/JordanHejazRailay/",
+        match: /facebook\.com/i,
+    },
+    {
+        id: "instagram",
+        title: "Instagram",
+        className: "ig",
+        icon: instagramIcon,
+        link: "#",
+        match: /instagram\.com/i,
+    },
+    {
+        id: "youtube",
+        title: "YouTube",
+        className: "yt",
+        icon: youtubeIcon,
+        link: "https://www.youtube.com/channel/UCe1TR5Upmef5FYdDaLkq9xw",
+        match: /youtube\.com/i,
+    },
 ];
+
+const mergeSocialLinks = (footerSocial = []) =>
+    SOCIAL_DEFAULTS.map((social) => {
+        const matches = footerSocial.filter(
+            (item) =>
+                social.match.test(item.link || "") ||
+                social.match.test(item.title || "")
+        );
+        const fromContent =
+            matches.find((item) => /\/channel\//i.test(item.link || "")) || matches[0];
+
+        return {
+            ...social,
+            link: fromContent?.link && fromContent.link !== "#" ? fromContent.link : social.link,
+        };
+    });
 
 const FORM_MESSAGES = {
     loading: "جاري تحميل النموذج...",
@@ -33,15 +73,19 @@ const stripHtml = (html) => (html || "").replace(/<[^>]*>/g, "").trim();
 function ContactUs() {
     const baseUrl = drupalBaseUrl;
     const [page, setPage] = useState(null);
+    const [socialLinks, setSocialLinks] = useState(SOCIAL_DEFAULTS);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(
-                    `${baseUrl}/jsonapi/node/contact_us?include=field_contact_info,field_contact_info.field_media_image,field_contact_info.field_media_image.field_media_image,field_sub_numbers`
-                );
+                const [response, footerData] = await Promise.all([
+                    fetch(
+                        `${baseUrl}/jsonapi/node/contact_us?include=field_contact_info,field_contact_info.field_media_image,field_contact_info.field_media_image.field_media_image,field_sub_numbers`
+                    ),
+                    fetchFooterData().catch(() => null),
+                ]);
 
                 if (!response.ok) {
                     console.log(response.status);
@@ -50,6 +94,10 @@ function ContactUs() {
                 const data = await response.json();
                 const node = Array.isArray(data.data) ? { ...data, data: data.data[0] } : data;
                 setPage(parseDrupalSingleNode(node, baseUrl));
+
+                if (footerData?.socialIcons?.length) {
+                    setSocialLinks(mergeSocialLinks(footerData.socialIcons));
+                }
             } catch (error) {
                 console.log(error);
             } finally {
@@ -107,16 +155,16 @@ function ContactUs() {
                         <div className="social-media-block">
                             <h3>مواقع التواصل الاجتماعي:</h3>
                             <div className="social-icons">
-                                {SOCIAL_LINKS.map((social) => (
+                                {socialLinks.map((social) => (
                                     <a
                                         key={social.id}
-                                        href={social.link}
+                                        href={social.link || "#"}
                                         className={`social-btn ${social.className}`}
                                         title={social.title}
-                                        target="_blank"
-                                        rel="noreferrer"
+                                        target={social.link && social.link !== "#" ? "_blank" : undefined}
+                                        rel={social.link && social.link !== "#" ? "noreferrer" : undefined}
                                     >
-                                        <i className={social.icon}></i>
+                                        <img src={social.icon} alt={social.title} className="social-btn-icon" />
                                     </a>
                                 ))}
                             </div>

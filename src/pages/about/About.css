@@ -139,18 +139,32 @@
     margin: 0 0 6px 0;
 }
 
-.welcome-position {
+.welcome-position,
+.main-content .welcome-position,
+.full-content .welcome-position {
+    color: #0C6F8C !important;
+    text-align: center;
+    font-family: Cairo, sans-serif;
     font-size: 14px;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
     margin: 0 0 4px 0;
 }
 
-.welcome-company {
-    font-size: 13px;
-    color: var(--text-muted);
+.welcome-company,
+.main-content .welcome-company,
+.full-content .welcome-company,
+.welcome-text span[style*="white-space"],
+.main-content .welcome-text span[style*="white-space"],
+.full-content .welcome-text span[style*="white-space"] {
+    color: #6A7282 !important;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
     margin: 0;
-    line-height: 1.6;
 }
 
 .about-table-wrapper {
@@ -196,25 +210,23 @@
 .position-badge {
     display: inline-block;
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 9999px;
     font-size: 12px;
     font-weight: 600;
 }
 
 .position-badge.chairman {
-    background-color: var(--secondary-color);
+    border-radius: 9999px;
+    background: #BE9650;
     color: #ffffff;
 }
 
-.position-badge.vice {
-    background-color: var(--vision-box-bg);
-    color: var(--primary-color);
-    border: 1px solid var(--border-color);
-}
-
+.position-badge.vice,
 .position-badge.default {
-    background-color: var(--card-bg);
-    color: var(--text-muted);
+    border-radius: 9999px;
+    background: #E8F4F8;
+    color: #0C6F8C;
+    border: none;
 }
 
 .org-chart-image {

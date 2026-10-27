@@ -118,60 +118,72 @@
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    width: auto;
+    align-self: flex-start;
 }
 
-.app-btn {
+.app-btn,
+.main-content .app-btn {
     display: flex;
+    width: 250px;
+    padding: 12px 20px;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+    flex: 0 0 250px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1.348px solid #D1D5DC;
     text-decoration: none;
-    background-color: var(--card-bg);
-    min-width: 150px;
+    background-color: var(--content-bg, #ffffff);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .app-btn:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 2px 8px var(--shadow-color);
+    border-color: #0C6F8C;
+    box-shadow: 0 2px 8px rgba(12, 111, 140, 0.08);
 }
 
 .app-btn-icon-img {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     flex-shrink: 0;
+    margin-inline-start: auto;
 }
 
 .app-btn-text {
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: 2px;
+    gap: 0;
+    min-width: 0;
 }
 
-.app-name {
-    font-size: 13px;
+.app-name,
+.main-content .app-name {
+    color: #1E2939 !important;
+    font-family: Cairo, sans-serif;
+    font-size: 16px;
+    font-style: normal;
     font-weight: 700;
-    color: var(--heading-color);
-    line-height: 1.3;
+    line-height: 32px;
 }
 
-.app-store {
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.3;
-}
-
-.app-store p {
+.app-store,
+.main-content .app-store,
+.main-content .app-store p {
+    color: #99A1AF !important;
+    font-family: Cairo, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
     margin: 0;
-    color: var(--text-muted);
 }
 
 .external-icon {
-    color: var(--text-muted);
+    color: #99A1AF;
     flex-shrink: 0;
 }
 
@@ -188,10 +200,13 @@
 
     .app-buttons-group {
         flex-direction: column;
-        width: 100%;
+        width: auto;
+        align-self: flex-start;
     }
 
-    .app-btn {
-        width: 100%;
+    .app-btn,
+    .main-content .app-btn {
+        width: 250px;
+        flex: 0 0 250px;
     }
 }

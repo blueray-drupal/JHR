@@ -70,12 +70,18 @@
     background-color: #0d6d8c;
     color: #ffffff;
     border: none;
-    padding: 7px 20px;
+    padding: 7px 34px;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s;color: #FFF;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21px; /* 150% */
 }
 
 .search-btn:hover {
@@ -132,7 +138,10 @@
     color: #0d6d8c;
     text-decoration: none;
     margin-top: auto;
-    align-self: flex-start;
+    align-self: stretch;
+    padding-top: 12px;
+    border-radius: 0 0 3px 3px;
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 .info-item-media {
@@ -254,8 +263,6 @@
 
 .document-icon-wrapper {
     margin-bottom: 16px;
-    color: #ea4335;
-    /* Red PDF icon color */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,22 +276,35 @@
     line-height: 1.4;
 }
 
-.document-size {
-    font-size: 12px;
-    color: #999999;
+.document-size,
+.main-content .document-size,
+.full-content .document-size {
+    color: #4A5565 !important;
+    text-align: center;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
     margin-bottom: 20px;
 }
 
-.document-download-btn {
+.document-download-btn,
+.main-content .document-download-btn,
+.full-content .document-download-btn {
     width: 100%;
     margin-top: auto;
     background-color: #0d6d8c;
-    color: #ffffff;
+    color: #ffffff !important;
     border: none;
     padding: 10px 0;
     border-radius: 4px;
+    text-align: center;
+    font-family: Cairo, sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -294,8 +314,27 @@
     transition: background-color 0.2s ease;
 }
 
+.document-download-btn span,
+.main-content .document-download-btn span,
+.full-content .document-download-btn span {
+    color: #ffffff !important;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.document-download-btn svg,
+.main-content .document-download-btn svg {
+    color: #ffffff;
+    stroke: #ffffff;
+    flex-shrink: 0;
+}
+
 .document-download-btn:hover {
     background-color: #084c61;
+    color: #ffffff !important;
 }
 
 /* Responsive Styles */
@@ -360,9 +399,18 @@
     text-align: center;
 }
 
-.col-size {
+.col-size,
+.main-content .col-size,
+.full-content .col-size,
+.reports-table tbody .col-size {
     width: 20%;
+    color: #4A5565 !important;
     text-align: center;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
 }
 
 .col-action {

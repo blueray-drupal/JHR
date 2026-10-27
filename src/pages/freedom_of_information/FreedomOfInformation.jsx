@@ -23,10 +23,28 @@ const FIELD_ROWS = [
     ["first_name", "father_name"],
     ["grandfather_name", "family_name"],
     ["residence_governorate", "residence_city"],
-    ["residence_city", "residence_district"],
     ["work_governorate", "work_city"],
-    ["work_city", "work_district"],
     ["phone_number", "fax_number"],
+];
+
+const CONSENT_TEXT =
+    "أقر بأن المعلومات المذكورة صحيحة والتزم بأن استخدم المعلومات للغرض الذي تم الحصول عليها من أجله وأن أشير إلى مصدر المعلومة التي حصلت عليها والمعلومات الببلوغرافية حسب الأصول العلمية والقانونية المرعية";
+
+const FIELD_OVERRIDES = {
+    personal_document: { placeholder: "حمل ملف" },
+    additional_documents: { placeholder: "حمل ملف" },
+    consent: {
+        title: CONSENT_TEXT,
+        description: CONSENT_TEXT,
+    },
+};
+
+const FOI_NOTICE_ITEMS = [
+    "ألتزم بأن استخدم المعلومات للغرض الذي تم الحصول عليها من أجله وأن أشير إلى مصدر المعلومة التي حصلت عليها والمعلومات الببليوغرافية وحسب الأصول العلمية والقانونية المرعية",
+    "يتم إجابة الطلب أو رفضه خلال ثلاثين يوماً من اليوم التالي لتاريخ تقديم الطلب",
+    "يعتبر الامتناع عن الرد ضمن المدة المحددة قراراً بالرفض",
+    "في حال عدم حصولك على المعلومة يحق لك تقديم شكوى إلى مجلس المعلومات بواسطة مفوض المعلومات / مدير عام دائرة المكتبة الوطنية",
+    "ملاحظة: تأكد من حصولك على الرقم المرجعي",
 ];
 
 function FreedomOfInformation() {
@@ -51,7 +69,19 @@ function FreedomOfInformation() {
                         className="foi-webform"
                         submitLabel="إرسال"
                         fieldRows={FIELD_ROWS}
+                        fieldOverrides={FIELD_OVERRIDES}
                         messages={FORM_MESSAGES}
+                        afterFields={{
+                            additional_documents: (
+                                <div className="foi-notice" role="note">
+                                    <ul className="foi-notice-list">
+                                        {FOI_NOTICE_ITEMS.map((item) => (
+                                            <li key={item}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ),
+                        }}
                     />
                 </div>
             </div>

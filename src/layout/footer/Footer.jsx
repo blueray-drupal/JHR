@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getMenuByMachineName } from "../../utils/menuService";
 import { fetchFooterData, parseContactLine } from "../../services/api/footerApi";
-import { Skeleton } from "../../components/skeleton/Skeleton";
 import "./footer.css";
 import facebookIcon from "../../../assets/facebook.svg";
 import instagramIcon from "../../../assets/insta.svg";
 import youtubeIcon from "../../../assets/youtube.svg";
+
+/** ترتيب RTL: يظهر أول عنصر يمينًا كما في التصميم */
+const topFooterLinks = [
+    { id: "code-of-conduct", title: "مدونة السلوك الوظيفي", link: "/code-of-conduct" },
+    { id: "faq", title: "الأسئلة الأكثر تكراراً", link: "/faq" },
+    { id: "useful-links", title: "روابط مفيدة", link: "/useful-links" },
+    { id: "staff-mail", title: "بريد الموظفين", link: "https://webmail.gov.jo/owa/" },
+];
 
 const defaultContactItems = [
     { id: "default-1", text: "العنوان: عمان - المحطة - شارع الملك عبدالله الأول" },
@@ -37,14 +43,16 @@ const copyrightMenu = {
     organization: "مؤسسة الخط الحديدي الحجازي الأردني",
 };
 
+function isExternalHref(link) {
+    return /^https?:\/\//i.test(link) || link.startsWith("//") || link.startsWith("mailto:");
+}
+
 function FooterPolicyLink({ title, link }) {
     if (!link) {
         return <span>{title}</span>;
     }
 
-    const isExternal = /^https?:\/\//i.test(link);
-
-    if (isExternal) {
+    if (isExternalHref(link)) {
         return (
             <a
                 href={link}
@@ -59,6 +67,27 @@ function FooterPolicyLink({ title, link }) {
 
     return (
         <Link to={link} className="footer-policy-link">
+            {title}
+        </Link>
+    );
+}
+
+function FooterTopMenuLink({ title, link }) {
+    if (isExternalHref(link)) {
+        return (
+            <a
+                href={link}
+                className="footer-top-menu-link"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {title}
+            </a>
+        );
+    }
+
+    return (
+        <Link to={link} className="footer-top-menu-link">
             {title}
         </Link>
     );
@@ -86,23 +115,11 @@ function FooterContactLine({ text }) {
 }
 
 function Footer() {
-    const [topFooterMenu, setTopFooterMenu] = useState([]);
-    const [loadingTopMenu, setLoadingTopMenu] = useState(true);
     const [contactItems, setContactItems] = useState(defaultContactItems);
     const [importantLinks, setImportantLinks] = useState(defaultImportantLinks);
     const [partners, setPartners] = useState([]);
     const [socialIcons, setSocialIcons] = useState(defaultSocialIcons);
     const [bottomLinks, setBottomLinks] = useState([]);
-
-    useEffect(() => {
-        const loadTopFooterMenu = async () => {
-            const menuData = await getMenuByMachineName("main");
-            setTopFooterMenu(menuData);
-            setLoadingTopMenu(false);
-        };
-
-        loadTopFooterMenu();
-    }, []);
 
     useEffect(() => {
         const loadFooterData = async () => {
@@ -141,19 +158,13 @@ function Footer() {
             <div className="footer-top">
                 <div className="footer-container footer-top-container">
                     <nav className="footer-top-menu">
-                        {loadingTopMenu ? (
-                            <Skeleton style={{ width: 220, height: 14 }} />
-                        ) : (
-                            topFooterMenu.map((item) => (
-                                <Link
-                                    key={item.id}
-                                    to={item.link}
-                                    className="footer-top-menu-link"
-                                >
-                                    {item.title}
-                                </Link>
-                            ))
-                        )}
+                        {topFooterLinks.map((item) => (
+                            <FooterTopMenuLink
+                                key={item.id}
+                                title={item.title}
+                                link={item.link}
+                            />
+                        ))}
                     </nav>
 
                     <nav className="footer-social-menu">

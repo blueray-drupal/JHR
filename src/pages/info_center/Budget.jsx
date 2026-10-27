@@ -3,6 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { formatFileSizeAr } from '../../utils/formatFileSize';
 
 const BUDGET_DATA = [
     {
@@ -116,36 +117,63 @@ function Budget() {
                     {files.map((item) => (
                         <div key={item.id} className="document-card">
                             <div className="document-icon-wrapper">
-                                {/* Red PDF Document SVG Icon */}
                                 <svg
+                                    xmlns="http://www.w3.org/2000/svg"
                                     width="48"
                                     height="48"
-                                    viewBox="0 0 24 24"
+                                    viewBox="0 0 48 48"
                                     fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
+                                    aria-hidden="true"
                                 >
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                    <polyline points="14 2 14 8 20 8" />
-                                    <line x1="16" y1="13" x2="8" y2="13" />
-                                    <line x1="16" y1="17" x2="8" y2="17" />
-                                    <line x1="10" y1="9" x2="8" y2="9" />
+                                    <path
+                                        d="M29.9962 3.99902H11.9985C10.9378 3.99902 9.92049 4.4204 9.17044 5.17044C8.4204 5.92049 7.99902 6.93778 7.99902 7.99851V39.9944C7.99902 41.0551 8.4204 42.0724 9.17044 42.8224C9.92049 43.5725 10.9378 43.9939 11.9985 43.9939H35.9954C37.0561 43.9939 38.0734 43.5725 38.8235 42.8224C39.5735 42.0724 39.9949 41.0551 39.9949 39.9944V13.9977L29.9962 3.99902Z"
+                                        stroke="#FB2C36"
+                                        strokeWidth="3.99948"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M27.9961 3.99902V11.998C27.9961 13.0587 28.4175 14.076 29.1675 14.8261C29.9176 15.5761 30.9348 15.9975 31.9956 15.9975H39.9945"
+                                        stroke="#FB2C36"
+                                        strokeWidth="3.99948"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M19.9975 17.998H15.998"
+                                        stroke="#FB2C36"
+                                        strokeWidth="3.99948"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M31.996 25.9971H15.998"
+                                        stroke="#FB2C36"
+                                        strokeWidth="3.99948"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M31.996 33.9961H15.998"
+                                        stroke="#FB2C36"
+                                        strokeWidth="3.99948"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
                                 </svg>
                             </div>
 
                             <h3 className="document-title">{item.title}</h3>
-                            <span className="document-size">{item.file.filesize % 1024} kb</span>
+                            <span className="document-size">{formatFileSizeAr(item.file.filesize)}</span>
 
                             <a
                                 href={item.file.url}
                                 download
                                 className="document-download-btn"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <span>تحميل PDF</span>
-                                {/* Download Tray SVG Icon */}
                                 <svg
                                     width="16"
                                     height="16"
@@ -155,6 +183,7 @@ function Budget() {
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
+                                    aria-hidden="true"
                                 >
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="7 10 12 15 17 10" />
