@@ -51,7 +51,20 @@
     /* background-color: #0d748d; */
 }
 
+/* مؤقتاً: إخفاء زر اللغة الإنجليزية */
 .lang-btn {
+    display: none !important;
+}
+
+.lang-btn-visible {
+    display: inline-flex;
+}
+
+.lang-btn-temp-hidden {
+    display: none !important;
+}
+
+.lang-btn-base {
     background: transparent;
     color: #ffffff;
     border: none;
