@@ -40,6 +40,7 @@ import DirectorsGeneral from './pages/about/DirectorsGeneral';
 import FreedomOfInformation from './pages/freedom_of_information/FreedomOfInformation';
 import Tenders from './pages/tenders/Tenders';
 import TenderDetails from './pages/tenders/TenderDetails';
+import Search from './pages/search/Search';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
           <Route path="/useful-links" element={<UsefulLinks />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/freedom-of-information" element={<FreedomOfInformation />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={<BasicPage />} />
         </Routes>
 

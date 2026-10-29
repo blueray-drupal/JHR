@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useSitePreferences } from "../../context/SitePreferencesContext";
 import darkIcon from "../../../assets/dark.svg";
@@ -175,6 +175,7 @@ const toolActionMap = {
 // ================= HEADER =================
 
 function Header() {
+    const navigate = useNavigate();
     const {
         preferences,
         setTheme,
@@ -272,6 +273,7 @@ function Header() {
                                 className="tool-btn tool-btn-search"
                                 title="البحث"
                                 aria-label="البحث"
+                                onClick={() => navigate("/search")}
                             >
                                 <img
                                     src={searchIcon}

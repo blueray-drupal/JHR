@@ -1,0 +1,155 @@
+.site-search-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.site-search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.site-search-label {
+    color: #1e2939;
+    font-family: Cairo, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.site-search-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.site-search-input {
+    flex: 1;
+    min-width: 220px;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid #d1d5dc;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e2939;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+.site-search-input:focus {
+    border-color: #0c6f8c;
+    box-shadow: 0 0 0 3px rgba(12, 111, 140, 0.12);
+}
+
+.site-search-submit {
+    min-width: 120px;
+    height: 46px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 8px;
+    background: #0c6f8c;
+    color: #ffffff;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.site-search-submit:hover {
+    background: #0a5a70;
+}
+
+.site-search-status {
+    margin: 0;
+    color: #4a5565;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.site-search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.site-search-result {
+    padding: 18px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.site-search-result-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.site-search-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #e8f4f8;
+    color: #0c6f8c;
+    font-family: Cairo, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.site-search-title {
+    color: #1e2939;
+    font-family: Cairo, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.site-search-title:hover {
+    color: #0c6f8c;
+}
+
+.site-search-description {
+    margin: 10px 0 0;
+    color: #4a5565;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.site-search-open {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 60px;
+    background: #0c6f8c;
+    color: #ffffff;
+    font-family: Cairo, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.site-search-open:hover {
+    background: #0a5a70;
+}
+
+@media (max-width: 640px) {
+    .site-search-submit {
+        width: 100%;
+    }
+}

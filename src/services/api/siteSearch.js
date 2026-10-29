@@ -1,113 +1,150 @@
 import { drupalApi } from './axios.config.js';
 
 const stripHtml = (html = '') =>
-  html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  String(html || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
+const excerpt = (html, max = 160) => {
+  const plain = stripHtml(html);
+  if (plain.length <= max) return plain;
+  return `${plain.slice(0, max).trim()}...`;
+};
+
+/** صفحات ثابتة من خريطة الموقع */
 export const STATIC_SEARCH_PAGES = [
-  {
-    title: 'الرئيسية',
-    path: '/',
-    badge: 'صفحة',
-    description: 'الصفحة الرئيسية لمرصد المرأة الأردني.',
-  },
-  {
-    title: 'كلمة سمو الأميرة',
-    path: '/about-princess-message',
-    badge: 'عن المرصد',
-    description: 'كلمة سمو الأميرة بسمة بنت طلال حول مرصد المرأة الأردني.',
-  },
-  {
-    title: 'نظرة عامة',
-    path: '/about-princess-message#overview',
-    badge: 'عن المرصد',
-    description: 'نظرة عامة حول مرصد المرأة الأردني وأهدافه.',
-  },
-  {
-    title: 'محاور البيانات',
-    path: '/data-axsis/20',
-    badge: 'بيانات',
-    description: 'محاور ومؤشرات بيانات أوضاع المرأة الأردنية.',
-  },
-  {
-    title: 'المشاركة في سوق العمل',
-    path: '/data-axsis/25',
-    badge: 'بيانات',
-    description: 'بيانات ومؤشرات مشاركة المرأة في سوق العمل.',
-  },
-  {
-    title: 'التشريعات والوثائق',
-    path: '/legislation',
-    badge: 'سياسات',
-    description: 'التشريعات والوثائق المتعلقة بحقوق المرأة.',
-  },
-  {
-    title: 'الاستراتيجيات الوطنية',
-    path: '/national-strategies',
-    badge: 'سياسات',
-    description: 'الاستراتيجيات الوطنية ذات الصلة بالمرأة.',
-  },
-  {
-    title: 'الاتفاقيات',
-    path: '/agreements',
-    badge: 'سياسات',
-    description: 'الاتفاقيات والمعاهدات الدولية والوطنية.',
-  },
-  {
-    title: 'دراسات وأوراق سياسات',
-    path: '/studies',
-    badge: 'دراسات',
-    description: 'الدراسات والأوراق البحثية والسياسات.',
-  },
-  {
-    title: 'المؤشرات الدولية',
-    path: '/international-indicators',
-    badge: 'بيانات',
-    description: 'مقارنة المؤشرات الوطنية بالمعايير الدولية.',
-  },
-  {
-    title: 'اتصل بنا',
-    path: '/contact',
-    badge: 'تواصل',
-    description: 'طرق التواصل مع مرصد المرأة الأردني.',
-  },
+  { title: 'الرئيسية', path: '/', badge: 'صفحة', description: 'الصفحة الرئيسية لمؤسسة الخط الحديدي الحجازي الأردني.' },
+  { title: 'نبذة عن المؤسسة', path: '/about', badge: 'عن المؤسسة', description: 'نبذة عن مؤسسة الخط الحديدي الحجازي الأردني.' },
+  { title: 'الكلمة الترحيبية', path: '/welcome-speech', badge: 'عن المؤسسة', description: 'الكلمة الترحيبية للمدير العام.' },
+  { title: 'مجلس الإدارة', path: '/board-directors', badge: 'عن المؤسسة', description: 'أعضاء مجلس إدارة المؤسسة.' },
+  { title: 'الهيكل التنظيمي', path: '/organization-chart', badge: 'عن المؤسسة', description: 'الهيكل التنظيمي للمؤسسة.' },
+  { title: 'المدراء العامون', path: '/general-managers', badge: 'عن المؤسسة', description: 'المديرون العامون السابقون.' },
+  { title: 'الرحلات', path: '/services/trips', badge: 'خدمات', description: 'خدمات الرحلات العائلية والسياحية.' },
+  { title: 'حجز مواقع', path: '/services/venue-booking', badge: 'خدمات', description: 'حجز المواقع التابعة للمؤسسة.' },
+  { title: 'المتحف', path: '/services/museum', badge: 'خدمات', description: 'متحف الخط الحديدي الحجازي.' },
+  { title: 'خدمات الشحن', path: '/services/cargo', badge: 'خدمات', description: 'خدمات الشحن والنقل.' },
+  { title: 'خدمات الاستثمار', path: '/services/investment', badge: 'خدمات', description: 'فرص وخدمات الاستثمار.' },
+  { title: 'الأخبار', path: '/news', badge: 'المركز الإعلامي', description: 'أخبار المؤسسة.' },
+  { title: 'ألبوم الصور', path: '/gallery', badge: 'المركز الإعلامي', description: 'ألبوم صور المؤسسة.' },
+  { title: 'الفعاليات', path: '/events', badge: 'المركز الإعلامي', description: 'فعاليات المؤسسة.' },
+  { title: 'المؤتمرات', path: '/conferences', badge: 'المركز الإعلامي', description: 'مؤتمرات المؤسسة.' },
+  { title: 'المشاريع', path: '/info-center/projects', badge: 'مركز المعلومات', description: 'مشاريع المؤسسة.' },
+  { title: 'الموازنة', path: '/info-center/budget', badge: 'مركز المعلومات', description: 'وثائق الموازنة.' },
+  { title: 'التقارير السنوية', path: '/info-center/annual-reports', badge: 'مركز المعلومات', description: 'التقارير السنوية.' },
+  { title: 'الاتفاقيات', path: '/info-center/agreements', badge: 'مركز المعلومات', description: 'اتفاقيات المؤسسة.' },
+  { title: 'القوانين', path: '/legislations/laws', badge: 'تشريعات', description: 'القوانين ذات العلاقة.' },
+  { title: 'الأنظمة', path: '/legislations/regulations', badge: 'تشريعات', description: 'الأنظمة والتعليمات.' },
+  { title: 'الوظائف', path: '/jobs', badge: 'وظائف', description: 'إعلانات الوظائف.' },
+  { title: 'العطاءات', path: '/tenders', badge: 'عطاءات', description: 'عطاءات المؤسسة.' },
+  { title: 'الشكاوى والاقتراحات', path: '/complaints', badge: 'تواصل', description: 'منصة الشكاوى والاقتراحات.' },
+  { title: 'حق الحصول على معلومة', path: '/freedom-of-information', badge: 'تواصل', description: 'نموذج حق الحصول على معلومة.' },
+  { title: 'اتصل بنا', path: '/contact-us', badge: 'تواصل', description: 'معلومات الاتصال ونموذج التواصل.' },
+  { title: 'الأسئلة الأكثر تكراراً', path: '/faq', badge: 'صفحة', description: 'الأسئلة الشائعة.' },
+  { title: 'روابط مفيدة', path: '/useful-links', badge: 'صفحة', description: 'روابط مفيدة.' },
+  { title: 'خريطة الموقع', path: '/sitemap', badge: 'صفحة', description: 'خريطة صفحات الموقع.' },
 ];
+
+const MEDIA_PATHS = {
+  news: '/news',
+  events: '/events',
+  conferences: '/conferences',
+  gallery: '/gallery',
+  photo_gallery: '/gallery',
+};
 
 const SEARCHABLE_CONTENT = [
   {
-    type: 'policies',
-    badge: 'تشريعات',
-    getPath: (node) => `/legislation/${node.attributes.drupal_internal__nid}`,
+    type: 'media_center',
+    badge: 'المركز الإعلامي',
+    getPath: (node) => {
+      const classification = String(
+        node.attributes.field_media_center_classificatio || 'news'
+      ).toLowerCase();
+      const base = MEDIA_PATHS[classification] || '/news';
+      return `${base}/${node.id}`;
+    },
     getDescription: (node) =>
-      stripHtml(node.attributes.field_breif?.processed || node.attributes.field_breif?.value || ''),
-  },
-  {
-    type: 'studies_and_papers',
-    badge: 'دراسات',
-    getPath: () => '/studies',
-    getDescription: (node) =>
-      stripHtml(
-        node.attributes.body?.summary ||
+      excerpt(
+        node.attributes.field_body?.summary ||
+          node.attributes.field_body?.processed ||
+          node.attributes.field_body?.value ||
+          node.attributes.body?.summary ||
           node.attributes.body?.processed ||
           node.attributes.body?.value ||
           ''
       ),
   },
   {
-    type: 'about_us',
-    badge: 'عن المرصد',
-    getPath: () => '/about-princess-message',
+    type: 'jobs',
+    badge: 'وظائف',
+    getPath: (node) => `/jobs/${node.id}`,
     getDescription: (node) =>
-      stripHtml(
-        node.attributes.body?.summary ||
+      excerpt(
+        node.attributes.field_body?.processed ||
+          node.attributes.field_body?.value ||
           node.attributes.body?.processed ||
           node.attributes.body?.value ||
+          ''
+      ),
+  },
+  {
+    type: 'tenders',
+    badge: 'عطاءات',
+    getPath: (node) => `/tenders/${node.id}`,
+    getDescription: (node) =>
+      excerpt(
+        node.attributes.field_brief ||
+          node.attributes.field_body?.processed ||
+          node.attributes.field_body?.value ||
+          ''
+      ),
+  },
+  {
+    type: 'projects',
+    badge: 'مشاريع',
+    getPath: (node) => `/info-center/projects/${node.id}`,
+    getDescription: (node) =>
+      excerpt(
+        node.attributes.field_body?.summary ||
+          node.attributes.field_body?.processed ||
+          node.attributes.field_body?.value ||
+          node.attributes.body?.processed ||
+          ''
+      ),
+  },
+  {
+    type: 'faq',
+    badge: 'أسئلة شائعة',
+    getPath: () => '/faq',
+    getDescription: (node) =>
+      excerpt(
+        node.attributes.field_body?.processed ||
+          node.attributes.field_body?.value ||
+          node.attributes.body?.processed ||
+          ''
+      ),
+  },
+  {
+    type: 'basic_page',
+    badge: 'صفحة',
+    getPath: (node) => {
+      const link = node.attributes.field_link;
+      if (typeof link === 'string' && link.startsWith('/')) return link;
+      return '/';
+    },
+    getDescription: (node) =>
+      excerpt(
+        node.attributes.field_body1?.processed ||
+          node.attributes.field_body1?.value ||
+          node.attributes.field_body?.processed ||
           ''
       ),
   },
 ];
 
 function matchesQuery(text, query) {
-  return text.toLowerCase().includes(query.toLowerCase());
+  return String(text || '').toLowerCase().includes(query.toLowerCase());
 }
 
 function filterStaticPages(query) {
@@ -116,7 +153,10 @@ function filterStaticPages(query) {
       matchesQuery(page.title, query) ||
       matchesQuery(page.description, query) ||
       matchesQuery(page.badge, query)
-  );
+  ).map((page) => ({
+    id: `static-${page.path}`,
+    ...page,
+  }));
 }
 
 async function searchNodesByTitle(type, query) {
@@ -127,6 +167,7 @@ async function searchNodesByTitle(type, query) {
       'filter[title][condition][operator]': 'CONTAINS',
       'filter[title][condition][value]': query,
       'page[limit]': 20,
+      sort: '-created',
     },
   });
 
