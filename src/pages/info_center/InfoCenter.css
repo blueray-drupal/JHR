@@ -279,14 +279,31 @@
 .document-size,
 .main-content .document-size,
 .full-content .document-size {
-    color: #4A5565 !important;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
+    color: #99A1AF !important;
     text-align: center;
     font-family: Cairo, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 20px;
+    font-weight: 400;
+    line-height: 16px;
     margin-bottom: 20px;
+}
+
+.document-size-value,
+.document-size-unit {
+    color: inherit;
+    font: inherit;
+}
+
+.document-size-unit {
+    direction: ltr;
+    unicode-bidi: isolate;
 }
 
 .document-download-btn,
@@ -411,6 +428,16 @@
     font-style: normal;
     font-weight: 700;
     line-height: 20px;
+}
+
+.col-size .file-size,
+.reports-table tbody .col-size .file-size {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
 }
 
 .col-action {

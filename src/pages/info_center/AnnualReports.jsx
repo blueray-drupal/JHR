@@ -3,7 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
-import { formatFileSizeAr } from '../../utils/formatFileSize';
+import FileSize from '../../components/fileSize/FileSize';
 
 const ANNUAL_REPORTS_DATA = [
     {
@@ -145,7 +145,9 @@ function AnnualReports() {
                                             background: "blue"
                                         }}>DOCS</span>)} </span>
                                     </td>
-                                    <td className="col-size">{formatFileSizeAr(item.file.filesize)}</td>
+                                    <td className="col-size">
+                                        <FileSize bytes={item.file.filesize} className="file-size" locale="ar" />
+                                    </td>
                                     <td className="col-action">
                                         <a
                                             href={item.file.url}

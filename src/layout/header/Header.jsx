@@ -332,7 +332,7 @@ function Header() {
 
                     {/* Brand */}
 
-                    <div className="brand">
+                    <Link to="/" className="brand" aria-label="الصفحة الرئيسية">
 
                         <div className="brand-logo">
                             <img
@@ -352,7 +352,7 @@ function Header() {
                             </span>
                         </div>
 
-                    </div>
+                    </Link>
 
 
                     {/* Secondary Navigation */}

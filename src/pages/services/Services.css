@@ -130,11 +130,19 @@
     border: 1.196px solid #D0E8F0;
     background: #F0F8FB;
     padding: 24px 20px;
-    text-align: center;
+    text-align: right;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 10px;
+}
+
+.contact-info-box .contact-title,
+.contact-info-box .phone-number,
+.main-content .contact-info-box .contact-title,
+.main-content .contact-info-box .phone-number {
+    width: 100%;
+    text-align: right;
 }
 
 .contact-info-box,

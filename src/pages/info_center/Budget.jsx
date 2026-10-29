@@ -3,7 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
-import { formatFileSizeAr } from '../../utils/formatFileSize';
+import FileSize from '../../components/fileSize/FileSize';
 
 const BUDGET_DATA = [
     {
@@ -164,7 +164,7 @@ function Budget() {
                             </div>
 
                             <h3 className="document-title">{item.title}</h3>
-                            <span className="document-size">{formatFileSizeAr(item.file.filesize)}</span>
+                            <FileSize bytes={item.file.filesize} className="document-size" />
 
                             <a
                                 href={item.file.url}

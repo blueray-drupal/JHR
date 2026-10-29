@@ -58,6 +58,20 @@
     line-height: 20px;
 }
 
+.col-size .file-size {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
+}
+
+.col-size .document-size-unit {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
 .col-action {
     width: 15%;
     text-align: center;
