@@ -31,9 +31,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--heading-color);
+    color: #0C6F8C !important;
     text-align: right;
-    font-family: Cairo;
+    font-family: Cairo, sans-serif;
     font-size: 35px;
     font-style: normal;
     font-weight: 600;
@@ -146,10 +146,15 @@
     margin-top: 40px !important;
 }
 
-.section-title {
-    font-size: 22px;
+.section-title,
+.main-content .section-title,
+.full-content .section-title {
+    color: #0C6F8C !important;
+    font-family: Cairo, sans-serif;
+    font-size: 24px;
+    font-style: normal;
     font-weight: 700;
-    color: var(--primary-color);
+    line-height: 32px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--secondary-color);
     margin-bottom: 24px;

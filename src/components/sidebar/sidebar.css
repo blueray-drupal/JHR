@@ -60,7 +60,7 @@
 }
 
 .sidebar-item.active {
-    background-color: var(--secondary-color);
+    background: #BE9650;
 }
 
 .sidebar-item.active a {

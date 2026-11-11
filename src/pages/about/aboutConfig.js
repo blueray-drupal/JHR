@@ -3,7 +3,7 @@ export const ABOUT_SIDEBAR = [
     { id: 2, title: "الكلمة الترحيبية", link: "/welcome-speech" },
     { id: 3, title: "مجلس الإدارة", link: "/board-directors" },
     { id: 4, title: "الهيكل التنظيمي", link: "/organization-chart" },
-    { id: 5, title: "المديرون العامون السابقون", link: "/general-managers" },
+    { id: 5, title: "المدراء العامون", link: "/general-managers" },
 ];
 
 export const ABOUT_SECTIONS = {

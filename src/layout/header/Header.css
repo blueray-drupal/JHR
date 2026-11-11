@@ -54,17 +54,6 @@
 /* مؤقتاً: إخفاء زر اللغة الإنجليزية */
 .lang-btn {
     display: none !important;
-}
-
-.lang-btn-visible {
-    display: inline-flex;
-}
-
-.lang-btn-temp-hidden {
-    display: none !important;
-}
-
-.lang-btn-base {
     background: transparent;
     color: #ffffff;
     border: none;
@@ -74,11 +63,14 @@
     font-size: 13px;
     font-weight: 500;
     line-height: 1;
-    display: flex;
     align-items: center;
     gap: 8px;
     padding: 0 14px;
     min-height: 32px;
+}
+
+.lang-btn + .top-bar-tools-divider {
+    display: none;
 }
 
 .lang-btn-icon {

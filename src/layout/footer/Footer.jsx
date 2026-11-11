@@ -47,6 +47,14 @@ function isExternalHref(link) {
     return /^https?:\/\//i.test(link) || link.startsWith("//") || link.startsWith("mailto:");
 }
 
+function resolvePartnerLink(link) {
+    if (!link) return link;
+    if (/tawasul\.gov\.jo/i.test(link)) {
+        return "https://www.tawasal.gov.jo/";
+    }
+    return link;
+}
+
 function FooterPolicyLink({ title, link }) {
     if (!link) {
         return <span>{title}</span>;
@@ -232,7 +240,7 @@ function Footer() {
                                 item.link ? (
                                     <a
                                         key={item.id}
-                                        href={item.link}
+                                        href={resolvePartnerLink(item.link)}
                                         className="footer-partner"
                                         target="_blank"
                                         rel="noopener noreferrer"

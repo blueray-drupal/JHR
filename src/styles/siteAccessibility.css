@@ -74,7 +74,39 @@
   color: var(--link-hover-color);
 }
 
+.main-page-title,
+.page-title,
+.section-title,
 .main-content .section-title,
+.full-content .section-title,
+.info-center-header .section-title,
+.services-header .section-title,
+.gallery-header .section-title,
+.gallery-details-header .section-title,
+.news-section-title,
+.services-title,
+.about-home-title,
+.explore-title,
+.useful-links-group-title,
+.info-header-title,
+.apps-title,
+.platform-title,
+.sub-header-title,
+.dwf-section-title,
+.agreements-main-title {
+  color: #0C6F8C !important;
+}
+
+.section-title,
+.main-content .section-title,
+.full-content .section-title {
+  font-family: Cairo, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
 .main-content .contact-title,
 .main-content .phone-number,
 .main-content .platform-title,
@@ -142,11 +174,15 @@
 }
 
 .news-card-title,
-.service-card-title,
+.service-card-title {
+  color: var(--heading-color);
+}
+
 .about-home-title,
 .news-section-title,
-.services-title {
-  color: var(--heading-color);
+.services-title,
+.explore-title {
+  color: #0C6F8C !important;
 }
 
 .news-card-summary,
@@ -213,8 +249,16 @@
   color: var(--link-color) !important;
 }
 
-[data-theme="dark"] .main-content .section-title {
-  color: var(--primary-color) !important;
+[data-theme="dark"] .main-page-title,
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .main-content .section-title,
+[data-theme="dark"] .full-content .section-title,
+[data-theme="dark"] .news-section-title,
+[data-theme="dark"] .services-title,
+[data-theme="dark"] .about-home-title,
+[data-theme="dark"] .explore-title {
+  color: #0C6F8C !important;
   border-bottom-color: var(--secondary-color) !important;
 }
 
@@ -244,7 +288,10 @@
 }
 
 [data-theme="dark"] .main-content .platform-title,
-[data-theme="dark"] .main-content .apps-title,
+[data-theme="dark"] .main-content .apps-title {
+  color: #0C6F8C !important;
+}
+
 [data-theme="dark"] .main-content .app-name {
   color: var(--heading-color) !important;
 }
@@ -274,19 +321,14 @@
   color: var(--text-color) !important;
 }
 
-[data-theme="dark"] .main-page-title,
-[data-theme="dark"] .page-title,
-[data-theme="dark"] .section-title,
 [data-theme="dark"] .about-title,
-[data-theme="dark"] .news-section-title,
-[data-theme="dark"] .services-title,
 [data-theme="dark"] .card-title,
 [data-theme="dark"] .news-card-title,
 [data-theme="dark"] .service-card-title,
 [data-theme="dark"] .job-title,
 [data-theme="dark"] .info-title,
-[data-theme="dark"] h1:not(.slider-title):not(.fact-title),
-[data-theme="dark"] h2:not(.slider-title):not(.fact-title),
+[data-theme="dark"] h1:not(.slider-title):not(.fact-title):not(.main-page-title):not(.page-title),
+[data-theme="dark"] h2:not(.slider-title):not(.fact-title):not(.news-section-title):not(.services-title):not(.about-home-title):not(.explore-title):not(.sitemap-section-title):not(.useful-links-group-title):not(.info-header-title),
 [data-theme="dark"] h3:not(.slider-title):not(.fact-title),
 [data-theme="dark"] h4,
 [data-theme="dark"] h5,

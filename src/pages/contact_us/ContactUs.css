@@ -43,7 +43,7 @@
 
 .info-header-title {
     margin: 0 0 18px;
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     font-family: Cairo, sans-serif;
     font-size: 20px;
     font-weight: 700;
@@ -259,7 +259,7 @@
 
 .sub-header-title {
     margin: 0 0 24px;
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     font-family: Cairo, sans-serif;
     font-size: 18px;
     font-weight: 700;

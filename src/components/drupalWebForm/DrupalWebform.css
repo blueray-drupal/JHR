@@ -126,7 +126,7 @@
   margin: 0;
   font-size: var(--dwf-font-size);
   font-weight: 700;
-  color: var(--dwf-text-label);
+  color: #0C6F8C !important;
 }
 
 .dwf-section-fields {

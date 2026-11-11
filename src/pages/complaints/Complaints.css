@@ -37,7 +37,7 @@
 }
 
 .platform-title {
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -106,7 +106,7 @@
 }
 
 .apps-title {
-    color: var(--heading-color);
+    color: #0C6F8C !important;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;

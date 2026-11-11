@@ -18,8 +18,8 @@ const SITEMAP_DATA = [
         title: "الخدمات",
         links: [
             { label: "الرحلات", path: "/services/trips" },
-            { label: "حجز مواقع", path: "/services/venue-booking" },
-            { label: "محطات المسافرين", path: "/contact-us" },
+            { label: "حجز موقع", path: "/services/venue-booking" },
+            { label: "خدمات الاستثمار", path: "/services/investment" },
             { label: "المتحف", path: "/services/museum" },
         ],
     },

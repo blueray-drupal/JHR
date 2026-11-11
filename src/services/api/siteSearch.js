@@ -19,7 +19,7 @@ export const STATIC_SEARCH_PAGES = [
   { title: 'الكلمة الترحيبية', path: '/welcome-speech', badge: 'عن المؤسسة', description: 'الكلمة الترحيبية للمدير العام.' },
   { title: 'مجلس الإدارة', path: '/board-directors', badge: 'عن المؤسسة', description: 'أعضاء مجلس إدارة المؤسسة.' },
   { title: 'الهيكل التنظيمي', path: '/organization-chart', badge: 'عن المؤسسة', description: 'الهيكل التنظيمي للمؤسسة.' },
-  { title: 'المدراء العامون', path: '/general-managers', badge: 'عن المؤسسة', description: 'المديرون العامون السابقون.' },
+  { title: 'المدراء العامون', path: '/general-managers', badge: 'عن المؤسسة', description: 'المدراء العامون.' },
   { title: 'الرحلات', path: '/services/trips', badge: 'خدمات', description: 'خدمات الرحلات العائلية والسياحية.' },
   { title: 'حجز مواقع', path: '/services/venue-booking', badge: 'خدمات', description: 'حجز المواقع التابعة للمؤسسة.' },
   { title: 'المتحف', path: '/services/museum', badge: 'خدمات', description: 'متحف الخط الحديدي الحجازي.' },
