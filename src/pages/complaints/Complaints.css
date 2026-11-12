@@ -14,9 +14,11 @@
 }
 
 /* Card 1: Main Platform */
-.main-platform-card {
-    background-color: var(--vision-box-bg);
-    border-right: 4px solid var(--primary-color);
+.main-platform-card,
+.main-content .main-platform-card {
+    border-radius: 8px;
+    border-right: 2.697px solid #0C6F8C;
+    background: #F0F8FB !important;
 }
 
 .platform-body {
@@ -73,7 +75,7 @@
 }
 
 .btn-link {
-    background-color: var(--accent-color);
+    
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 8px;
@@ -85,6 +87,8 @@
     gap: 8px;
     transition: background-color 0.2s ease;
     margin-top: 4px;
+    border-radius: 8px;
+background: #3EA4C2;
 }
 
 .btn-link:hover {

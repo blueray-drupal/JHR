@@ -55,18 +55,20 @@
     margin: 0 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
 }
 
 .info-list li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: #364153;
-    font-family: Cairo, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.7;
+    color: #00000A;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 18.475px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36.95px; /* 200% */
 }
 
 .info-icon {
@@ -84,6 +86,21 @@
     object-fit: contain;
 }
 
+.info-list .info-contact-link {
+    color: #024EA2;
+    font-family: Cairo, sans-serif;
+    font-size: 18.475px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36.95px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
 .social-media-block {
     display: flex;
     align-items: center;
@@ -91,11 +108,13 @@
 }
 
 .social-media-block h3 {
-    margin: 0;
-    color: var(--primary-color);
-    font-family: Cairo, sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    color: #000;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 25.073px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 31.671px; /* 126.316% */
 }
 
 .social-icons {
@@ -210,16 +229,18 @@
 }
 
 .contact-webform .dwf-btn {
-    background-color: var(--primary-color);
+
     color: #ffffff;
     border: none;
-    padding: 8px 34px;
+    width: 130px;
     border-radius: 4px;
     cursor: pointer;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-weight: 600;
     transition: background-color 0.2s ease;
+    border-radius: 5px;
+background: #0C6F8C;
 }
 
 .contact-webform .dwf-btn:hover:not(:disabled) {
@@ -269,9 +290,9 @@
 .sub-header-title::after {
     content: "";
     display: block;
-    width: 40px;
-    height: 2px;
-    background-color: #C8A86B;
+    width: 55px;
+    height: 6px;
+    background-color:#0C6F8C;
     margin: 6px auto 0;
 }
 
@@ -291,6 +312,11 @@
     font-size: 13px;
     font-weight: 500;
     text-align: center;
+    border-radius: 5px;
+border-top: 1px solid #495D8D;
+border-right: 4px solid #495D8D;
+border-bottom: 1px solid #495D8D;
+border-left: 1px solid #495D8D;
 }
 
 @media (max-width: 768px) {

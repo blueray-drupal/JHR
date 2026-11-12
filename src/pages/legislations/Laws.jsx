@@ -90,9 +90,19 @@ function Laws() {
                                         </div>
                                     </td>
                                     <td className="col-type">
-                                        <span >{item.file.filemime.split("/")[1] == "pdf" ? (<span className="pdf-icon-badge" >PDF</span>) : (<span className="pdf-icon-badge" style={{
-                                            background: "blue"
-                                        }}>DOCS</span>)} </span>
+                                        <span>
+                                            {item.file.filemime.split("/")[1] == "pdf" ? (
+                                                <img
+                                                    src="/PdfIcon.svg"
+                                                    alt="PDF"
+                                                    className="pdf-icon-badge"
+                                                    width="36"
+                                                    height="40"
+                                                />
+                                            ) : (
+                                                <span className="pdf-icon-badge pdf-icon-badge--docs">DOCS</span>
+                                            )}
+                                        </span>
                                     </td>
                                     <td className="col-size">
                                         <FileSize bytes={item.file.filesize} className="file-size" />

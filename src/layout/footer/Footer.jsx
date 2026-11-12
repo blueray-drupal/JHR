@@ -47,11 +47,26 @@ function isExternalHref(link) {
     return /^https?:\/\//i.test(link) || link.startsWith("//") || link.startsWith("mailto:");
 }
 
-function resolvePartnerLink(link) {
-    if (!link) return link;
+const NATIONAL_HUMAN_RIGHTS_PLAN_PDF =
+    encodeURI("/الخطة_الوطنية_الشاملة_لحقوق_الانسان.pdf");
+
+function resolvePartnerLink(item) {
+    const link = item?.link || "";
+    const haystack = `${link} ${item?.image || ""} ${item?.title || ""}`;
+
     if (/tawasul\.gov\.jo/i.test(link)) {
         return "https://www.tawasal.gov.jo/";
     }
+
+    if (
+        /mot\.gov\.jo/i.test(link) ||
+        /الخطة_?الوطنية|%D8%A7%D9%84%D8%AE%D8%B7%D8%A9/i.test(haystack)
+    ) {
+        if (/الخطة|%D8%A7%D9%84%D8%AE%D8%B7%D8%A9|حقوق.?الانسان|%D8%AD%D9%82%D9%88%D9%82/i.test(haystack)) {
+            return NATIONAL_HUMAN_RIGHTS_PLAN_PDF;
+        }
+    }
+
     return link;
 }
 
@@ -240,7 +255,7 @@ function Footer() {
                                 item.link ? (
                                     <a
                                         key={item.id}
-                                        href={resolvePartnerLink(item.link)}
+                                        href={resolvePartnerLink(item)}
                                         className="footer-partner"
                                         target="_blank"
                                         rel="noopener noreferrer"

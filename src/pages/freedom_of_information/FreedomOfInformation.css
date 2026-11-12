@@ -23,9 +23,9 @@
     padding: 0;
     overflow: hidden;
     background: #ffffff;
-    border: 1px solid var(--foi-border);
+    /* border: 1px solid var(--foi-border);
     border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(15, 40, 60, 0.06);
+    box-shadow: 0 1px 4px rgba(15, 40, 60, 0.06); */
 }
 
 /* ─── Date bar ───────────────────────────────────────────────────────────── */
@@ -37,6 +37,7 @@
     padding: 12px 22px;
     background: var(--foi-teal-soft);
     border-bottom: 1px solid #d0e4ea;
+    border-radius: 8px;
 }
 
 .foi-form .foi-date-label,

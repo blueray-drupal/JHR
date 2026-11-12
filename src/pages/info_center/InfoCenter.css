@@ -100,7 +100,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    border-bottom: 2px solid #b2d4e0;
+    border-bottom: 1px solid #0C6F8C;
     padding-bottom: 20px;
     gap: 20px;
 }
@@ -115,27 +115,34 @@
 .info-item-title {
     font-size: 15px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
     line-height: 1.6;
     margin: 0;
 }
 
-.info-item-date {
-    font-size: 12px;
-    color: #888888;
+.info-item-date,
+.info-item-description {
+    color: #000;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
 }
 
 .info-item-description {
-    font-size: 14px;
-    color: var(--text-color);
-    line-height: 1.7;
     margin: 4px 0;
 }
 
 .item-action-link {
+    color: #000 !important;
+    text-align: right;
+    font-family: Cairo, sans-serif;
     font-size: 14px;
-    font-weight: 700;
-    color: #0d6d8c;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
     text-decoration: none;
     margin-top: auto;
     align-self: stretch;
@@ -466,15 +473,23 @@
 
 /* PDF Badge Icon */
 .pdf-icon-badge {
+    display: inline-block;
+    width: 36px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.pdf-icon-badge--docs {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ea4335;
+    background-color: #2563eb;
     color: #ffffff !important;
     font-size: 10px;
     font-weight: 700;
-    width: 32px;
-    height: 38px;
+    width: 36px;
+    height: 40px;
     border-radius: 4px;
     text-transform: uppercase;
 }
@@ -659,6 +674,13 @@
 
 .info-item-country {
     margin: 0;
+    color: #000;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
 }
 
 .page-number-btn.active {

@@ -6,11 +6,11 @@ const UNITS = {
 /**
  * Split byte size into numeric value + unit.
  * @param {number} bytes
- * @param {"en"|"ar"} [locale="en"]
+ * @param {"en"|"ar"} [locale="ar"]
  */
-export function getFileSizeParts(bytes, locale = "en") {
+export function getFileSizeParts(bytes, locale = "ar") {
     const size = Number(bytes) || 0;
-    const labels = UNITS[locale] || UNITS.en;
+    const labels = UNITS[locale] || UNITS.ar;
 
     if (size < 1024) {
         return { value: String(size), unit: labels.b };
@@ -28,7 +28,7 @@ export function getFileSizeParts(bytes, locale = "en") {
 /**
  * Format byte size as "13 kb" / "2.1 MB" (or Arabic short units).
  */
-export function formatFileSizeAr(bytes, locale = "en") {
+export function formatFileSizeAr(bytes, locale = "ar") {
     const { value, unit } = getFileSizeParts(bytes, locale);
     return `${value} ${unit}`;
 }

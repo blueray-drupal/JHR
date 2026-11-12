@@ -70,6 +70,26 @@ const FORM_MESSAGES = {
 
 const stripHtml = (html) => (html || "").replace(/<[^>]*>/g, "").trim();
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function ContactInfoText({ title, body }) {
+    const value = stripHtml(body);
+    const label = title ? `${title}: ` : "";
+
+    if (EMAIL_PATTERN.test(value)) {
+        return (
+            <span>
+                {label}
+                <a href={`mailto:${value}`} className="info-contact-link">
+                    {value}
+                </a>
+            </span>
+        );
+    }
+
+    return <span>{label}{value}</span>;
+}
+
 function ContactUs() {
     const baseUrl = drupalBaseUrl;
     const [page, setPage] = useState(null);
@@ -147,7 +167,7 @@ function ContactUs() {
                                             <img src={item.image} alt="" />
                                         </span>
                                     )}
-                                    <span>{item.title}: {stripHtml(item.body)}</span>
+                                    <ContactInfoText title={item.title} body={item.body} />
                                 </li>
                             ))}
                         </ul>

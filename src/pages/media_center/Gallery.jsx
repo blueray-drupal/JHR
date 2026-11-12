@@ -113,7 +113,7 @@ function Gallery() {
                         </div>
                         <div className="album-info">
                             <h3 className="album-title">{album.title}</h3>
-                            <span className="album-count">📷 {photos.length} صورة</span>
+                            <span className="album-count"> {photos.length} صورة</span>
                         </div>
                     </Link>
                     );

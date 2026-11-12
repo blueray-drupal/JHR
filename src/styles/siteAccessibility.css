@@ -74,7 +74,6 @@
   color: var(--link-hover-color);
 }
 
-.main-page-title,
 .page-title,
 .section-title,
 .main-content .section-title,
@@ -125,7 +124,9 @@
 }
 
 .main-platform-card {
-  background-color: var(--vision-box-bg);
+  border-radius: 8px;
+  border-right: 2.697px solid #0C6F8C;
+  background: #F0F8FB;
 }
 
 .vision-box,
@@ -249,7 +250,10 @@
   color: var(--link-color) !important;
 }
 
-[data-theme="dark"] .main-page-title,
+[data-theme="dark"] .main-page-title {
+  color: #f1f5f9 !important;
+}
+
 [data-theme="dark"] .page-title,
 [data-theme="dark"] .section-title,
 [data-theme="dark"] .main-content .section-title,
@@ -260,6 +264,16 @@
 [data-theme="dark"] .explore-title {
   color: #0C6F8C !important;
   border-bottom-color: var(--secondary-color) !important;
+}
+
+[data-theme="dark"] .breadcrumb a,
+[data-theme="dark"] .breadcrumb span,
+[data-theme="dark"] .breadcrumb .separator {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .breadcrumb .breadcrumb-current {
+  color: #0C6F8C !important;
 }
 
 /* ─── Inner page cards & CMS content (site-wide catch-all) ─────────────── */
@@ -345,16 +359,15 @@
 [data-theme="dark"] .service-card-body,
 [data-theme="dark"] .about-home-body,
 [data-theme="dark"] .venue-description,
-[data-theme="dark"] .breadcrumb span {
+[data-theme="dark"] .breadcrumb span:not(.breadcrumb-current) {
   color: var(--text-color);
 }
 
-[data-theme="dark"] .breadcrumb a,
 [data-theme="dark"] .news-card-link,
 [data-theme="dark"] .about-home-btn,
 [data-theme="dark"] .card-link,
 [data-theme="dark"] .sidebar-item a:hover,
-[data-theme="dark"] a:not(.nav-link):not(.footer-top-menu-link):not(.contact-item):not(.lang-btn):not(.news-ticker-bar a) {
+[data-theme="dark"] a:not(.nav-link):not(.footer-top-menu-link):not(.contact-item):not(.lang-btn):not(.news-ticker-bar a):not(.breadcrumb a) {
   color: var(--link-color);
 }
 
@@ -466,8 +479,14 @@
   background: var(--surface-color) !important;
 }
 
-[data-theme="dark"] .page-header-wrapper {
+[data-theme="dark"] .page-header-band {
+  background: var(--content-bg) !important;
   border-bottom-color: var(--gold-accent) !important;
+}
+
+[data-theme="dark"] .page-header-wrapper {
+  border-bottom-color: transparent !important;
+  background: transparent !important;
 }
 
 /* ─── Tables & lists ───────────────────────────────────────────────────── */

@@ -169,12 +169,15 @@
 
 .about-table-wrapper {
     overflow-x: auto;
+    width: 100%;
 }
 
 .about-table {
     width: 100%;
+    min-width: 820px;
     border-collapse: collapse;
     font-size: 14px;
+    table-layout: auto;
 }
 
 .about-table thead tr {
@@ -183,9 +186,11 @@
 
 .about-table th,
 .about-table td {
-    padding: 12px 16px;
+    padding: 12px 14px;
     text-align: right;
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 .about-table thead th {
@@ -202,8 +207,30 @@
     background-color: var(--card-bg);
 }
 
-.about-table .col-index {
-    width: 50px;
+.about-table .col-index,
+.about-table td:first-child {
+    width: 48px;
+    color: #6A7282;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.about-table td:nth-child(2) {
+    color: #1E2939;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.about-table th:last-child,
+.about-table td:last-child {
     text-align: center;
 }
 
@@ -213,6 +240,7 @@
     border-radius: 9999px;
     font-size: 12px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .position-badge.chairman {

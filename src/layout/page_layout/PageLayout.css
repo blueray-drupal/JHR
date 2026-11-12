@@ -14,16 +14,33 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Full-bleed white header band */
+.page-header-band {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 3px solid var(--gold-accent);
+}
+
+.page-header-inner {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 15px 12px;
+    box-sizing: border-box;
+}
+
 /* Header Section & Breadcrumb */
 .page-header-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-bottom: 12px;
-    border-bottom: 3px solid var(--gold-accent);
+    padding-bottom: 0;
+    border-bottom: none;
     flex-direction: column;
-    max-width: 1200px;
-    margin: auto;
+    max-width: none;
+    margin: 0;
+    width: 100%;
+    background: transparent;
 }
 
 .main-page-title {
@@ -31,7 +48,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #0C6F8C !important;
+    color: #181818 !important;
     text-align: right;
     font-family: Cairo, sans-serif;
     font-size: 35px;
@@ -59,14 +76,21 @@
     gap: 16px;
 }
 
+.page-header-row .breadcrumb {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
 .page-share-btn {
     background: none;
     border: none;
     padding: 0;
-    color: var(--link-color);
+    margin-inline-start: auto;
+    color: #0C6F8C;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-weight: 600;
+    line-height: 20px;
     cursor: pointer;
     flex-shrink: 0;
 }
@@ -84,7 +108,7 @@
 }
 
 .breadcrumb a {
-    color: var(--link-color);
+    color: #181818;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -94,19 +118,23 @@
 
 .breadcrumb a:hover {
     text-decoration: underline;
-    color: var(--link-hover-color);
+    color: #0C6F8C;
 }
 
 .breadcrumb span {
-    color: var(--text-color);
+    color: #181818;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: 20px;
 }
 
+.breadcrumb .breadcrumb-current {
+    color: #0C6F8C !important;
+}
+
 .breadcrumb .separator {
-    color: var(--link-color);
+    color: #181818;
     font-size: 10px;
 }
 
@@ -121,7 +149,7 @@
     gap: 24px;
     align-items: start;
     background: var(--surface-color);
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 

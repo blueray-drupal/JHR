@@ -1,3 +1,10 @@
+.main-content.full-content:has(.sitemap-container),
+[data-theme="dark"] .main-content.full-content:has(.sitemap-container) {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 .sitemap-container {
     display: flex;
     flex-direction: column;
@@ -34,6 +41,7 @@
     flex-direction: column;
     gap: 8px;
     width: 100%;
+    
 }
 
 .sitemap-item {
@@ -44,8 +52,9 @@
 .sitemap-link {
     display: inline-block;
     padding: 0 12px 0 0;
-    border-right: 2px solid #0C6F8C;
-    color: #4A5565;
+    /* border-right: 2px solid #0C6F8C; */
+    border-right: 4px solid #004D79;
+    color: #00000A !important;
     font-family: Cairo, sans-serif;
     font-size: 16px;
     font-style: normal;

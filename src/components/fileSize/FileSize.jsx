@@ -1,7 +1,7 @@
 import React from "react";
 import { getFileSizeParts } from "../../utils/formatFileSize";
 
-export default function FileSize({ bytes, className = "", locale = "en" }) {
+export default function FileSize({ bytes, className = "", locale = "ar" }) {
     const { value, unit } = getFileSizeParts(bytes, locale);
 
     return (

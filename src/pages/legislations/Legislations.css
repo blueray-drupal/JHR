@@ -96,15 +96,23 @@
 }
 
 .pdf-icon-badge {
+    display: inline-block;
+    width: 36px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.pdf-icon-badge--docs {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ea4335;
+    background-color: #2563eb;
     color: #ffffff !important;
     font-size: 10px;
     font-weight: 700;
-    width: 32px;
-    height: 38px;
+    width: 36px;
+    height: 40px;
     border-radius: 4px;
     text-transform: uppercase;
 }

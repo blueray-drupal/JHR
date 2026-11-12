@@ -125,9 +125,12 @@
     align-items: flex-start;
     gap: 16px;
     width: 100%;
-    padding: 16px;
+    padding-block-end: 20px;
     box-sizing: border-box;
     overflow: hidden;
+    background-color:#fff;
+    border:unset;
+    border-bottom: 1.348px solid #F3F4F6;
 }
 
 .news-cards .card-image-wrapper {
@@ -135,7 +138,7 @@
     width: 180px;
     height: 120px;
     overflow: hidden;
-    border-radius: 6px;
+    border-radius: 13px;
     padding: 0;
     border: none;
 }
