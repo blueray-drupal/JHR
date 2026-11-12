@@ -16,7 +16,7 @@
 .info-center-header .section-title {
     font-size: 22px;
     font-weight: 700;
-    color: #0d6d8c;
+    color: #0C6F8C !important;
     margin: 0;
 }
 
@@ -70,12 +70,18 @@
     background-color: #0d6d8c;
     color: #ffffff;
     border: none;
-    padding: 7px 20px;
+    padding: 7px 34px;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s;color: #FFF;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21px; /* 150% */
 }
 
 .search-btn:hover {
@@ -94,7 +100,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    border-bottom: 2px solid #b2d4e0;
+    border-bottom: 1px solid #0C6F8C;
     padding-bottom: 20px;
     gap: 20px;
 }
@@ -109,30 +115,40 @@
 .info-item-title {
     font-size: 15px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #1a1a1a !important;
     line-height: 1.6;
     margin: 0;
 }
 
-.info-item-date {
-    font-size: 12px;
-    color: #888888;
+.info-item-date,
+.info-item-description {
+    color: #000;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
 }
 
 .info-item-description {
-    font-size: 14px;
-    color: var(--text-color);
-    line-height: 1.7;
     margin: 4px 0;
 }
 
 .item-action-link {
+    color: #000 !important;
+    text-align: right;
+    font-family: Cairo, sans-serif;
     font-size: 14px;
-    font-weight: 700;
-    color: #0d6d8c;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
     text-decoration: none;
     margin-top: auto;
-    align-self: flex-start;
+    align-self: stretch;
+    padding-top: 12px;
+    border-radius: 0 0 3px 3px;
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 .info-item-media {
@@ -254,8 +270,6 @@
 
 .document-icon-wrapper {
     margin-bottom: 16px;
-    color: #ea4335;
-    /* Red PDF icon color */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,22 +283,52 @@
     line-height: 1.4;
 }
 
-.document-size {
+.document-size,
+.main-content .document-size,
+.full-content .document-size {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
+    color: #99A1AF !important;
+    text-align: center;
+    font-family: Cairo, sans-serif;
     font-size: 12px;
-    color: #999999;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
     margin-bottom: 20px;
 }
 
-.document-download-btn {
+.document-size-value,
+.document-size-unit {
+    color: inherit;
+    font: inherit;
+}
+
+.document-size-unit {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+.document-download-btn,
+.main-content .document-download-btn,
+.full-content .document-download-btn {
     width: 100%;
     margin-top: auto;
     background-color: #0d6d8c;
-    color: #ffffff;
+    color: #ffffff !important;
     border: none;
     padding: 10px 0;
     border-radius: 4px;
+    text-align: center;
+    font-family: Cairo, sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -294,8 +338,27 @@
     transition: background-color 0.2s ease;
 }
 
+.document-download-btn span,
+.main-content .document-download-btn span,
+.full-content .document-download-btn span {
+    color: #ffffff !important;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.document-download-btn svg,
+.main-content .document-download-btn svg {
+    color: #ffffff;
+    stroke: #ffffff;
+    flex-shrink: 0;
+}
+
 .document-download-btn:hover {
     background-color: #084c61;
+    color: #ffffff !important;
 }
 
 /* Responsive Styles */
@@ -360,9 +423,28 @@
     text-align: center;
 }
 
-.col-size {
+.col-size,
+.main-content .col-size,
+.full-content .col-size,
+.reports-table tbody .col-size {
     width: 20%;
+    color: #4A5565 !important;
     text-align: center;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.col-size .file-size,
+.reports-table tbody .col-size .file-size {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
 }
 
 .col-action {
@@ -391,15 +473,23 @@
 
 /* PDF Badge Icon */
 .pdf-icon-badge {
+    display: inline-block;
+    width: 36px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.pdf-icon-badge--docs {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ea4335;
+    background-color: #2563eb;
     color: #ffffff !important;
     font-size: 10px;
     font-weight: 700;
-    width: 32px;
-    height: 38px;
+    width: 36px;
+    height: 40px;
     border-radius: 4px;
     text-transform: uppercase;
 }
@@ -428,7 +518,7 @@
 }
 
 .agreements-main-title {
-    color: #0b6285;
+    color: #0C6F8C !important;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -584,6 +674,13 @@
 
 .info-item-country {
     margin: 0;
+    color: #000;
+    text-align: right;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
 }
 
 .page-number-btn.active {

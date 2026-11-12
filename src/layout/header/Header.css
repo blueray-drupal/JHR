@@ -51,7 +51,9 @@
     /* background-color: #0d748d; */
 }
 
+/* مؤقتاً: إخفاء زر اللغة الإنجليزية */
 .lang-btn {
+    display: none !important;
     background: transparent;
     color: #ffffff;
     border: none;
@@ -61,11 +63,14 @@
     font-size: 13px;
     font-weight: 500;
     line-height: 1;
-    display: flex;
     align-items: center;
     gap: 8px;
     padding: 0 14px;
     min-height: 32px;
+}
+
+.lang-btn + .top-bar-tools-divider {
+    display: none;
 }
 
 .lang-btn-icon {
@@ -101,6 +106,14 @@
     object-fit: contain;
 }
 
+.tool-btn-fa {
+    font-size: 16px;
+    line-height: 1;
+    color: #ffffff;
+    width: 18px;
+    text-align: center;
+}
+
 .tool-btn-search {
     padding: 0;
     line-height: 0;
@@ -134,6 +147,11 @@
     align-items: center;
     gap: 6px;
     font-size: 13px;
+}
+
+.contact-item-ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
 }
 
 /* 2. Middle Bar Styling */
@@ -187,6 +205,9 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 

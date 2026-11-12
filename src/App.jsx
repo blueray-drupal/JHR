@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
+import PageRating from './components/pageRating/PageRating';
 import Home from './pages/home/Home';
 import Conferences from './pages/media_center/Conferences';
 import News from './pages/media_center/News';
@@ -39,6 +40,7 @@ import DirectorsGeneral from './pages/about/DirectorsGeneral';
 import FreedomOfInformation from './pages/freedom_of_information/FreedomOfInformation';
 import Tenders from './pages/tenders/Tenders';
 import TenderDetails from './pages/tenders/TenderDetails';
+import Search from './pages/search/Search';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
 
 function App() {
@@ -85,9 +87,11 @@ function App() {
           <Route path="/useful-links" element={<UsefulLinks />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/freedom-of-information" element={<FreedomOfInformation />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={<BasicPage />} />
         </Routes>
 
+        <PageRating />
         <Footer />
       </div>
     </SitePreferencesProvider>

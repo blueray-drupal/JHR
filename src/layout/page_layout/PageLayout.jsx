@@ -9,7 +9,7 @@ const PageLayout = ({
     breadcrumb = [],
     sidebarTitle,
     sidebarItems = [],
-    showShare = false,
+    showShare = true,
     isLoading = false,
     loadingType = "content",
     children,
@@ -63,39 +63,37 @@ const PageLayout = ({
 
 
         <div className="inner-page-wrapper">
-            <div className="inner-page-container" dir="rtl">
-                {/* Header Info & Breadcrumb */}
-                <div className="page-header-wrapper">
-                    <h1 className="main-page-title">{pageTitle}</h1>
-                    <div className="page-header-row">
-                        <nav className="breadcrumb">
-                            {breadcrumb.map((item, index) => (
-                                <span key={index}>
-                                    {index > 0 && <span className="separator"> ◂ </span>}
-                                    {item.link ? (
-                                        <Link to={item.link}>{item.title}</Link>
-                                    ) : (
-                                        <span>{item.title}</span>
-                                    )}
-                                </span>
-                            ))}
-                        </nav>
+            <div className="page-header-band">
+                <div className="page-header-inner" dir="rtl">
+                    <div className="page-header-wrapper">
+                        <h1 className="main-page-title">{pageTitle}</h1>
+                        <div className="page-header-row">
+                            <nav className="breadcrumb">
+                                {breadcrumb.map((item, index) => (
+                                    <span key={index}>
+                                        {index > 0 && <span className="separator"> ◂ </span>}
+                                        {item.link ? (
+                                            <Link to={item.link}>{item.title}</Link>
+                                        ) : (
+                                            <span className="breadcrumb-current">{item.title}</span>
+                                        )}
+                                    </span>
+                                ))}
+                            </nav>
 
-                        {showShare && (
-                            <button type="button" className="page-share-btn" onClick={handleShare}>
-                                شارك
-                            </button>
-                        )}
+                            {showShare && (
+                                <button type="button" className="page-share-btn" onClick={handleShare}>
+                                    شارك
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Grid Layout */}
-
-
-                {
-
-                    showSideBar ? (<div className="page-content-grid">
-                        {/* إعادة استخدام الـ Sidebar هنا */}
+            <div className="inner-page-container" dir="rtl">
+                {showSideBar ? (
+                    <div className="page-content-grid">
                         <div className="sidebar-wrapper">
                             {isLoading ? (
                                 <SidebarNavSkeleton count={Math.max(sidebarItems.length, 4)} />
@@ -105,26 +103,22 @@ const PageLayout = ({
                         </div>
 
                         <main className="main-content" aria-busy={isLoading}>
-                            <div className="section-title">{
-                                breadcrumb[breadcrumb.length - 1].title
-                            }
-
-
-
+                            <div className="section-title">
+                                {breadcrumb[breadcrumb.length - 1].title}
                             </div>
-                            {backButton ?
+                            {backButton ? (
                                 <Link to="/gallery" className="back-link">
                                     ‹ العودة إلى الألبومات
-                                </Link> : <></>}
-                            {isLoading ? renderPageSkeleton(loadingType) : children}</main>
-
-
-                    </div>) : (<main className="main-content full-content" aria-busy={isLoading}>
+                                </Link>
+                            ) : null}
+                            {isLoading ? renderPageSkeleton(loadingType) : children}
+                        </main>
+                    </div>
+                ) : (
+                    <main className="main-content full-content" aria-busy={isLoading}>
                         {isLoading ? renderPageSkeleton(loadingType) : children}
-                    </main>)
-
-                }
-
+                    </main>
+                )}
             </div>
         </div>
     );

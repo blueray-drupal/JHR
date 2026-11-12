@@ -43,7 +43,7 @@
 
 .info-header-title {
     margin: 0 0 18px;
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     font-family: Cairo, sans-serif;
     font-size: 20px;
     font-weight: 700;
@@ -55,18 +55,20 @@
     margin: 0 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
 }
 
 .info-list li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: #364153;
-    font-family: Cairo, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.7;
+    color: #00000A;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 18.475px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36.95px; /* 200% */
 }
 
 .info-icon {
@@ -84,6 +86,21 @@
     object-fit: contain;
 }
 
+.info-list .info-contact-link {
+    color: #024EA2;
+    font-family: Cairo, sans-serif;
+    font-size: 18.475px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36.95px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
 .social-media-block {
     display: flex;
     align-items: center;
@@ -91,11 +108,13 @@
 }
 
 .social-media-block h3 {
-    margin: 0;
-    color: var(--primary-color);
-    font-family: Cairo, sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    color: #000;
+    text-align: right;
+    font-family: Cairo;
+    font-size: 25.073px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 31.671px; /* 126.316% */
 }
 
 .social-icons {
@@ -104,27 +123,22 @@
 }
 
 .social-btn {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 12px;
     text-decoration: none;
+    overflow: hidden;
+    background: transparent;
 }
 
-.social-btn.fb {
-    background-color: #3b5998;
-}
-
-.social-btn.ig {
-    background-color: #e1306c;
-}
-
-.social-btn.yt {
-    background-color: #ff0000;
+.social-btn-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 /* ==========================================
@@ -178,6 +192,18 @@
     color: #99a1af;
 }
 
+.contact-webform #phone,
+.contact-webform input[type="tel"].dwf-input {
+    direction: rtl;
+    text-align: right;
+}
+
+.contact-webform #phone::placeholder,
+.contact-webform input[type="tel"].dwf-input::placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
 .contact-webform .dwf-input:focus,
 .contact-webform .dwf-textarea:focus,
 .contact-webform .dwf-select:focus {
@@ -203,16 +229,18 @@
 }
 
 .contact-webform .dwf-btn {
-    background-color: var(--primary-color);
+
     color: #ffffff;
     border: none;
-    padding: 8px 34px;
+    width: 130px;
     border-radius: 4px;
     cursor: pointer;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-weight: 600;
     transition: background-color 0.2s ease;
+    border-radius: 5px;
+background: #0C6F8C;
 }
 
 .contact-webform .dwf-btn:hover:not(:disabled) {
@@ -236,7 +264,7 @@
 
 .extensions-header {
     background-color: var(--primary-color);
-    color: #ffffff;
+    color: #ffffff !important;
     text-align: center;
     padding: 10px;
     font-family: Cairo, sans-serif;
@@ -252,7 +280,7 @@
 
 .sub-header-title {
     margin: 0 0 24px;
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     font-family: Cairo, sans-serif;
     font-size: 18px;
     font-weight: 700;
@@ -262,9 +290,9 @@
 .sub-header-title::after {
     content: "";
     display: block;
-    width: 40px;
-    height: 2px;
-    background-color: #C8A86B;
+    width: 55px;
+    height: 6px;
+    background-color:#0C6F8C;
     margin: 6px auto 0;
 }
 
@@ -284,6 +312,11 @@
     font-size: 13px;
     font-weight: 500;
     text-align: center;
+    border-radius: 5px;
+border-top: 1px solid #495D8D;
+border-right: 4px solid #495D8D;
+border-bottom: 1px solid #495D8D;
+border-left: 1px solid #495D8D;
 }
 
 @media (max-width: 768px) {

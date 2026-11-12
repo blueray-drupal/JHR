@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useSitePreferences } from "../../context/SitePreferencesContext";
 import darkIcon from "../../../assets/dark.svg";
@@ -175,6 +175,7 @@ const toolActionMap = {
 // ================= HEADER =================
 
 function Header() {
+    const navigate = useNavigate();
     const {
         preferences,
         setTheme,
@@ -238,10 +239,11 @@ function Header() {
                             <a
                                 key={item.type}
                                 href={item.href}
-                                className="contact-item"
+                                className={`contact-item${item.type === "phone" || item.type === "email" ? " contact-item-ltr" : ""}`}
+                                dir={item.type === "phone" || item.type === "email" ? "ltr" : undefined}
                             >
                                 <i className={item.icon}></i>
-                                {item.text}
+                                <span>{item.text}</span>
                             </a>
                         ))}
 
@@ -260,7 +262,7 @@ function Header() {
                                 <img
                                     src={langIcon}
                                     alt=""
-                                    className="lang-btn-icon"
+                                    className="lang-btn-icon keep-visible"
                                     aria-hidden="true"
                                 />
                                 English
@@ -271,11 +273,12 @@ function Header() {
                                 className="tool-btn tool-btn-search"
                                 title="البحث"
                                 aria-label="البحث"
+                                onClick={() => navigate("/search")}
                             >
                                 <img
                                     src={searchIcon}
                                     alt=""
-                                    className="tool-btn-icon tool-btn-icon-search"
+                                    className="tool-btn-icon tool-btn-icon-search keep-visible"
                                     aria-hidden="true"
                                 />
                             </button>
@@ -300,12 +303,19 @@ function Header() {
                                             aria-label={tool.title}
                                             aria-pressed={isToolActive(tool.type)}
                                         >
-                                            <img
-                                                src={tool.icon}
-                                                alt=""
-                                                className="tool-btn-icon"
-                                                aria-hidden="true"
-                                            />
+                                            {tool.type === "hide-images" ? (
+                                                <i
+                                                    className={`fa-solid ${preferences.hideImages ? "fa-eye" : "fa-eye-slash"} tool-btn-fa`}
+                                                    aria-hidden="true"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src={tool.icon}
+                                                    alt=""
+                                                    className="tool-btn-icon keep-visible"
+                                                    aria-hidden="true"
+                                                />
+                                            )}
                                         </button>
                                     );
                                 })}
@@ -324,7 +334,7 @@ function Header() {
 
                     {/* Brand */}
 
-                    <div className="brand">
+                    <Link to="/" className="brand" aria-label="الصفحة الرئيسية">
 
                         <div className="brand-logo">
                             <img
@@ -344,7 +354,7 @@ function Header() {
                             </span>
                         </div>
 
-                    </div>
+                    </Link>
 
 
                     {/* Secondary Navigation */}

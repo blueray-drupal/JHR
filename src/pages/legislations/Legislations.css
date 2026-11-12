@@ -45,9 +45,31 @@
     text-align: center;
 }
 
-.col-size {
+.col-size,
+.main-content .col-size,
+.full-content .col-size {
     width: 20%;
+    color: #4A5565 !important;
     text-align: center;
+    font-family: Cairo, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.col-size .file-size {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    direction: rtl;
+}
+
+.col-size .document-size-unit {
+    direction: ltr;
+    unicode-bidi: isolate;
 }
 
 .col-action {
@@ -74,15 +96,23 @@
 }
 
 .pdf-icon-badge {
+    display: inline-block;
+    width: 36px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.pdf-icon-badge--docs {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ea4335;
+    background-color: #2563eb;
     color: #ffffff !important;
     font-size: 10px;
     font-weight: 700;
-    width: 32px;
-    height: 38px;
+    width: 36px;
+    height: 40px;
     border-radius: 4px;
     text-transform: uppercase;
 }

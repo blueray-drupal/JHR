@@ -12,7 +12,7 @@
 .gallery-details-header .section-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #0C6F8C !important;
     margin: 0;
 }
 

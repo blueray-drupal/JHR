@@ -12,8 +12,8 @@ const formatYear = (date) => {
 
 const getPositionClass = (position) => {
     if (!position) return 'default';
-    if (position.includes('رئيس مجلس')) return 'chairman';
-    if (position.includes('نائب')) return 'vice';
+    // فقط "رئيس مجلس الإدارة" — ليس نائب الرئيس
+    if (position.includes('رئيس مجلس') && !position.includes('نائب')) return 'chairman';
     return 'default';
 };
 

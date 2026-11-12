@@ -94,7 +94,7 @@
 
 .news-section-title {
   text-align: center;
-  color: var(--primary-color, #0d748d);
+  color: #0C6F8C !important;
   font-size: 26px;
   font-weight: bold;
   margin-bottom: 40px;
@@ -153,7 +153,7 @@
 .news-card-date {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   gap: 6px;
   font-size: 13px;
   color: #888888;
@@ -170,7 +170,7 @@
 
 .news-card-summary {
   font-size: 13px;
-  color: var(--text-muted, #666666);
+  color: #4A5565 !important;
   line-height: 1.6;
   margin: 0 0 20px 0;
   flex-grow: 1;
@@ -247,9 +247,9 @@
 }
 
 .explore-title {
-  color: #000;
+  color: #0C6F8C !important;
   text-align: right;
-  font-family: Cairo;
+  font-family: Cairo, sans-serif;
   font-size: var(--font-size-35, 35px);
   font-style: normal;
   font-weight: var(--font-weight-400, 400);
@@ -675,7 +675,7 @@
 }
 
 .about-home-title {
-  color: #0d6d8c;
+  color: #0C6F8C !important;
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -727,7 +727,7 @@
 }
 
 .services-title {
-  color: #0d6d8c;
+  color: #0C6F8C !important;
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 36px;
@@ -750,7 +750,7 @@
   gap: 16px;
 }
 
-.service-card {
+.service-cards .service-card {
   background-color: var(--content-bg);
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -764,7 +764,7 @@
   height: 178px;
 }
 
-.service-card:hover {
+.service-cards .service-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }

@@ -1,16 +1,43 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
+import { parseDrupalMultipleNodes, toPlainText } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './Home.css';
 
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { SliderHeroSkeleton } from '../../components/skeleton/PageSkeletons';
 
 const baseUrl = drupalBaseUrl;
+
+const getSlideLink = (linkField) => {
+    if (!linkField) return '';
+
+    if (typeof linkField === 'string') {
+        return linkField.trim();
+    }
+
+    if (typeof linkField !== 'object') return '';
+
+    const uri = String(linkField.uri || linkField.url || '').trim();
+    if (!uri) return '';
+
+    if (uri.startsWith('internal:')) {
+        return uri.replace('internal:', '') || '/';
+    }
+
+    if (uri.startsWith('entity:')) {
+        return `/${uri.replace('entity:', '')}`;
+    }
+
+    return uri;
+};
+
+const isExternalLink = (href) =>
+    /^https?:\/\//i.test(href) || href.startsWith('//') || href.startsWith('mailto:') || href.startsWith('tel:');
 
 export default function Slider() {
     const [sliderData, setSliderData] = useState([]);
@@ -25,23 +52,12 @@ export default function Slider() {
                 );
 
                 if (!response.ok) {
-                    throw new Error(
-                        `HTTP error! Status: ${response.status}`
-                    );
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
                 const data = await response.json();
-
-                const slider = parseDrupalMultipleNodes(
-                    data,
-                    baseUrl
-                );
-
-                console.log(slider)
-
+                const slider = parseDrupalMultipleNodes(data, baseUrl);
                 setSliderData(slider);
-
-                console.log('Slider data:', slider);
             } catch (error) {
                 console.error('Error fetching slider:', error);
             } finally {
@@ -64,43 +80,64 @@ export default function Slider() {
         <div className="hero-slider-container">
             <Swiper
                 navigation={true}
-                modules={[Navigation]}
+                modules={[Autoplay, Navigation]}
+                loop={sliderData.length > 1}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                }}
                 className="mySwiper"
             >
-                {sliderData.map((slide) => (
-                    <SwiperSlide key={slide.id}>
-                        <div className="slide-content">
+                {sliderData.map((slide) => {
+                    const href = getSlideLink(slide.field_new_link);
+                    const body = toPlainText(
+                        slide.field_body?.processed ||
+                            slide.field_body?.value ||
+                            slide.body ||
+                            ''
+                    );
 
-                            <img
-                                src={slide.image}
-                                alt={slide.title}
-                                className="slide-image"
-                            />
+                    return (
+                        <SwiperSlide key={slide.id}>
+                            <div className="slide-content">
+                                <img
+                                    src={slide.image}
+                                    alt={slide.title}
+                                    className="slide-image"
+                                />
 
-                            <div className="slider-overlay">
-                                <div className="slider-wrapper">
+                                <div className="slider-overlay">
+                                    <div className="slider-wrapper">
+                                        <h2 className="slider-title">
+                                            {slide.title}
+                                        </h2>
 
-                                    <h2 className="slider-title">
-                                        {slide.title}
-                                    </h2>
+                                        {body && (
+                                            <p className="slider-body">{body}</p>
+                                        )}
 
-                                    <p className="slider-body">
-                                        {slide.field_body?.value.replace(/<[^>]*>/g, '')}
-                                    </p>
-
-                                    <a
-                                        href="#"
-                                        className="slider-btn"
-                                    >
-                                        عرض جميع المحطات
-                                    </a>
-
+                                        {href &&
+                                            (isExternalLink(href) ? (
+                                                <a
+                                                    href={href}
+                                                    className="slider-btn"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    عرض جميع المحطات
+                                                </a>
+                                            ) : (
+                                                <Link to={href} className="slider-btn">
+                                                    عرض جميع المحطات
+                                                </Link>
+                                            ))}
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </SwiperSlide>
-                ))}
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </div>
     );

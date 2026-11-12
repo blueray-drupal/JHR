@@ -1,11 +1,12 @@
 import { React, useEffect, useMemo, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import Card from "../../components/card/Card";
-import Pagination from "../../components/pagination/Pagination";
 import { fetchMediaCenterNews } from "../../services/api/mediaCenterApi";
 import { excerptText } from "../../utils/drupalParser";
+import "./News.css";
 
-const ITEMS_PER_PAGE = 8;
+const INITIAL_VISIBLE = 8;
+const LOAD_MORE_STEP = 8;
 
 const News = () => {
     const breadcrumb = [
@@ -23,7 +24,7 @@ const News = () => {
 
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +32,7 @@ const News = () => {
             try {
                 const newsCard = await fetchMediaCenterNews();
                 setNews(newsCard);
-                setCurrentPage(1);
+                setVisibleCount(INITIAL_VISIBLE);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -41,17 +42,15 @@ const News = () => {
         fetchData();
     }, []);
 
-    const totalPages = Math.max(1, Math.ceil(news.length / ITEMS_PER_PAGE));
+    const visibleItems = useMemo(
+        () => news.slice(0, visibleCount),
+        [news, visibleCount]
+    );
 
-    const pageItems = useMemo(() => {
-        const start = (currentPage - 1) * ITEMS_PER_PAGE;
-        return news.slice(start, start + ITEMS_PER_PAGE);
-    }, [news, currentPage]);
+    const hasMore = visibleCount < news.length;
 
-    const handlePageChange = (page) => {
-        if (page < 1 || page > totalPages || page === currentPage) return;
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    const handleLoadMore = () => {
+        setVisibleCount((prev) => Math.min(prev + LOAD_MORE_STEP, news.length));
     };
 
     return (
@@ -64,7 +63,7 @@ const News = () => {
             loadingType="cards"
         >
             <div className="cards-list">
-                {pageItems.map((item) => (
+                {visibleItems.map((item) => (
                     <Card
                         key={item.id}
                         title={item.title}
@@ -83,13 +82,16 @@ const News = () => {
                 ))}
             </div>
 
-            {!loading && (
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    totalItems={news.length}
-                    onPageChange={handlePageChange}
-                />
+            {!loading && hasMore && (
+                <div className="news-load-more-wrap">
+                    <button
+                        type="button"
+                        className="news-load-more-btn"
+                        onClick={handleLoadMore}
+                    >
+                        عرض المزيد
+                    </button>
+                </div>
             )}
         </PageLayout>
     );

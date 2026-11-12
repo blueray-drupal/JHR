@@ -3,6 +3,7 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "../info_center/InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import FileSize from '../../components/fileSize/FileSize';
 
 
 
@@ -89,11 +90,23 @@ function Laws() {
                                         </div>
                                     </td>
                                     <td className="col-type">
-                                        <span >{item.file.filemime.split("/")[1] == "pdf" ? (<span className="pdf-icon-badge" >PDF</span>) : (<span className="pdf-icon-badge" style={{
-                                            background: "blue"
-                                        }}>DOCS</span>)} </span>
+                                        <span>
+                                            {item.file.filemime.split("/")[1] == "pdf" ? (
+                                                <img
+                                                    src="/PdfIcon.svg"
+                                                    alt="PDF"
+                                                    className="pdf-icon-badge"
+                                                    width="36"
+                                                    height="40"
+                                                />
+                                            ) : (
+                                                <span className="pdf-icon-badge pdf-icon-badge--docs">DOCS</span>
+                                            )}
+                                        </span>
                                     </td>
-                                    <td className="col-size">{item.file.filesize % 1024} kb</td>
+                                    <td className="col-size">
+                                        <FileSize bytes={item.file.filesize} className="file-size" />
+                                    </td>
                                     <td className="col-action">
                                         <a
                                             href={item.file.url}

@@ -251,6 +251,8 @@ const DEFAULT_MESSAGES = {
  * @param {object}   [messages]      - Override any default UI strings
  * @param {string}   [className]     - Additional class on the <form> element
  * @param {object}   [fieldOverrides]- Partial field metadata overrides by field key
+ * @param {object}   [afterFields]   - Optional content after a field: { fieldKey: ReactNode }
+ * @param {React.ReactNode} [beforeActions] - Optional content rendered after fields, before submit
  * @param {React.ReactNode} [submitIcon] - Optional icon rendered inside submit button
  * @param {object}   [swalProps]     - Extra SweetAlert2 options merged into every Swal.fire() call
  * @param {Function} [onSuccess]     - Called with Drupal response after success
@@ -268,6 +270,8 @@ const DrupalWebform = ({
   className,
   style,
   fieldOverrides,
+  afterFields,
+  beforeActions,
   submitIcon,
   swalProps,
   onSuccess,
@@ -578,15 +582,29 @@ const DrupalWebform = ({
     );
   };
 
+  const renderAfterField = (fieldKey) => {
+    const content = afterFields?.[fieldKey];
+    if (!content) return null;
+    return <React.Fragment key={`after-${fieldKey}`}>{content}</React.Fragment>;
+  };
+
   const renderChunk = (chunk) => {
     if (chunk.kind === 'row') {
       return (
-        <div key={`row-${chunk.fields[0].key}-${chunk.fields[1].key}`} className="dwf-row">
-          {chunk.fields.map(renderField)}
-        </div>
+        <React.Fragment key={`row-${chunk.fields[0].key}-${chunk.fields[1].key}`}>
+          <div className="dwf-row">
+            {chunk.fields.map(renderField)}
+          </div>
+          {chunk.fields.map((field) => renderAfterField(field.key))}
+        </React.Fragment>
       );
     }
-    return <React.Fragment key={chunk.field.key}>{renderField(chunk.field)}</React.Fragment>;
+    return (
+      <React.Fragment key={chunk.field.key}>
+        {renderField(chunk.field)}
+        {renderAfterField(chunk.field.key)}
+      </React.Fragment>
+    );
   };
 
   // ── State renders ─────────────────────────────────────────────────────────
@@ -625,6 +643,7 @@ const DrupalWebform = ({
       <div className="dwf-fields">
         {chunks.map(renderChunk)}
       </div>
+      {beforeActions}
       <div className="dwf-actions">
         <button type="submit" className="dwf-btn" disabled={submitting} aria-busy={submitting}>
           {submitIcon ? <span className="dwf-btn-icon" aria-hidden="true">{submitIcon}</span> : null}

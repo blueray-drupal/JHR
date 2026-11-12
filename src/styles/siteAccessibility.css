@@ -23,7 +23,7 @@
   color: var(--text-color);
 }
 
-.main-content div,
+.main-content div:not(.extensions-header),
 .main-content p,
 /* .main-content span:not(.tender-number-badge), */
 .main-content li,
@@ -38,10 +38,15 @@
 .main-content .basic-page-body,
 .main-content .news-details-body,
 .main-content .faq-answer,
-.full-content div,
+.full-content div:not(.extensions-header),
 .full-content p,
 .full-content span:not(.tender-number-badge) {
   color: var(--text-color);
+}
+
+.main-content .extensions-header,
+.full-content .extensions-header {
+  color: #ffffff;
 }
 
 .main-content h1,
@@ -69,7 +74,38 @@
   color: var(--link-hover-color);
 }
 
+.page-title,
+.section-title,
 .main-content .section-title,
+.full-content .section-title,
+.info-center-header .section-title,
+.services-header .section-title,
+.gallery-header .section-title,
+.gallery-details-header .section-title,
+.news-section-title,
+.services-title,
+.about-home-title,
+.explore-title,
+.useful-links-group-title,
+.info-header-title,
+.apps-title,
+.platform-title,
+.sub-header-title,
+.dwf-section-title,
+.agreements-main-title {
+  color: #0C6F8C !important;
+}
+
+.section-title,
+.main-content .section-title,
+.full-content .section-title {
+  font-family: Cairo, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
 .main-content .contact-title,
 .main-content .phone-number,
 .main-content .platform-title,
@@ -88,11 +124,11 @@
 }
 
 .main-platform-card {
-  background-color: var(--vision-box-bg);
+  border-radius: 8px;
+  border-right: 2.697px solid #0C6F8C;
+  background: #F0F8FB;
 }
 
-.contact-info-box,
-.service-card-header,
 .vision-box,
 .mission-box,
 .complaint-card,
@@ -101,7 +137,6 @@
 .album-card,
 .gallery-image-card,
 .foi-card,
-.job-card,
 .faq-item,
 .app-btn,
 .venue-image-wrapper,
@@ -140,11 +175,15 @@
 }
 
 .news-card-title,
-.service-card-title,
+.service-card-title {
+  color: var(--heading-color);
+}
+
 .about-home-title,
 .news-section-title,
-.services-title {
-  color: var(--heading-color);
+.services-title,
+.explore-title {
+  color: #0C6F8C !important;
 }
 
 .news-card-summary,
@@ -211,9 +250,30 @@
   color: var(--link-color) !important;
 }
 
-[data-theme="dark"] .main-content .section-title {
-  color: var(--primary-color) !important;
+[data-theme="dark"] .main-page-title {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .main-content .section-title,
+[data-theme="dark"] .full-content .section-title,
+[data-theme="dark"] .news-section-title,
+[data-theme="dark"] .services-title,
+[data-theme="dark"] .about-home-title,
+[data-theme="dark"] .explore-title {
+  color: #0C6F8C !important;
   border-bottom-color: var(--secondary-color) !important;
+}
+
+[data-theme="dark"] .breadcrumb a,
+[data-theme="dark"] .breadcrumb span,
+[data-theme="dark"] .breadcrumb .separator {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .breadcrumb .breadcrumb-current {
+  color: #0C6F8C !important;
 }
 
 /* ─── Inner page cards & CMS content (site-wide catch-all) ─────────────── */
@@ -242,7 +302,10 @@
 }
 
 [data-theme="dark"] .main-content .platform-title,
-[data-theme="dark"] .main-content .apps-title,
+[data-theme="dark"] .main-content .apps-title {
+  color: #0C6F8C !important;
+}
+
 [data-theme="dark"] .main-content .app-name {
   color: var(--heading-color) !important;
 }
@@ -272,19 +335,14 @@
   color: var(--text-color) !important;
 }
 
-[data-theme="dark"] .main-page-title,
-[data-theme="dark"] .page-title,
-[data-theme="dark"] .section-title,
 [data-theme="dark"] .about-title,
-[data-theme="dark"] .news-section-title,
-[data-theme="dark"] .services-title,
 [data-theme="dark"] .card-title,
 [data-theme="dark"] .news-card-title,
 [data-theme="dark"] .service-card-title,
 [data-theme="dark"] .job-title,
 [data-theme="dark"] .info-title,
-[data-theme="dark"] h1:not(.slider-title):not(.fact-title),
-[data-theme="dark"] h2:not(.slider-title):not(.fact-title),
+[data-theme="dark"] h1:not(.slider-title):not(.fact-title):not(.main-page-title):not(.page-title),
+[data-theme="dark"] h2:not(.slider-title):not(.fact-title):not(.news-section-title):not(.services-title):not(.about-home-title):not(.explore-title):not(.sitemap-section-title):not(.useful-links-group-title):not(.info-header-title),
 [data-theme="dark"] h3:not(.slider-title):not(.fact-title),
 [data-theme="dark"] h4,
 [data-theme="dark"] h5,
@@ -301,16 +359,15 @@
 [data-theme="dark"] .service-card-body,
 [data-theme="dark"] .about-home-body,
 [data-theme="dark"] .venue-description,
-[data-theme="dark"] .breadcrumb span {
+[data-theme="dark"] .breadcrumb span:not(.breadcrumb-current) {
   color: var(--text-color);
 }
 
-[data-theme="dark"] .breadcrumb a,
 [data-theme="dark"] .news-card-link,
 [data-theme="dark"] .about-home-btn,
 [data-theme="dark"] .card-link,
 [data-theme="dark"] .sidebar-item a:hover,
-[data-theme="dark"] a:not(.nav-link):not(.footer-top-menu-link):not(.contact-item):not(.lang-btn):not(.news-ticker-bar a) {
+[data-theme="dark"] a:not(.nav-link):not(.footer-top-menu-link):not(.contact-item):not(.lang-btn):not(.news-ticker-bar a):not(.breadcrumb a) {
   color: var(--link-color);
 }
 
@@ -330,7 +387,6 @@
 [data-theme="dark"] .sidebar-content,
 [data-theme="dark"] .page-content-box,
 [data-theme="dark"] .info-card,
-[data-theme="dark"] .job-card,
 [data-theme="dark"] .gallery-card,
 [data-theme="dark"] .contact-card,
 [data-theme="dark"] .complaints-form-wrapper,
@@ -423,8 +479,14 @@
   background: var(--surface-color) !important;
 }
 
-[data-theme="dark"] .page-header-wrapper {
+[data-theme="dark"] .page-header-band {
+  background: var(--content-bg) !important;
   border-bottom-color: var(--gold-accent) !important;
+}
+
+[data-theme="dark"] .page-header-wrapper {
+  border-bottom-color: transparent !important;
+  background: transparent !important;
 }
 
 /* ─── Tables & lists ───────────────────────────────────────────────────── */
@@ -453,12 +515,12 @@
 
 /* ─── Hide images (site-wide) ──────────────────────────────────────────── */
 
-html[data-hide-images="true"] img:not(.keep-visible),
+html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 html[data-hide-images="true"] picture,
 html[data-hide-images="true"] video,
 html[data-hide-images="true"] iframe,
 html[data-hide-images="true"] svg image,
-body.site-hide-images img:not(.keep-visible),
+body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 body.site-hide-images picture,
 body.site-hide-images video,
 body.site-hide-images iframe {
@@ -466,9 +528,9 @@ body.site-hide-images iframe {
   opacity: 0 !important;
 }
 
-html[data-hide-images="true"] img:not(.keep-visible),
+html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 html[data-hide-images="true"] video,
-body.site-hide-images img:not(.keep-visible),
+body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
 body.site-hide-images video {
   max-height: 0 !important;
   max-width: 0 !important;
@@ -476,6 +538,27 @@ body.site-hide-images video {
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
+}
+
+/* Keep header UI icons visible while content images are hidden */
+html[data-hide-images="true"] .site-header img,
+html[data-hide-images="true"] .site-header .tool-btn-fa,
+body.site-hide-images .site-header img,
+body.site-hide-images .site-header .tool-btn-fa {
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-height: none !important;
+  max-width: none !important;
+  overflow: visible !important;
+  padding: unset !important;
+  margin: unset !important;
+  border: unset !important;
+  display: block !important;
+}
+
+html[data-hide-images="true"] .site-header .tool-btn-fa,
+body.site-hide-images .site-header .tool-btn-fa {
+  display: inline-block !important;
 }
 
 html[data-hide-images="true"] [style*="background-image"],
