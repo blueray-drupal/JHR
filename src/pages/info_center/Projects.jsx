@@ -104,7 +104,7 @@ function Projects() {
             isLoading={isLoading}
             loadingType="projects"
         >
-            <div className="info-center-container">
+            <div className="info-center-container projects-page">
 
                 <div className="filter-controls-row">
                     <p className="filter-instruction">

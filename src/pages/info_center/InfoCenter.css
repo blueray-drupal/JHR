@@ -59,7 +59,7 @@
 }
 
 .search-input {
-    width: 200px;
+    width: 289.328px;
     padding: 6px 10px;
     border: 1px solid #cccccc;
     border-radius: 4px;
@@ -105,6 +105,55 @@
     gap: 20px;
 }
 
+/* بطاقات المشاريع — نفس تصميم الفعاليات بدون بوردر حول الكارد */
+.projects-page .info-item-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    box-shadow: none;
+}
+
+.projects-page .info-item-media {
+    display: flex;
+    width: 220px;
+    flex: 0 0 220px;
+    height: 134px;
+    min-height: 134px;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    background: #F3F4F6;
+    border: none;
+    border-radius: 0;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.projects-page .info-item-media img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border: none;
+}
+
+.projects-page .info-item-content {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: none;
+    gap: 8px;
+}
+
 .info-item-content {
     flex: 1;
     display: flex;
@@ -127,7 +176,7 @@
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 22px;
 }
 
@@ -136,19 +185,23 @@
 }
 
 .item-action-link {
-    color: #0C6F8C !important;
+    color: #293133 !important;
     text-align: right;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 22px;
+    line-height: 28px;
     text-decoration: none;
     margin-top: auto;
     align-self: stretch;
     padding-top: 12px;
-    border-radius: 0 0 3px 3px;
-    border-top: 1px solid rgba(0, 0, 0, 0.13);
+    border: none;
+    border-radius: 0;
+}
+
+.projects-page .item-action-link {
+    color: #0C6F8C !important;
 }
 
 .info-item-media {
@@ -226,6 +279,16 @@
     .info-item-media {
         width: 100%;
         height: 120px;
+    }
+
+    .projects-page .info-item-card {
+        flex-direction: column;
+    }
+
+    .projects-page .info-item-media {
+        width: 100%;
+        flex: 0 0 auto;
+        min-height: 180px;
     }
 
     .search-form {

@@ -485,7 +485,11 @@
 }
 
 [data-theme="dark"] .page-header-inner {
-  border-bottom-color: var(--gold-accent) !important;
+  border-bottom: none !important;
+}
+
+[data-theme="dark"] .page-header-inner::before {
+  background: var(--gold-accent) !important;
 }
 
 [data-theme="dark"] .page-header-wrapper {
