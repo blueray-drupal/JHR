@@ -18,7 +18,7 @@
 .page-header-band {
     width: 100%;
     background: #ffffff;
-    border-bottom: 3px solid var(--gold-accent);
+    border-bottom: none;
 }
 
 .page-header-inner {
@@ -27,6 +27,7 @@
     margin: 0 auto;
     padding: 20px 15px 12px;
     box-sizing: border-box;
+    border-bottom: 3px solid var(--gold-accent);
 }
 
 /* Header Section & Breadcrumb */
@@ -86,7 +87,7 @@
     border: none;
     padding: 0;
     margin-inline-start: auto;
-    color: #0C6F8C;
+    color: #000;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-weight: 600;

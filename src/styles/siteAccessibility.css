@@ -481,6 +481,10 @@
 
 [data-theme="dark"] .page-header-band {
   background: var(--content-bg) !important;
+  border-bottom: none !important;
+}
+
+[data-theme="dark"] .page-header-inner {
   border-bottom-color: var(--gold-accent) !important;
 }
 

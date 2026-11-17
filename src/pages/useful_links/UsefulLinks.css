@@ -21,7 +21,7 @@
 
 .useful-links-group-title {
     margin: 0 0 14px;
-    color: #0C6F8C !important;
+    color: #000 !important;
     font-family: Cairo, sans-serif;
     font-size: 18px;
     font-weight: 700;
@@ -47,7 +47,7 @@
     display: inline-block;
     padding: 2px 14px 2px 0;
     border-right: 3px solid var(--link-color);
-    color: var(--link-color);
+    color: #00000A !important;
     font-family: Cairo, sans-serif;
     font-size: 15px;
     font-weight: 600;

@@ -31,7 +31,7 @@ const PageLayout = ({
     // }, [location.pathname]);
 
     const [showSideBar, setShowSideBar] = useState(false)
-    console.log(sidebarItems.length);
+    const [shareFeedback, setShareFeedback] = useState("")
 
     useEffect(() => {
         if (sidebarItems.length > 0) {
@@ -42,20 +42,79 @@ const PageLayout = ({
 
     }, [sidebarItems.length])
 
+    const copyWithFallback = async (url) => {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+            await navigator.clipboard.writeText(url);
+            return true;
+        }
+
+        const input = document.createElement("textarea");
+        input.value = url;
+        input.setAttribute("readonly", "");
+        input.style.position = "fixed";
+        input.style.top = "0";
+        input.style.left = "0";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.focus();
+        input.select();
+        input.setSelectionRange(0, input.value.length);
+
+        let copied = false;
+        try {
+            copied = document.execCommand("copy");
+        } catch {
+            copied = false;
+        }
+
+        document.body.removeChild(input);
+        return copied;
+    };
+
+    const showShareCopied = () => {
+        setShareFeedback("تم نسخ الرابط");
+        window.setTimeout(() => setShareFeedback(""), 2000);
+    };
+
     const handleShare = async () => {
+        const url = window.location.href;
         const shareData = {
-            title: pageTitle,
-            url: window.location.href,
+            title: pageTitle || document.title,
+            text: pageTitle || document.title,
+            url,
         };
 
         try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else if (navigator.clipboard?.writeText) {
-                await navigator.clipboard.writeText(window.location.href);
+            if (typeof navigator.share === "function") {
+                const canShare =
+                    typeof navigator.canShare !== "function" || navigator.canShare(shareData);
+
+                if (canShare) {
+                    await navigator.share(shareData);
+                    return;
+                }
+            }
+
+            const copied = await copyWithFallback(url);
+            if (copied) {
+                showShareCopied();
+            } else {
+                window.prompt("انسخ الرابط:", url);
             }
         } catch (error) {
-            console.error('Share failed:', error);
+            // User cancelled native share dialog
+            if (error?.name === "AbortError") return;
+
+            try {
+                const copied = await copyWithFallback(url);
+                if (copied) {
+                    showShareCopied();
+                } else {
+                    window.prompt("انسخ الرابط:", url);
+                }
+            } catch (fallbackError) {
+                console.error("Share failed:", fallbackError);
+            }
         }
     };
 
@@ -83,7 +142,7 @@ const PageLayout = ({
 
                             {showShare && (
                                 <button type="button" className="page-share-btn" onClick={handleShare}>
-                                    شارك
+                                    {shareFeedback || "شارك"}
                                 </button>
                             )}
                         </div>

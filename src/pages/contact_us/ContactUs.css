@@ -99,6 +99,16 @@
     text-decoration-thickness: auto;
     text-underline-offset: auto;
     text-underline-position: from-font;
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+}
+
+.info-list .info-contact-number {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+    text-align: left;
 }
 
 .social-media-block {

@@ -76,7 +76,7 @@
 .welcome-text strong {
     font-style: normal;
     font-weight: 700;
-    color: var(--heading-color);
+    color: #1E2939;
     font-family: Cairo;
     font-size: 16px;
     line-height: 32px;
