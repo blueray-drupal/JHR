@@ -17,7 +17,14 @@ const Card = ({
     const location = useLocation();
     const isNews = location.pathname === "/news";
     const isEvents = location.pathname === "/events";
-    const variantClass = isNews ? " news-cards" : isEvents ? " event-cards" : "";
+    const isConferences = location.pathname === "/conferences";
+    const variantClass = isNews
+        ? " news-cards"
+        : isEvents
+          ? " event-cards"
+          : isConferences
+            ? " conference-cards"
+            : "";
 
     return (
         <article className={`custom-card ${className}${variantClass}`.trim()}>

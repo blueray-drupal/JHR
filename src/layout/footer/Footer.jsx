@@ -60,6 +60,13 @@ function resolvePartnerLink(item) {
     const link = item?.link || "";
     const haystack = `${link} ${item?.image || ""} ${item?.title || ""}`;
 
+    if (
+        /obtaininformationform/i.test(link) ||
+        /حق.?الحصول|الحصول.?على.?معلوم|%D8%AD%D9%82%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84/i.test(haystack)
+    ) {
+        return "/freedom-of-information";
+    }
+
     if (/tawasul\.gov\.jo/i.test(link)) {
         return "https://www.tawasal.gov.jo/";
     }
@@ -278,27 +285,46 @@ function Footer() {
 
                     {partners.length > 0 && (
                         <div className="footer-partners">
-                            {partners.map((item) => (
-                                item.link ? (
+                            {partners.map((item) => {
+                                if (!item.link) {
+                                    return (
+                                        <div key={item.id} className="footer-partner">
+                                            {item.image && (
+                                                <img src={item.image} alt={item.title} />
+                                            )}
+                                        </div>
+                                    );
+                                }
+
+                                const href = resolvePartnerLink(item);
+                                const image = item.image ? (
+                                    <img src={item.image} alt={item.title} />
+                                ) : null;
+
+                                if (!isExternalHref(href)) {
+                                    return (
+                                        <Link
+                                            key={item.id}
+                                            to={href}
+                                            className="footer-partner"
+                                        >
+                                            {image}
+                                        </Link>
+                                    );
+                                }
+
+                                return (
                                     <a
                                         key={item.id}
-                                        href={resolvePartnerLink(item)}
+                                        href={href}
                                         className="footer-partner"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {item.image && (
-                                            <img src={item.image} alt={item.title} />
-                                        )}
+                                        {image}
                                     </a>
-                                ) : (
-                                    <div key={item.id} className="footer-partner">
-                                        {item.image && (
-                                            <img src={item.image} alt={item.title} />
-                                        )}
-                                    </div>
-                                )
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
 

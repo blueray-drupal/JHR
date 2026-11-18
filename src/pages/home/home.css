@@ -723,7 +723,7 @@
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
-  background: var(--card-bg);
+  /* background: var(--card-bg); */
 }
 
 .services-title {

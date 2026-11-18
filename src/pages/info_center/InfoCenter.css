@@ -115,7 +115,7 @@
     background-color: #ffffff;
     border: none;
     border-radius: 0;
-    border-bottom: none;
+    border-bottom: 1px solid #0C6F8C;
     padding-bottom: 0;
     box-shadow: none;
 }
@@ -202,6 +202,8 @@
 
 .projects-page .item-action-link {
     color: #0C6F8C !important;
+    border-radius: 0 0 3px 3px;
+    border-top: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 .info-item-media {
