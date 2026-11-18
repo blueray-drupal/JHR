@@ -307,6 +307,15 @@ function Footer() {
                                             key={item.id}
                                             to={href}
                                             className="footer-partner"
+                                            onClick={() => {
+                                                if (href === "/freedom-of-information") {
+                                                    window.scrollTo({
+                                                        top: 0,
+                                                        left: 0,
+                                                        behavior: "smooth",
+                                                    });
+                                                }
+                                            }}
                                         >
                                             {image}
                                         </Link>
