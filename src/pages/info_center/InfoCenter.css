@@ -201,9 +201,17 @@
 }
 
 .projects-page .item-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: #0C6F8C !important;
     border-radius: 0 0 3px 3px;
     border-top: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.projects-page .item-action-link svg {
+    display: block;
+    flex-shrink: 0;
 }
 
 .info-item-media {

@@ -85,12 +85,13 @@ function ContactInfoText({ title, body }) {
     }
 
     if (isPhoneLikeValue(value)) {
+        const telHref = `tel:${value.replace(/[^\d+]/g, "")}`;
         return (
             <span>
                 {label}
-                <span className="info-contact-number" dir="ltr">
+                <a href={telHref} className="info-contact-number info-contact-link" dir="ltr">
                     {value}
-                </span>
+                </a>
             </span>
         );
     }

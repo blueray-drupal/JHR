@@ -153,11 +153,21 @@
 .news-card-date {
   display: flex;
   align-items: center;
-  /* justify-content: flex-end; */
   gap: 6px;
   font-size: 13px;
   color: #888888;
   margin-bottom: 12px;
+}
+
+.news-card-date-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.news-card-date-icon svg {
+  display: block;
 }
 
 .news-card-title {
@@ -182,7 +192,7 @@
 
 .news-card-link {
   color: var(--primary-color, #0d748d);
-  text-decoration: none;
+  text-decoration-line: underline;
   font-weight: bold;
   font-size: 14px;
   align-self: flex-start;
@@ -735,14 +745,14 @@
   display: inline-block;
 }
 
-.services-title::after {
+/* .services-title::after {
   content: "";
   display: block;
   width: 35px;
   height: 2px;
   background-color: #0d6d8c;
   margin: 6px auto 0;
-}
+} */
 
 .service-cards {
   display: grid;

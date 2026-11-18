@@ -156,7 +156,23 @@ function Projects() {
                                             className="item-action-link"
                                             state={project}
                                         >
-                                            عرض المزيد &rsaquo;
+                                            عرض المزيد
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="6"
+                                                height="10"
+                                                viewBox="0 0 6 10"
+                                                fill="none"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    d="M4.66374 8.66147L0.666015 4.66374L4.66374 0.666016"
+                                                    stroke="#0C6F8C"
+                                                    strokeWidth="1.33257"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
                                         </Link>
                                     </div>
                                 </div>

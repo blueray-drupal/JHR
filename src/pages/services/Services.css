@@ -140,6 +140,11 @@
     gap: 10px;
 }
 
+.venue-booking-page .contact-info-box,
+.main-content .venue-booking-page .contact-info-box {
+    width: 100%;
+}
+
 .contact-info-box .contact-title,
 .contact-info-box .phone-number,
 .main-content .contact-info-box .contact-title,
@@ -152,31 +157,23 @@
 .contact-info-box .contact-title a,
 .contact-info-box .contact-title p,
 .contact-info-box .contact-title strong,
+.contact-info-box .phone-number,
+.contact-info-box .phone-number a,
+.contact-info-box .phone-number p,
 .main-content .contact-info-box .contact-title,
 .main-content .contact-info-box .contact-title a,
 .main-content .contact-info-box .contact-title p,
-.main-content .contact-info-box .contact-title strong {
+.main-content .contact-info-box .contact-title strong,
+.main-content .contact-info-box .phone-number,
+.main-content .contact-info-box .phone-number a,
+.main-content .contact-info-box .phone-number p {
     color: #0C6F8C !important;
+    text-align: right;
     font-family: Cairo, sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: 30px;
-}
-
-.contact-info-box .phone-number,
-.contact-info-box .phone-number a,
-.contact-info-box .phone-number p,
-.main-content .contact-info-box .phone-number,
-.main-content .contact-info-box .phone-number a,
-.main-content .contact-info-box .phone-number p {
-    color: #364153 !important;
-    text-align: right;
-    font-family: Cairo, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
 }
 
 .contact-info-box a,
@@ -187,6 +184,12 @@
 
 .contact-info-box p {
     margin: 0;
+}
+
+.contact-info-box .contact-phone-ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
 }
 
 .phone-number:hover,
