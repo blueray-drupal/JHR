@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./Services.css";
 import { fetchServices } from "../../services/api/servicesApi";
+import { withReadablePhoneNumbers } from "./serviceHtml";
 
 function VenueBooking() {
     const breadcrumb = [
@@ -49,7 +50,7 @@ function VenueBooking() {
             loadingType="content"
         >
             {item && (
-                <div className="venue-booking-content">
+                <div className="venue-booking-content venue-booking-page">
                     <div className="venue-image-wrapper">
                         <img src={item.image} alt={section.title} />
                     </div>
@@ -63,7 +64,9 @@ function VenueBooking() {
                                 <div
                                     key={index}
                                     className={index === 0 ? "contact-title" : "phone-number"}
-                                    dangerouslySetInnerHTML={{ __html: part }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: withReadablePhoneNumbers(part),
+                                    }}
                                 />
                             ))}
                         </div>

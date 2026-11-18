@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { Link, useLocation } from "react-router-dom";
 import { renderPageSkeleton, SidebarNavSkeleton } from "../../components/skeleton/PageSkeletons";
@@ -16,22 +16,10 @@ const PageLayout = ({
 }) => {
     const location = useLocation();
     const backButton = location.pathname.startsWith("/gallery/")
-
-    // const [backButton, setBackButton] = useState(false);
-
-    // useEffect(() => {
-    //     if (
-    //         location.pathname.split("/")[1] === "gallery" &&
-    //         location.pathname.split("/").length > 2
-    //     ) {
-    //         setBackButton(true);
-    //     } else {
-    //         setBackButton(false);
-    //     }
-    // }, [location.pathname]);
+    const shareMenuRef = useRef(null);
 
     const [showSideBar, setShowSideBar] = useState(false)
-    console.log(sidebarItems.length);
+    const [shareOpen, setShareOpen] = useState(false)
 
     useEffect(() => {
         if (sidebarItems.length > 0) {
@@ -42,21 +30,69 @@ const PageLayout = ({
 
     }, [sidebarItems.length])
 
-    const handleShare = async () => {
-        const shareData = {
-            title: pageTitle,
-            url: window.location.href,
+    useEffect(() => {
+        if (!shareOpen) return undefined;
+
+        const handleClickOutside = (event) => {
+            if (shareMenuRef.current && !shareMenuRef.current.contains(event.target)) {
+                setShareOpen(false);
+            }
         };
 
-        try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else if (navigator.clipboard?.writeText) {
-                await navigator.clipboard.writeText(window.location.href);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [shareOpen]);
+
+    const getSharePayload = () => {
+        const url = window.location.href;
+        const title = pageTitle || document.title || "";
+        return { url, title, text: `${title}\n${url}` };
+    };
+
+    const openShareWindow = (href) => {
+        window.open(href, "_blank", "noopener,noreferrer,width=640,height=720");
+        setShareOpen(false);
+    };
+
+    const shareToFacebook = () => {
+        const { url } = getSharePayload();
+        openShareWindow(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+        );
+    };
+
+    const shareToWhatsApp = () => {
+        const { text } = getSharePayload();
+        openShareWindow(
+            `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`
+        );
+    };
+
+    const shareToInstagram = async () => {
+        const { url, title, text } = getSharePayload();
+        setShareOpen(false);
+
+        // Instagram has no web sharer for links; native share sheet lets the user pick Instagram.
+        if (typeof navigator.share === "function") {
+            try {
+                const shareData = { title, text, url };
+                const canShare =
+                    typeof navigator.canShare !== "function" || navigator.canShare(shareData);
+                if (canShare) {
+                    await navigator.share(shareData);
+                    return;
+                }
+            } catch (error) {
+                if (error?.name === "AbortError") return;
             }
-        } catch (error) {
-            console.error('Share failed:', error);
         }
+
+        // Desktop fallback: open Instagram; user can share from the app/device.
+        window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+    };
+
+    const toggleShareMenu = () => {
+        setShareOpen((open) => !open);
     };
 
     return (
@@ -69,22 +105,64 @@ const PageLayout = ({
                         <h1 className="main-page-title">{pageTitle}</h1>
                         <div className="page-header-row">
                             <nav className="breadcrumb">
-                                {breadcrumb.map((item, index) => (
-                                    <span key={index}>
-                                        {index > 0 && <span className="separator"> ◂ </span>}
-                                        {item.link ? (
-                                            <Link to={item.link}>{item.title}</Link>
-                                        ) : (
-                                            <span className="breadcrumb-current">{item.title}</span>
-                                        )}
-                                    </span>
-                                ))}
+                                {breadcrumb.map((item, index) => {
+                                    const isCurrent = index === breadcrumb.length - 1;
+
+                                    return (
+                                        <span key={index}>
+                                            {index > 0 && <span className="separator"> ◂ </span>}
+                                            {item.link && !isCurrent ? (
+                                                <Link to={item.link}>{item.title}</Link>
+                                            ) : (
+                                                <span className={isCurrent ? "breadcrumb-current" : undefined}>
+                                                    {item.title}
+                                                </span>
+                                            )}
+                                        </span>
+                                    );
+                                })}
                             </nav>
 
                             {showShare && (
-                                <button type="button" className="page-share-btn" onClick={handleShare}>
-                                    شارك
-                                </button>
+                                <div className="page-share-wrap" ref={shareMenuRef}>
+                                    <button
+                                        type="button"
+                                        className="page-share-btn"
+                                        onClick={toggleShareMenu}
+                                        aria-expanded={shareOpen}
+                                        aria-haspopup="menu"
+                                    >
+                                        شارك
+                                    </button>
+                                    {shareOpen ? (
+                                        <div className="page-share-menu" role="menu">
+                                            <button
+                                                type="button"
+                                                className="page-share-option"
+                                                role="menuitem"
+                                                onClick={shareToFacebook}
+                                            >
+                                                فيسبوك
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="page-share-option"
+                                                role="menuitem"
+                                                onClick={shareToWhatsApp}
+                                            >
+                                                واتساب
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="page-share-option"
+                                                role="menuitem"
+                                                onClick={shareToInstagram}
+                                            >
+                                                إنستغرام
+                                            </button>
+                                        </div>
+                                    ) : null}
+                                </div>
                             )}
                         </div>
                     </div>

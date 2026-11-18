@@ -76,7 +76,7 @@
 .welcome-text strong {
     font-style: normal;
     font-weight: 700;
-    color: var(--heading-color);
+    color: #1E2939;
     font-family: Cairo;
     font-size: 16px;
     line-height: 32px;
@@ -210,13 +210,21 @@
 .about-table .col-index,
 .about-table td:first-child {
     width: 48px;
-    color: #6A7282;
     text-align: right;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+}
+
+.about-table thead th.col-index {
+    color: #ffffff;
+}
+
+.about-table tbody td.col-index,
+.about-table td:first-child {
+    color: #6A7282;
 }
 
 .about-table td:nth-child(2) {

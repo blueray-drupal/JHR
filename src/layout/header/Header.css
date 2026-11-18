@@ -154,6 +154,17 @@
     unicode-bidi: isolate;
 }
 
+.contact-item-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-item-icon svg {
+    display: block;
+}
+
 /* 2. Middle Bar Styling */
 .middle-bar {
     background-color: var(--bg-color);

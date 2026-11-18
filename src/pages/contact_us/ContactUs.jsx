@@ -15,7 +15,7 @@ const SOCIAL_DEFAULTS = [
         title: "Facebook",
         className: "fb",
         icon: facebookIcon,
-        link: "https://www.facebook.com/JordanHejazRailay/",
+        link: "https://www.facebook.com/JordanHejazRailay/mentions/",
         match: /facebook\.com/i,
     },
     {
@@ -23,7 +23,7 @@ const SOCIAL_DEFAULTS = [
         title: "Instagram",
         className: "ig",
         icon: instagramIcon,
-        link: "#",
+        link: "https://www.instagram.com/jordan_hejaz_railway_/",
         match: /instagram\.com/i,
     },
     {
@@ -36,21 +36,7 @@ const SOCIAL_DEFAULTS = [
     },
 ];
 
-const mergeSocialLinks = (footerSocial = []) =>
-    SOCIAL_DEFAULTS.map((social) => {
-        const matches = footerSocial.filter(
-            (item) =>
-                social.match.test(item.link || "") ||
-                social.match.test(item.title || "")
-        );
-        const fromContent =
-            matches.find((item) => /\/channel\//i.test(item.link || "")) || matches[0];
-
-        return {
-            ...social,
-            link: fromContent?.link && fromContent.link !== "#" ? fromContent.link : social.link,
-        };
-    });
+const mergeSocialLinks = () => SOCIAL_DEFAULTS.map((social) => ({ ...social }));
 
 const FORM_MESSAGES = {
     loading: "جاري تحميل النموذج...",
@@ -71,6 +57,17 @@ const FORM_MESSAGES = {
 const stripHtml = (html) => (html || "").replace(/<[^>]*>/g, "").trim();
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_VALUE_PATTERN = /^[\d\s+\-()]+$/;
+
+function isPhoneLikeValue(value) {
+    const trimmed = String(value || "").trim();
+    if (!trimmed) return false;
+    return (
+        PHONE_VALUE_PATTERN.test(trimmed) ||
+        trimmed.startsWith("00962") ||
+        trimmed.startsWith("+")
+    );
+}
 
 function ContactInfoText({ title, body }) {
     const value = stripHtml(body);
@@ -80,7 +77,19 @@ function ContactInfoText({ title, body }) {
         return (
             <span>
                 {label}
-                <a href={`mailto:${value}`} className="info-contact-link">
+                <a href={`mailto:${value}`} className="info-contact-link" dir="ltr">
+                    {value}
+                </a>
+            </span>
+        );
+    }
+
+    if (isPhoneLikeValue(value)) {
+        const telHref = `tel:${value.replace(/[^\d+]/g, "")}`;
+        return (
+            <span>
+                {label}
+                <a href={telHref} className="info-contact-number info-contact-link" dir="ltr">
                     {value}
                 </a>
             </span>

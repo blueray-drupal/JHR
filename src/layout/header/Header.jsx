@@ -14,17 +14,55 @@ import logoIcon from "../../../assets/logo.svg";
 
 // ================= DATA =================
 
+const PhoneIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <g clipPath="url(#clip0_header_phone)">
+            <path
+                d="M14.6584 11.2731V13.272C14.6592 13.4575 14.6212 13.6412 14.5468 13.8112C14.4725 13.9812 14.3635 14.1339 14.2267 14.2593C14.09 14.3848 13.9286 14.4803 13.7528 14.5397C13.577 14.5992 13.3907 14.6212 13.2059 14.6045C11.1556 14.3818 9.18621 13.6812 7.45586 12.559C5.846 11.5361 4.48111 10.1712 3.45814 8.56132C2.3321 6.82311 1.63134 4.84409 1.41263 2.7846C1.39598 2.60035 1.41788 2.41465 1.47693 2.23933C1.53598 2.06401 1.63089 1.9029 1.75562 1.76626C1.88034 1.62963 2.03215 1.52046 2.20138 1.44571C2.37061 1.37096 2.55355 1.33227 2.73855 1.3321H4.73741C5.06076 1.32891 5.37424 1.44342 5.61942 1.65427C5.86459 1.86512 6.02473 2.15792 6.06998 2.47811C6.15435 3.11779 6.31081 3.74587 6.53639 4.35038C6.62603 4.58886 6.64543 4.84804 6.59229 5.09721C6.53915 5.34638 6.4157 5.57509 6.23656 5.75624L5.39037 6.60243C6.33887 8.27051 7.72001 9.65166 9.3881 10.6002L10.2343 9.75397C10.4154 9.57483 10.6442 9.45137 10.8933 9.39823C11.1425 9.34509 11.4017 9.3645 11.6401 9.45414C12.2447 9.67971 12.8727 9.83617 13.5124 9.92054C13.8361 9.9662 14.1317 10.1292 14.343 10.3786C14.5543 10.628 14.6665 10.9463 14.6584 11.2731Z"
+                stroke="white"
+                strokeWidth="1.33257"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </g>
+        <defs>
+            <clipPath id="clip0_header_phone">
+                <rect width="15.9909" height="15.9909" fill="white" />
+            </clipPath>
+        </defs>
+    </svg>
+);
+
+const EmailIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path
+            d="M2.66558 2.66504H13.3262C14.0621 2.66504 14.6588 3.26165 14.6588 3.99761V11.9931C14.6588 12.729 14.0621 13.3256 13.3262 13.3256H2.66558C1.92962 13.3256 1.33301 12.729 1.33301 11.9931V3.99761C1.33301 3.26165 1.92962 2.66504 2.66558 2.66504Z"
+            stroke="white"
+            strokeWidth="1.33257"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+        <path
+            d="M14.6588 4.66406L8.68216 8.4619C8.47646 8.59078 8.23862 8.65913 7.99588 8.65913C7.75314 8.65913 7.51531 8.59078 7.30961 8.4619L1.33301 4.66406"
+            stroke="white"
+            strokeWidth="1.33257"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
+
 const contactItems = [
     {
         type: "phone",
         href: "tel:0096264895413",
-        icon: "fa-solid fa-phone",
+        icon: <PhoneIcon />,
         text: "00962 - 6 - 4895413",
     },
     {
         type: "email",
         href: "mailto:info@jhr.gov.jo",
-        icon: "fa-regular fa-envelope",
+        icon: <EmailIcon />,
         text: "info@jhr.gov.jo",
     },
 ];
@@ -36,14 +74,14 @@ const topBarTools = [
         title: "إخفاء / إظهار الصور",
     },
     {
-        type: "theme-dark",
-        icon: darkIcon,
-        title: "الوضع الداكن",
-    },
-    {
         type: "theme-light",
         icon: lightIcon,
         title: "الوضع الفاتح",
+    },
+    {
+        type: "theme-dark",
+        icon: darkIcon,
+        title: "الوضع الداكن",
     },
     {
         type: "zoom-in",
@@ -242,8 +280,8 @@ function Header() {
                                 className={`contact-item${item.type === "phone" || item.type === "email" ? " contact-item-ltr" : ""}`}
                                 dir={item.type === "phone" || item.type === "email" ? "ltr" : undefined}
                             >
-                                <i className={item.icon}></i>
                                 <span>{item.text}</span>
+                                <span className="contact-item-icon">{item.icon}</span>
                             </a>
                         ))}
 

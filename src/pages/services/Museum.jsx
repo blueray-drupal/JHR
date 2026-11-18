@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import "./Services.css";
 import { fetchServices } from "../../services/api/servicesApi";
+import { withReadablePhoneNumbers } from "./serviceHtml";
 
 function Museum() {
     const breadcrumb = [
@@ -63,7 +64,9 @@ function Museum() {
                                 <div
                                     key={index}
                                     className={index === 0 ? "contact-title" : "phone-number"}
-                                    dangerouslySetInnerHTML={{ __html: part }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: withReadablePhoneNumbers(part),
+                                    }}
                                 />
                             ))}
                         </div>

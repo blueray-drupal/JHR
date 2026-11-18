@@ -481,7 +481,15 @@
 
 [data-theme="dark"] .page-header-band {
   background: var(--content-bg) !important;
-  border-bottom-color: var(--gold-accent) !important;
+  border-bottom: none !important;
+}
+
+[data-theme="dark"] .page-header-inner {
+  border-bottom: none !important;
+}
+
+[data-theme="dark"] .page-header-inner::before {
+  background: var(--gold-accent) !important;
 }
 
 [data-theme="dark"] .page-header-wrapper {

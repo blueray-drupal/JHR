@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import "./card.css";
 import learnMoreIcon from "../../../assets/learn-more.png";
 
-
 const Card = ({
     varient,
     title,
@@ -15,12 +14,20 @@ const Card = ({
     imageAlt = "",
     className = "",
 }) => {
-
     const location = useLocation();
     const isNews = location.pathname === "/news";
+    const isEvents = location.pathname === "/events";
+    const isConferences = location.pathname === "/conferences";
+    const variantClass = isNews
+        ? " news-cards"
+        : isEvents
+          ? " event-cards"
+          : isConferences
+            ? " conference-cards"
+            : "";
 
     return (
-        <article className={`custom-card ${className}${isNews ? " news-cards" : ""}`}>
+        <article className={`custom-card ${className}${variantClass}`.trim()}>
             {image && (
                 <div className="card-image-wrapper">
                     <img src={image} alt={imageAlt || title} className="card-image" />

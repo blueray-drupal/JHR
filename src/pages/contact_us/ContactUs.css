@@ -1,9 +1,20 @@
+/* جذر المشكلة: .main-content كان content-box فالـ padding بوسّع الصندوق ويكسر الهوامش */
+.main-content.full-content:has(.contact-us-container) {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 .contact-us-container {
     display: flex;
     flex-direction: column;
     gap: 36px;
     direction: rtl;
     width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 /* الخريطة */
@@ -27,10 +38,13 @@
 }
 
 .contact-main-section {
-    display: flex;
+    display: grid;
+    /* minmax(0,1fr) يمنع النصوص الطويلة من توسيع عمود على حساب الثاني */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 48px;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ==========================================
@@ -38,7 +52,11 @@
    ========================================== */
 
 .contact-info-container {
-    flex: 1;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .info-header-title {
@@ -69,6 +87,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: 36.95px; /* 200% */
+    min-width: 0;
+}
+
+.info-list li > span:not(.info-icon) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .info-icon {
@@ -99,6 +124,16 @@
     text-decoration-thickness: auto;
     text-underline-offset: auto;
     text-underline-position: from-font;
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+}
+
+.info-list .info-contact-number {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+    text-align: left;
 }
 
 .social-media-block {
@@ -146,7 +181,16 @@
    ========================================== */
 
 .contact-form-container {
-    flex: 1;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.contact-form-container .drupal-webform,
+.contact-form-container .contact-webform {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* تخصيص شكل الـ DrupalWebform ليطابق تصميم الصفحة */
@@ -321,7 +365,7 @@ border-left: 1px solid #495D8D;
 
 @media (max-width: 768px) {
     .contact-main-section {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 30px;
     }
 

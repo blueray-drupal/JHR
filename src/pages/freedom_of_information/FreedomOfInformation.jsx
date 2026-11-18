@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import DrupalWebform from "../../components/drupalWebForm/DrupalWebform";
 import "./FreedomOfInformation.css";
@@ -55,9 +55,13 @@ function FreedomOfInformation() {
 
     const today = new Intl.DateTimeFormat("en-GB").format(new Date());
 
+    useLayoutEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
+
     return (
         <PageLayout pageTitle="حق الحصول على معلومة" breadcrumb={breadcrumb}>
-            <div className="foi-form" dir="rtl">
+            <div id="foi-form-top" className="foi-form" dir="rtl">
                 <div className="foi-card">
                     <div className="foi-date-bar">
                         <span className="foi-date-label">تاريخ تقديم الطلب</span>

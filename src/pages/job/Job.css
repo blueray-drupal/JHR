@@ -34,9 +34,19 @@
     line-height: 1.6;
 }
 
+.jobs-wrapper .job-title {
+    color: #000;
+}
+
 .job-date,
 .main-content .job-date,
 .full-content .job-date {
+    margin: 0;
+}
+
+.jobs-wrapper .job-date,
+.main-content .jobs-wrapper .job-date,
+.full-content .jobs-wrapper .job-date {
     color: #0C6F8C !important;
     text-align: right;
     font-family: Cairo, sans-serif;
@@ -44,7 +54,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
-    margin: 0;
 }
 
 .job-card-divider {
@@ -64,6 +73,21 @@
     transition: opacity 0.2s ease;
 }
 
+.jobs-wrapper .link-job,
+.main-content .jobs-wrapper .link-job,
+.full-content .jobs-wrapper .link-job,
+.main-content .jobs-wrapper .link-job:hover,
+.full-content .jobs-wrapper .link-job:hover {
+    color: #000 !important;
+}
+
+.jobs-wrapper .link-job svg {
+    flex-shrink: 0;
+    display: block;
+    color: #0C6F8C;
+    stroke: #0C6F8C;
+}
+
 .link-job:hover {
     opacity: 0.85;
     color: var(--link-hover-color);
@@ -81,8 +105,11 @@
     margin-bottom: 8px;
 }
 
-.title-details {
-    color: var(--heading-color);
+.title-details,
+.main-content .title-details,
+.full-content .title-details,
+.job-details .title-details {
+    color: #000 !important;
     font-size: 19.848px;
     font-weight: 700;
     line-height: 23.818px;

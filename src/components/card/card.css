@@ -128,8 +128,8 @@
     padding-block-end: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color:#fff;
-    border:unset;
+    background-color: transparent !important;
+    border: unset;
     border-bottom: 1.348px solid #F3F4F6;
 }
 
@@ -141,6 +141,7 @@
     border-radius: 13px;
     padding: 0;
     border: none;
+    background-color: transparent !important;
 }
 
 .news-cards .card-image {
@@ -164,6 +165,7 @@
 .news-cards .card-title {
     margin: 0;
     overflow-wrap: anywhere;
+    color: #000 !important;
 }
 
 .news-cards .card-description {
@@ -178,6 +180,167 @@
     align-self: flex-start;
 }
 
+/* بطاقات الفعاليات — تصميم الفيجما */
+.event-cards,
+.custom-card.event-cards,
+[data-theme="dark"] .custom-card.event-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #ffffff !important;
+    border-radius: 8px;
+    border: 1.348px solid #E5E7EB;
+    box-shadow: none !important;
+    padding: 0;
+}
+
+/* يمين: منطقة الصورة */
+.event-cards .card-image-wrapper,
+[data-theme="dark"] .event-cards .card-image-wrapper {
+    display: flex;
+    width: 300px;
+    flex: 0 0 300px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    background: #F3F4F6 !important;
+    overflow: hidden;
+    border: none !important;
+    border-radius: 0;
+    padding: 16px;
+}
+
+.event-cards .card-image {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 160px;
+    object-fit: contain;
+    padding: 0;
+    border: none !important;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+/* يسار: المحتوى */
+.event-cards .card-info {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+.event-cards .card-title {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #000 !important;
+}
+
+.event-cards .card-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+.event-cards .card-link {
+    align-self: flex-start;
+    margin-top: auto;
+    color: #0C6F8C;
+}
+
+/* بطاقات المؤتمرات */
+.conference-cards,
+.custom-card.conference-cards,
+[data-theme="dark"] .custom-card.conference-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    height: 175px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #ffffff !important;
+    border-radius: 8px;
+    border: 1.348px solid #E5E7EB;
+    box-shadow: none !important;
+    padding: 0;
+}
+
+/* يمين: منطقة الصورة */
+.conference-cards .card-image-wrapper,
+[data-theme="dark"] .conference-cards .card-image-wrapper {
+    display: flex;
+    width: 300px;
+    flex: 0 0 300px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    background: #F3F4F6 !important;
+    overflow: hidden;
+    border: none !important;
+    border-radius: 0;
+    padding: 16px;
+}
+
+.conference-cards .card-image {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 0;
+    border: none !important;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+/* يسار: المحتوى */
+.conference-cards .card-info {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    background: #ffffff !important;
+    border: none !important;
+    box-sizing: border-box;
+}
+
+.conference-cards .card-title {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #000 !important;
+}
+
+.conference-cards .card-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+.conference-cards .card-link {
+    align-self: flex-start;
+    margin-top: auto;
+    color: #0C6F8C;
+}
+
 @media (max-width: 992px) {
     .news-cards {
         flex-direction: column;
@@ -187,5 +350,32 @@
         width: 100%;
         flex-basis: auto;
         height: 180px;
+    }
+
+    .event-cards,
+    .custom-card.event-cards {
+        flex-direction: column;
+    }
+
+    .event-cards .card-image-wrapper {
+        width: 100%;
+        flex: 0 0 auto;
+        min-height: 180px;
+    }
+
+    .conference-cards,
+    .custom-card.conference-cards {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .conference-cards .card-image-wrapper {
+        width: 100%;
+        flex: 0 0 auto;
+        min-height: 180px;
+    }
+
+    .conference-cards .card-info {
+        height: auto;
     }
 }

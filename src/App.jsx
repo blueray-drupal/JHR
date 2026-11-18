@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
 import PageRating from './components/pageRating/PageRating';
@@ -43,10 +44,21 @@ import TenderDetails from './pages/tenders/TenderDetails';
 import Search from './pages/search/Search';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <SitePreferencesProvider>
       <div className="app-wrapper">
+        <ScrollToTop />
         <Header />
 
         <Routes>

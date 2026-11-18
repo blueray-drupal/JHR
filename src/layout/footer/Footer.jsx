@@ -30,10 +30,16 @@ const defaultImportantLinks = [
     { id: "default-link-5", title: "آخر تعديل: 01/06/2026", link: "" },
 ];
 
+const SOCIAL_URLS = {
+    facebook: "https://www.facebook.com/JordanHejazRailay/mentions/",
+    instagram: "https://www.instagram.com/jordan_hejaz_railway_/",
+    youtube: "https://www.youtube.com/channel/UCe1TR5Upmef5FYdDaLkq9xw",
+};
+
 const defaultSocialIcons = [
-    { id: "default-fb", title: "Facebook", image: facebookIcon, link: "#" },
-    { id: "default-ig", title: "Instagram", image: instagramIcon, link: "#" },
-    { id: "default-yt", title: "YouTube", image: youtubeIcon, link: "#" },
+    { id: "default-fb", title: "Facebook", image: facebookIcon, link: SOCIAL_URLS.facebook },
+    { id: "default-ig", title: "Instagram", image: instagramIcon, link: SOCIAL_URLS.instagram },
+    { id: "default-yt", title: "YouTube", image: youtubeIcon, link: SOCIAL_URLS.youtube },
 ];
 
 const copyrightMenu = {
@@ -54,6 +60,13 @@ function resolvePartnerLink(item) {
     const link = item?.link || "";
     const haystack = `${link} ${item?.image || ""} ${item?.title || ""}`;
 
+    if (
+        /obtaininformationform/i.test(link) ||
+        /حق.?الحصول|الحصول.?على.?معلوم|%D8%AD%D9%82%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84/i.test(haystack)
+    ) {
+        return "/freedom-of-information";
+    }
+
     if (/tawasul\.gov\.jo/i.test(link)) {
         return "https://www.tawasal.gov.jo/";
     }
@@ -68,6 +81,24 @@ function resolvePartnerLink(item) {
     }
 
     return link;
+}
+
+function resolveSocialLink(item) {
+    const haystack = `${item?.link || ""} ${item?.title || ""} ${item?.image || ""}`;
+
+    if (/instagram\.com|insta|Icon%20%288%29|Icon \(8\)/i.test(haystack)) {
+        return SOCIAL_URLS.instagram;
+    }
+
+    if (/facebook\.com|JordanHejazRailay|Vector\.png/i.test(haystack)) {
+        return SOCIAL_URLS.facebook;
+    }
+
+    if (/youtube\.com|youtu\.be|Icon%20%289%29|Icon \(9\)/i.test(haystack)) {
+        return SOCIAL_URLS.youtube;
+    }
+
+    return item?.link || "#";
 }
 
 function FooterPolicyLink({ title, link }) {
@@ -194,18 +225,21 @@ function Footer() {
                         <span className="footer-social-title">
                             وسائل التواصل الاجتماعي
                         </span>
-                        {socialIcons.map((item) => (
-                            <a
-                                key={item.id}
-                                href={item.link || "#"}
-                                className="footer-social-link"
-                                aria-label={item.title}
-                                target={item.link && item.link !== "#" ? "_blank" : undefined}
-                                rel={item.link && item.link !== "#" ? "noopener noreferrer" : undefined}
-                            >
-                                <img src={item.image} alt={item.title} />
-                            </a>
-                        ))}
+                        {socialIcons.map((item) => {
+                            const href = resolveSocialLink(item);
+                            return (
+                                <a
+                                    key={item.id}
+                                    href={href}
+                                    className="footer-social-link"
+                                    aria-label={item.title}
+                                    target={href && href !== "#" ? "_blank" : undefined}
+                                    rel={href && href !== "#" ? "noopener noreferrer" : undefined}
+                                >
+                                    <img src={item.image} alt={item.title} />
+                                </a>
+                            );
+                        })}
                     </nav>
                 </div>
             </div>
@@ -251,27 +285,55 @@ function Footer() {
 
                     {partners.length > 0 && (
                         <div className="footer-partners">
-                            {partners.map((item) => (
-                                item.link ? (
+                            {partners.map((item) => {
+                                if (!item.link) {
+                                    return (
+                                        <div key={item.id} className="footer-partner">
+                                            {item.image && (
+                                                <img src={item.image} alt={item.title} />
+                                            )}
+                                        </div>
+                                    );
+                                }
+
+                                const href = resolvePartnerLink(item);
+                                const image = item.image ? (
+                                    <img src={item.image} alt={item.title} />
+                                ) : null;
+
+                                if (!isExternalHref(href)) {
+                                    return (
+                                        <Link
+                                            key={item.id}
+                                            to={href}
+                                            className="footer-partner"
+                                            onClick={() => {
+                                                if (href === "/freedom-of-information") {
+                                                    window.scrollTo({
+                                                        top: 0,
+                                                        left: 0,
+                                                        behavior: "smooth",
+                                                    });
+                                                }
+                                            }}
+                                        >
+                                            {image}
+                                        </Link>
+                                    );
+                                }
+
+                                return (
                                     <a
                                         key={item.id}
-                                        href={resolvePartnerLink(item)}
+                                        href={href}
                                         className="footer-partner"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {item.image && (
-                                            <img src={item.image} alt={item.title} />
-                                        )}
+                                        {image}
                                     </a>
-                                ) : (
-                                    <div key={item.id} className="footer-partner">
-                                        {item.image && (
-                                            <img src={item.image} alt={item.title} />
-                                        )}
-                                    </div>
-                                )
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
 

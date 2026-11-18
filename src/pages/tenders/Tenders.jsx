@@ -63,7 +63,22 @@ function Tenders() {
                                     className="tender-card-link"
                                 >
                                     اقرأ المزيد
-                                    <span aria-hidden="true">&gt;</span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M9.9948 3.99771L5.99707 7.99544L9.9948 11.9932"
+                                            stroke="#0C6F8C"
+                                            strokeWidth="1.33257"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
                                 </Link>
                             </div>
 
