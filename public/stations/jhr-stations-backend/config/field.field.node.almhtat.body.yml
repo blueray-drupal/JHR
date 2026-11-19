@@ -1,0 +1,23 @@
+uuid: b6fbe0f8-dd8f-49f4-9679-1b843254379d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.almhtat
+  module:
+    - text
+id: node.almhtat.body
+field_name: body
+entity_type: node
+bundle: almhtat
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

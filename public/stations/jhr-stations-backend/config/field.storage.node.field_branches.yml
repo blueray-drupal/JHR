@@ -1,0 +1,51 @@
+uuid: 33f0b1f3-e9b2-4df7-8780-cdc19fa93286
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_branches
+field_name: field_branches
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: عمان
+    -
+      value: '2'
+      label: الجيزة
+    -
+      value: '3'
+      label: القصر
+    -
+      value: '4'
+      label: ضبعة
+    -
+      value: '5'
+      label: اللبن
+    -
+      value: '6'
+      label: الزرقاء
+    -
+      value: '7'
+      label: المفرق
+    -
+      value: '8'
+      label: السمرا
+    -
+      value: '9'
+      label: القطرانة
+    -
+      value: '10'
+      label: معان
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: eadf1b7d-4d5d-4edb-8b2e-2309e0586a5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_branches
+    - node.type.almhtat
+  module:
+    - options
+id: node.almhtat.field_branches
+field_name: field_branches
+entity_type: node
+bundle: almhtat
+label: Branches
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

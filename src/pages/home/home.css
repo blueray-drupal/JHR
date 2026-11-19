@@ -615,20 +615,31 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.slider-btn {
-  display: inline-block;
-  background-color: #d4a359;
-  color: #ffffff;
+.slider-btn,
+a.slider-btn,
+.slider-wrapper .slider-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #d4a359 !important;
+  color: #ffffff !important;
   padding: 10px 28px;
   border-radius: 6px;
-  text-decoration: none;
+  text-decoration: none !important;
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.2s ease-in-out;
+  position: relative;
+  z-index: 2;
 }
 
-.slider-btn:hover {
-  background-color: #be8e46;
+.slider-btn:hover,
+a.slider-btn:hover,
+.slider-wrapper .slider-btn:hover {
+  background-color: #be8e46 !important;
+  color: #ffffff !important;
 }
 
 /* Custom Swiper Navigation Arrows styling to match the reference */

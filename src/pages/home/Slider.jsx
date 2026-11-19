@@ -16,24 +16,48 @@ const baseUrl = drupalBaseUrl;
 const getSlideLink = (linkField) => {
     if (!linkField) return '';
 
-    if (typeof linkField === 'string') {
-        return linkField.trim();
+    const value = Array.isArray(linkField) ? linkField[0] : linkField;
+    if (!value) return '';
+
+    if (typeof value === 'string') {
+        const raw = value.trim();
+        if (!raw) return '';
+        if (raw.startsWith('internal:')) return raw.slice('internal:'.length) || '/';
+        if (raw.startsWith('entity:')) return `/${raw.slice('entity:'.length)}`;
+        return raw;
     }
 
-    if (typeof linkField !== 'object') return '';
+    if (typeof value !== 'object') return '';
 
-    const uri = String(linkField.uri || linkField.url || '').trim();
+    const resolvable = String(value.resolvable_uri || '').trim();
+    if (resolvable) return resolvable;
+
+    const uri = String(value.uri || value.url || '').trim();
     if (!uri) return '';
 
     if (uri.startsWith('internal:')) {
-        return uri.replace('internal:', '') || '/';
+        return uri.slice('internal:'.length) || '/';
     }
 
     if (uri.startsWith('entity:')) {
-        return `/${uri.replace('entity:', '')}`;
+        return `/${uri.slice('entity:'.length)}`;
+    }
+
+    if (uri.startsWith('route:') && resolvable) {
+        return resolvable;
     }
 
     return uri;
+};
+
+const getSlideLinkLabel = (linkField, href) => {
+    const value = Array.isArray(linkField) ? linkField[0] : linkField;
+    const title = String(value?.title || '').trim();
+    if (title) return title;
+    if (href === '/stations' || href?.includes('/stations')) {
+        return 'عرض جميع المحطات';
+    }
+    return 'اقرأ المزيد';
 };
 
 const isExternalLink = (href) =>
@@ -90,7 +114,13 @@ export default function Slider() {
                 className="mySwiper"
             >
                 {sliderData.map((slide) => {
-                    const href = getSlideLink(slide.field_new_link);
+                    const linkField =
+                        slide.field_new_link ||
+                        slide.rawAttributes?.field_new_link ||
+                        slide.field_link ||
+                        null;
+                    const href = getSlideLink(linkField);
+                    const linkLabel = getSlideLinkLabel(linkField, href);
                     const body = toPlainText(
                         slide.field_body?.processed ||
                             slide.field_body?.value ||
@@ -117,21 +147,22 @@ export default function Slider() {
                                             <p className="slider-body">{body}</p>
                                         )}
 
-                                        {href &&
-                                            (isExternalLink(href) ? (
+                                        {href ? (
+                                            isExternalLink(href) ? (
                                                 <a
                                                     href={href}
                                                     className="slider-btn"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    عرض جميع المحطات
+                                                    {linkLabel}
                                                 </a>
                                             ) : (
                                                 <Link to={href} className="slider-btn">
-                                                    عرض جميع المحطات
+                                                    {linkLabel}
                                                 </Link>
-                                            ))}
+                                            )
+                                        ) : null}
                                     </div>
                                 </div>
                             </div>

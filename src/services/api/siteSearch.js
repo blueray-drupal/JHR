@@ -20,6 +20,7 @@ export const STATIC_SEARCH_PAGES = [
   { title: 'مجلس الإدارة', path: '/board-directors', badge: 'عن المؤسسة', description: 'أعضاء مجلس إدارة المؤسسة.' },
   { title: 'الهيكل التنظيمي', path: '/organization-chart', badge: 'عن المؤسسة', description: 'الهيكل التنظيمي للمؤسسة.' },
   { title: 'المدراء العامون', path: '/general-managers', badge: 'عن المؤسسة', description: 'المدراء العامون.' },
+  { title: 'المحطات', path: '/stations', badge: 'عن المؤسسة', description: 'محطات الخط الحديدي الحجازي على الخريطة.' },
   { title: 'الرحلات', path: '/services/trips', badge: 'خدمات', description: 'خدمات الرحلات العائلية والسياحية.' },
   { title: 'حجز مواقع', path: '/services/venue-booking', badge: 'خدمات', description: 'حجز المواقع التابعة للمؤسسة.' },
   { title: 'المتحف', path: '/services/museum', badge: 'خدمات', description: 'متحف الخط الحديدي الحجازي.' },

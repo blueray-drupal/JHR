@@ -1,0 +1,245 @@
+/* Map alone first; box absolute on the right so marker coords stay exact */
+.stations-page {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1018px;
+  overflow: hidden;
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-size: 83%;
+}
+
+.stations-map {
+  position: relative;
+  width: 50%;
+  height: 1018px;
+  float: left;
+}
+
+.stations-markers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.stations-marker {
+  position: absolute;
+  width: 26px;
+  height: 43px;
+  z-index: 2;
+}
+
+.stations-marker-btn {
+  width: 26px;
+  height: 43px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+  position: relative;
+}
+
+.stations-marker-btn span {
+  position: absolute;
+  left: -20px;
+  top: -10px;
+  font-size: 0;
+  color: #000;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0 10px;
+  white-space: nowrap;
+  transition: 0.6s;
+  pointer-events: none;
+}
+
+.stations-marker.is-active .stations-marker-btn span,
+.stations-marker:hover .stations-marker-btn span {
+  font-size: 8px;
+  color: #fff;
+  background: #0c6f8c;
+  transform: scale(1.1);
+  top: 5px;
+}
+
+.stations-detail-panel {
+  position: absolute;
+  top: 50%;
+  right: 27px;
+  width: 49%;
+  max-height: calc(100% - 48px);
+  transform: translateY(-50%);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 3;
+  box-sizing: border-box;
+  padding: 25px;
+  background: #ffffffd4;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 1px #80808087;
+}
+
+.stations-detail-title {
+  margin: 0 0 10px;
+  color: #000;
+  font-family: Cairo, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.station-details-title {
+  margin: 0 0 16px;
+  color: #000;
+  font-family: Cairo, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.stations-detail-panel .stations-detail-body {
+  color: #1f2a32;
+  font-family: Cairo, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.stations-detail-panel .stations-detail-body h1,
+.stations-detail-panel .stations-detail-body h2,
+.stations-detail-panel .stations-detail-body h3,
+.stations-detail-panel .stations-detail-body h4,
+.stations-detail-panel .stations-detail-body p,
+.stations-detail-panel .stations-detail-body strong,
+.stations-detail-panel .stations-detail-body span {
+  margin: 0 0 6px;
+  color: inherit !important;
+  font-family: Cairo, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+}
+
+.stations-detail-body {
+  color: #1f2a32;
+  font-family: Cairo, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.stations-detail-body h2,
+.stations-detail-body h3,
+.stations-detail-body p {
+  margin: 0 0 12px;
+}
+
+.stations-detail-gallery,
+.station-details-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.stations-detail-gallery img,
+.station-details-gallery img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.stations-detail-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  color: #0c6f8c;
+  font-family: Cairo, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.stations-empty {
+  text-align: center;
+  color: #6a7282;
+  padding: 40px 0;
+}
+
+.station-details {
+  max-width: 100%;
+}
+
+.station-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stations-back-link {
+  margin-top: 0;
+}
+
+.station-details-gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.station-details-gallery img {
+  height: 180px;
+}
+
+@media (max-width: 992px) {
+  .stations-page {
+    height: auto;
+    overflow: visible;
+    background-size: contain;
+    padding-bottom: 24px;
+  }
+
+  .stations-map {
+    float: none;
+    width: 100%;
+    height: 640px;
+  }
+
+  .stations-detail-panel {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-height: none;
+    transform: none;
+    overflow: visible;
+    margin-top: 16px;
+  }
+
+  .station-details-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .stations-map {
+    height: 480px;
+  }
+
+  .stations-detail-gallery,
+  .station-details-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .station-details-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

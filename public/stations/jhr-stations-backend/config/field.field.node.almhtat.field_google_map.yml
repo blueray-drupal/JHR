@@ -1,0 +1,23 @@
+uuid: 2b39c6b1-802f-48b3-8bbc-e98f37a7d671
+langcode: ar
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_google_map
+    - node.type.almhtat
+  module:
+    - link
+id: node.almhtat.field_google_map
+field_name: field_google_map
+entity_type: node
+bundle: almhtat
+label: 'Google map'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link
