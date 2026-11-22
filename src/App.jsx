@@ -42,6 +42,8 @@ import FreedomOfInformation from './pages/freedom_of_information/FreedomOfInform
 import Tenders from './pages/tenders/Tenders';
 import TenderDetails from './pages/tenders/TenderDetails';
 import Search from './pages/search/Search';
+import Stations from './pages/stations/Stations';
+import StationDetails from './pages/stations/StationDetails';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
 
 function ScrollToTop() {
@@ -99,6 +101,8 @@ function App() {
           <Route path="/useful-links" element={<UsefulLinks />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/freedom-of-information" element={<FreedomOfInformation />} />
+          <Route path="/stations" element={<Stations />} />
+          <Route path="/stations/:id" element={<StationDetails />} />
           <Route path="/search" element={<Search />} />
           <Route path="*" element={<BasicPage />} />
         </Routes>

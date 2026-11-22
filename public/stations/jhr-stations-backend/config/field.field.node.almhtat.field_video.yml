@@ -1,0 +1,23 @@
+uuid: c0ecc4f2-7784-4196-8b31-6102e135d5c1
+langcode: ar
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_video
+  - node.type.almhtat
+  module:
+  - video_embed_field
+id: node.almhtat.field_video
+field_name: field_video
+entity_type: node
+bundle: almhtat
+label: video
+description: ''
+required: false
+translatable: false
+default_value: {}
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 1
+field_type: link

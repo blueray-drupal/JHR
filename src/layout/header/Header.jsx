@@ -152,6 +152,10 @@ const mainNav = [
                 title: "المدراء العامون",
                 path: "/general-managers",
             },
+            {
+                title: "المحطات",
+                path: "/stations",
+            },
         ],
     },
     {

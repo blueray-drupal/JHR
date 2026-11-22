@@ -1,0 +1,1498 @@
+@media only screen and (min-width: 1800px) {
+    .container-1200 {
+        max-width: 1700px;
+    }
+
+    .header .logo img {
+        width: 220px;
+    }
+
+
+    div#block-sitebranding a:nth-child(2) {
+        top: 50px;
+    }
+
+
+    .header .logo a {
+        font-size: 33px;
+    }
+    
+
+    .header .top-menu a {
+        font-size: 25px;
+    }
+
+
+    .header .top-menu {
+        margin: 60px 0;
+    }
+
+    .header .top-social img{
+        width: 50px; 
+        height: 50px;
+    }
+
+
+
+
+    .header .top-social {
+        margin: 55px 0;
+    }
+
+
+
+    .header .main-menu ul li a {
+        font-size: 24px;
+    }
+
+
+
+
+
+    .header .top_search input.form-submit {
+        background: url(../images/ssse.png) no-repeat;
+        border: 0;
+        font-size: 0;
+        width: 32px;
+        background-size: 100%;
+        height: 32px;
+        float: left;
+    }
+
+
+    .header .top_search input#edit-keys::placeholder {
+        font-size: 24px;
+    }
+
+    .header .top_search input.form-search {
+        padding-top: 10px;
+    }
+
+
+    marquee .marquee-row .views-field.views-field-title a {
+        font-size: 24px;
+    }
+
+
+
+
+
+    .book_now h2{
+        font-size: 40px;
+        width: 20%;
+    }
+
+
+    .book_now .views-field.views-field-field-image-book{
+        width: 200px;
+        height: 200px;
+        padding: 70px 0;
+    }
+
+
+    .book_now .views-field.views-field-title a {
+        font-size: 24px;
+    }
+
+
+
+
+
+
+
+    section.latest_news {
+        padding: 40px 0;
+    }
+
+    section.latest_news header a {
+        font-size: 39px;
+    }
+
+
+    .latest_news .jcarousel-wrapper.jcarousel-skin-default{
+        height: 475px;
+    }
+
+
+    .latest_news .jcarousel-skin-default .jcarousel li{
+        width: 422px;
+    }
+
+
+
+    .jcarousel-skin-default .jcarousel img{
+        width: 100%;
+    }
+
+
+    .latest_news .views-field.views-field-body p {
+        font-size: 24px;
+    }
+
+
+    section.stations .views-field.views-field-body p {
+        font-size: 24px;
+    }
+
+    .station-show{
+        margin-top: 60px;
+    }
+
+
+    .station-show a{
+        padding: 15px 50px;
+    }
+
+
+    .gallery header a {
+        font-size: 43px;
+    }
+
+
+    section.gallery .jcarousel-skin-default .jcarousel li{
+        width: 172px;
+    }
+
+
+    .bottom_social div#block-views-block-bottom-bar-block-1 .views-row a{
+        font-size: 14px;
+    }
+
+    .footer .footer_menu li a{
+        font-size: 20px;
+    }
+
+
+    .footer .footer-one h2 {
+        font-size: 25px;
+    }
+
+    .footer .footer_contact .js-form-item textarea{
+        max-width: inherit;
+    }
+
+
+
+    .footer .footer_contact .form-actions input.form-submit{
+        font-size: 22px;
+    }
+
+
+    .copyright p {
+        font-size: 24px;
+    }
+
+
+
+    .copyright p a {
+        font-size: 24px;
+    }
+
+
+
+
+
+}
+@media screen and (min-width:1500px) and (max-width:1800px) {
+    .container-1200 {
+        max-width: 1300px;
+    }
+
+
+    div#block-breadcrumbs {
+        margin: 40px 160px;
+    }
+
+
+
+
+
+
+    .header .logo img {
+        width: 160px;
+    }
+
+
+    div#block-sitebranding a:nth-child(2) {
+        top: 50px;
+    }
+
+
+    .header .logo a {
+        font-size: 26px;
+    }
+    
+
+    .header .top-menu a {
+        font-size: 18px;
+    }
+
+
+    .header .top-menu {
+        margin: 60px 0;
+    }
+
+    .header .top-social img{
+        width: 35px; 
+        height: 35px;
+    }
+
+
+
+
+    .header .top-social {
+        margin: 55px 0;
+    }
+
+
+
+    .header .main-menu ul li a {
+        font-size: 20px;
+    }
+
+
+
+
+
+    .header .top_search input.form-submit {
+        background: url(../images/ssse.png) no-repeat;
+        border: 0;
+        font-size: 0;
+        width: 32px;
+        background-size: 70%;
+        height: 32px;
+        float: left;
+    }
+
+
+    .header .top_search input#edit-keys::placeholder {
+        font-size: 19px;
+    }
+
+    .header .top_search input.form-search {
+        padding-top: 10px;
+    }
+
+
+    marquee .marquee-row .views-field.views-field-title a {
+        font-size: 19px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .book_now h2{
+        font-size: 33px;
+        width: 15%;
+    }
+
+
+    .book_now .views-field.views-field-field-image-book{
+        width: 130px;
+        height: 130px;
+        padding: 45px 0;
+    }
+
+
+    .book_now .views-field.views-field-title a {
+        font-size: 19px;
+    }
+
+
+
+
+
+
+
+    section.latest_news {
+        padding: 40px 0;
+    }
+
+    section.latest_news header a {
+        font-size: 32px;
+    }
+
+
+    .latest_news .jcarousel-wrapper.jcarousel-skin-default{
+        height: 400px;
+    }
+
+
+    .latest_news .jcarousel-skin-default .jcarousel li{
+        width: 305px;
+    }
+
+
+
+    .jcarousel-skin-default .jcarousel img{
+        width: 100%;
+    }
+
+
+    .latest_news .views-field.views-field-body p {
+        font-size: 18px;
+    }
+
+
+    section.stations .views-field.views-field-body p {
+        font-size: 18px;
+    }
+
+    .station-show{
+        margin-top: 40px;
+    }
+
+
+    .station-show a{
+        padding: 5px 30px;
+    }
+
+
+    .gallery header a {
+        font-size: 32px;
+    }
+
+
+    section.gallery .jcarousel-skin-default .jcarousel li{
+        width: 150px;
+    }
+
+
+    .bottom_social div#block-views-block-bottom-bar-block-1 .views-row a{
+        font-size: 11px;
+    }
+
+    .footer .footer_menu li a{
+        font-size: 16px;
+    }
+
+
+    .footer .footer-one h2 {
+        font-size: 19px;
+    }
+
+    .footer .footer_contact .js-form-item textarea{
+        max-width: inherit;
+    }
+
+
+
+    .footer .footer_contact .form-actions input.form-submit{
+        font-size: 17px;
+    }
+
+
+    .copyright p {
+        font-size: 19px;
+    }
+
+
+
+    .copyright p a {
+        font-size: 19px;
+    }
+
+
+
+
+
+}
+
+@media only screen and (min-width:700px){
+    #block-views-block-rotating-header-block-1 img{
+        width:100%;
+    }
+    div#block-jhr-page-title h1 {
+   
+    width: 100%;
+}
+
+.tribs-body, .tribs-img{
+    width:55%
+}
+
+}
+/**************gernral*********************/
+
+.c-topheader{
+    display: none;
+
+}
+@media only screen and (max-width:1200px) {
+
+div#block-views-block-culture-image-block-1 .jcarousel-skin-default .jcarousel-control-next {
+    right: unset;
+    left: 43.5%;
+}
+div#block-views-block-culture-image-block-1 .jcarousel-skin-default .jcarousel-control-prev {
+    left: unset;
+    right: 44.5%;
+}
+.c-achievements .c-achi .achi-img img{
+    width: 100%;
+}
+
+
+ 
+
+
+
+    .book_now h2 {
+        width: 10%;
+        border-left: 1px solid #505052;
+        float: right;
+        font-size: 24px;
+        color: #454546;
+        margin-right: 120px;
+        margin-top: 50px;
+        margin-left: 110px;
+    }
+
+
+
+
+    .book_now .views-row {
+        float: right;
+        text-align: center;
+        margin-left: 50px;
+    }
+
+
+
+
+    .book_now .views-field.views-field-field-image-book {
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        padding: 20px 0;
+        border-radius: 50%;
+        border: 1px solid #c6c6c6;
+        background: #fff;
+        margin: auto;
+        transition: .6s;
+    }
+    
+
+
+
+
+
+
+
+
+}
+@media only screen and (max-width:1100px) {
+    .c-trips .views-row:nth-child(even) .tribs-body{
+        float: right;
+    }
+    
+    .c-trips .views-row .views-field-field-image img{
+        width: 100%;
+    }
+
+
+.header .bottom-header {
+    background-color: #0c6f8c;
+    padding: 10px 0;
+    display: none;
+}
+
+
+.top-header .logo {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+
+.logo:after{
+    display: none;
+}
+
+
+
+
+.header .logo a {
+    font-family: "gess";
+    font-size: 23px;
+    color: #505052;
+    display: block;
+}
+
+
+
+
+
+div#block-sitebranding a:nth-child(2) {
+    position: relative;
+    top: inherit;
+}
+
+
+.c-leftheader{
+    display: none;
+}
+.c-topheader{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background: #0c6f8c;
+}
+
+
+
+.header {
+    padding: 0;
+    border-bottom: 5px solid #0c6f8c;
+}
+
+
+
+
+.top-header .container-1200 {
+    padding: 0;
+}
+
+
+.header .top-menu {
+    margin: 15px 0;
+    float: left;
+}
+
+.header .top-social {
+    margin: 10px 0;
+   /* display: none;*/
+}
+
+
+.header .top-menu a {
+    transition: .6s;
+    color: #fff;
+    font-size: 14px;
+}
+
+
+div#sm_menu_ham span {
+    height: 3px;
+}
+
+
+.sm_menu_outer.active .mobile_menu li {
+    float: none;
+}
+
+
+
+
+
+
+.groub-tribs{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+/******************* slilder ***************************/
+
+
+
+#mutebutton{
+    top: 300px;
+}
+
+
+marquee .marquee-row .views-field.views-field-title a {
+    font-size: 14px;
+}
+
+
+}
+@media only screen and (max-width:1000px) {
+
+
+
+    .book_now h2 {
+        width: 15%;
+        border-left: 1px solid #505052;
+        float: right;
+        font-size: 20px;
+        color: #454546;
+        margin-right: 20px;
+        margin-top: 30px;
+        margin-left: 40px;
+    }
+
+
+
+
+    .book_now .views-field.views-field-field-image-book img {
+        width: 25px;
+        height: auto;
+    }
+    
+
+
+    .book_now .views-field.views-field-field-image-book {
+        text-align: center;
+        width: 60px;
+        height: 60px;
+        padding: 10px 0;
+        border-radius: 50%;
+        border: 1px solid #c6c6c6;
+        background: #fff;
+        margin: auto;
+        transition: .6s;
+    }
+
+
+    .book_now .views-field.views-field-title a {
+        font-size: 16px;
+    }
+
+
+
+
+    section.book_now {
+        padding: 50px 0;
+        background: #F7F7F7 url(../images/478copy.png)no-repeat center;
+    }
+
+
+
+
+
+    section.latest_news {
+        /* padding-bottom: 40px; */
+        padding: 50px 0;
+    }
+
+
+
+
+
+    
+    .bottom_social div#block-bottombarsocial img {
+        width: 20px;
+        height: auto;
+    }
+    .sm_menu_outer .mobile_menu li.hasChild > a, .sm_menu_outer .mobile_menu li.hasChild > span
+{
+    /*background: none;*/
+    background: url(../images/next.png) no-repeat scroll 55% center / 5% auto;
+        /*background: url(../images/back.png) no-repeat scroll 75% center / 5% auto;*/
+}
+
+
+}
+@media only screen and (max-width:900px) {
+
+
+
+    section.latest_news header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+
+
+    section.latest_news header a {
+        font-size: 26px;
+
+    }
+
+
+    .latest_news .views-field.views-field-body p {
+        font-size: 12px;
+    }
+
+    
+
+
+    section.stations .views-field.views-field-title a, section.stations .views-field.views-field-title span {
+        font-size: 26px;
+        color: #454546;
+    }
+
+
+
+    .station-show a {
+        font-size: 24px;
+        padding: 5px 30px;
+
+    }
+
+
+
+    .footer .footer_contact .js-form-item input, .footer .footer_contact .js-form-item textarea {
+        width: 100%;
+        font-size: 12px;
+    }
+
+
+
+    .footer .footer_contact .form-actions {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+
+
+
+
+
+
+
+
+    .footer .footer_contact .js-form-item textarea{
+        max-width: 100%;
+    }
+
+    .footer .footer-one {
+        padding: 35px 0;
+    }
+
+
+    .footer_contact {
+        margin: 50px 0;
+    }
+
+
+
+
+    .footer .footer_map div#block-footermap {
+        float: none;
+    }
+
+
+
+
+    .footer .footer_map div#block-footermap iframe {
+        width: 100%;
+        height: auto;
+    }
+
+
+
+
+
+    div#block-addtoanybuttons-2 {
+        position: relative;
+        display: inline-block;
+        width: 70%;
+    }
+
+
+    .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons {
+        width: 100% !important;
+        left: auto !important;
+    }
+
+
+
+
+
+
+    .webform-submission-tqyym-form .form-item.js-form-type-radio:nth-child(1) input[type=radio]::after {
+        background: url(../images/sad.png) no-repeat;
+        background-size: auto;
+    }
+
+
+
+    .webform-submission-tqyym-form .form-item.js-form-type-radio:nth-child(2) input[type=radio]::after {
+        background: url(../images/sceptic.png) no-repeat;
+        background-size: auto;
+    }
+
+    
+
+    .webform-submission-tqyym-form .form-item.js-form-type-radio:nth-child(3) input[type=radio]::after {
+        background: url(../images/happy.png) no-repeat;
+        background-size: auto;
+    }
+
+
+
+    .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons .webform-submission-tqyym-form .form-item.js-form-type-radio input[type=radio]::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 55%;
+    }
+
+
+
+    
+
+}
+@media only screen and (max-width:800px) {
+
+
+
+    section.stations .views-field-body p {
+        font-size: 15px;
+    }
+
+
+    .station-show a {
+        font-size: 18px;
+        padding: 3px 20px;
+    }
+
+
+    .station-show {
+        width: 44%;
+        float: right;
+        text-align: center;
+        margin-top: 70px;
+    }
+
+    .gallery header a {
+        font-size: 26px;
+
+    }
+
+
+
+    .bottom_social div#block-views-block-bottom-bar-block-1 {
+        width: 100%;
+        margin: 15px 0px;
+    }
+
+
+    .bottom_social div#block-bottombarsocial {
+        width: 100%;
+    }
+
+
+
+
+
+
+    .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons .webform-submission-tqyym-form .form-item.js-form-type-radio input[type=radio]::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 66%;
+    }
+
+
+
+
+
+
+}
+
+@media only screen and (max-width:700px){
+
+
+
+
+
+    .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons .webform-submission-tqyym-form .form-item.js-form-type-radio input[type=radio]::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 75%;
+    }
+
+
+
+
+
+    section.stations .station-body {
+        width: 100%;
+    }
+
+
+    .station-show {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+@media only screen and (max-width:600px){
+
+
+
+
+    .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons .webform-submission-tqyym-form .form-item.js-form-type-radio input[type=radio]::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 92%;
+    }
+
+
+
+
+.header .logo img {
+    width: 100px;
+}
+
+
+.header .logo a {
+    font-family: "gess";
+    font-size: 18px;
+}
+
+
+.top-header .logo {
+    margin: 10px 0;
+}
+
+
+
+#mutebutton {
+    top: 10%;
+}
+
+
+.book_now h2 {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    text-align: center;
+    padding-bottom: 35px;
+}
+
+
+
+
+.book_now .views-row {
+    float: right;
+    text-align: center;
+    /* margin-left: 46px; */
+    margin: auto;
+    width: 32%;
+}
+
+
+
+.bottom_social div#block-views-block-bottom-bar-block-1 .views-row .views-field-field-images img {
+    width: 16%;
+}
+
+
+
+.bottom_social div#block-views-block-bottom-bar-block-1 .views-row {
+    text-align: center;
+    padding: 0px 15px;
+    font-size: 13px;
+    width: 100%;
+    border: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+
+
+
+.latest_news .jcarousel-wrapper.jcarousel-skin-default
+{
+    max-width: 61%;
+}
+
+section.gallery .jcarousel-wrapper.jcarousel-skin-default
+{
+    max-width:63% ;
+}
+
+.bottom_social div#block-bottombarsocial,
+div#block-addtoanybuttons-2
+{
+    text-align: center;
+}
+.bottom_social div#block-bottombarsocial ul 
+{
+    display: inline-block;
+}
+
+
+div#block-jhr-page-title {
+    position: relative;
+    top: -200px;
+    width: 100%;
+    right: -16px;
+    text-align: right;
+}
+
+div#block-jhr-page-title h1 {
+    font-size: 26px;
+    color: #ffffff;
+    padding: 10px;
+    background: #0009;
+    width: 100%;
+    font-weight: bold;
+}
+
+div#block-breadcrumbs {
+    margin: 10px;
+}
+
+.page-args-ar-about .views-row:nth-child(odd) .views-field-field-image {
+    width: 100%;
+    float: right;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.page-args-ar-about .views-row:nth-child(odd) .fieldset2 {
+    width: 100%;
+    display: inline-block;
+}
+
+.c-vision-and-mission .views-row
+{
+    width: 100%;
+}
+
+html.js {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
+.c-directors fieldset.c-mjls-img {
+    width: 100%;
+    float: right;
+}
+
+.c-directors fieldset.c-mjls-img img {
+    transition: .5s;
+    width: 100%;
+    height: auto;
+}
+
+.c-directors fieldset.c-mjls-cv {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 39px;
+    float: left;
+    padding: 20px;
+}
+
+.c-inner-directors .c-mjls-img {
+    width: 100%;
+}
+
+.c-inner-directors .c-mjls-img .views-field.views-field-field-image {
+    height: 355px;
+    width: 270px;
+    margin: 0 auto;
+}
+
+.c-inner-directors .c-mjls-cv {
+    width: 100%;
+    float: right;
+    margin-top: 20px;
+}
+
+
+.c-achievements .views-slideshow-controls-top.clearfix .jcarousel-skin-ie7 .jcarousel-container-horizontal {
+    width: 100%;
+    padding: 20px 93px;
+    background: none;
+    border: 0;
+}
+.c-achievements .views_slideshow_cycle_main,
+.c-achievements .views_slideshow_cycle_teaser_section,
+.c-achievements .views_slideshow_cycle_slide
+{
+    width: 100% !important;
+}
+div#block-jhr-content,
+div#main-content {
+    display: inline-block;
+    width: 100%;
+}
+.c-achievements .views-row
+{
+    display: inline-block;
+    width: 100%;
+}
+
+.c-achievements .c-achi .achi-body {
+    width: 100%;
+    float: right;
+}
+
+.c-achievements .c-achi .achi-img img {
+    width: 100%;
+    height: auto;
+    transition: .7s;
+    border: 3px solid #0c6f8c;
+}
+
+.c-achievements .c-achi .achi-img {
+    width: 100%;
+    float: left;
+    display: inline-block;
+}
+
+div#block-menuformsbooks ul.quicktabs-tabs {
+    /* position: relative; */
+    display: inline-block;
+    display: i;
+    width: 100%;
+    margin-bottom: 80px;
+    background: #0c6f8c;
+    padding: 5px;
+    border-radius: 20px;
+    border: 2px solid #0c6f8c;
+}
+
+div#block-menuformsbooks ul.quicktabs-tabs li {
+    display: inline;
+    background: none;
+    list-style-type: none;
+    padding: 2px;
+    white-space: nowrap;
+    width: auto;
+    padding: 5px;
+    margin-left: 10px;
+    /* padding: 15px; */
+    float: right;
+}
+
+div#block-menuformsbooks ul.quicktabs-tabs li a {
+    font-size: 24px;
+    color: #ffffff;
+    transition: .5s;
+    margin-left: 0;
+    padding: 0 25px;
+    font-size: 14px;
+}
+
+.page-node-book_families div#block-menuformsbooks ul.quicktabs-tabs li.cb-familes a, .page-args-ar-book_families div#block-menuformsbooks ul.quicktabs-tabs li.cb-familes a, .page-args-en-book_families div#block-menuformsbooks ul.quicktabs-tabs li.cb-familes a {
+    color: #0c6f8c;
+    /* padding-bottom: 10px; */
+    background: #fff;
+    /* border-radius: 20px; */
+    border: 2px solid #0c6f8c;
+}
+
+.webform-submission-book-tour-groups-form div#edit-container-01, .webform-submission-book-families-form div#edit-container-01, .webform-submission-book-families-form div#edit-container-01--2, .webform-submission-book-students-form div#edit-container-01, .webform-submission-book-students-form div#edit-container-01--2 {
+    width: 100%;
+}
+
+.webform-submission-book-tour-groups-form fieldset#edit-boook, .webform-submission-book-families-form fieldset#edit-boook, .webform-submission-book-families-form fieldset#edit-boook--2, .webform-submission-book-students-form fieldset#edit-boook, .webform-submission-book-students-form fieldset#edit-boook--2 {
+    position: relative;
+    /* top: -27px; */
+    /* background: #fff; */
+    z-index: 9999;
+    margin-top: -18px;
+}
+
+.webform-submission-book-tour-groups-form .js-form-item > input, .webform-submission-book-families-form .js-form-item > select, .webform-submission-book-families-form .js-form-item > input, .webform-submission-book-students-form .js-form-item > select, .webform-submission-book-students-form .js-form-item > input, .webform-submission-book-tour-groups-form .js-form-item > select {
+    width: 100%;
+}
+
+form#webform-submission-book-families-node-66-add-form,
+form#webform-submission-book-tour-groups-node-65-add-form,
+form#webform-submission-book-students-node-80-add-form {
+    margin-top: 30px;
+}
+
+div#block-quicktabsalmhtat ul.quicktabs-tabs li a {
+    font-size: 0px;
+    padding: 0px 10px;
+    position: relative;
+    left: auto;
+    top: auto;
+    color: #000;
+    background: #ffffff00;
+    border-radius: 10px;
+    transition: .6s;
+    color: #fff;
+    background: #0c6f8c;
+}
+
+div#block-quicktabsalmhtat
+{
+    display: none;
+}
+
+div#block-views-block-almhtat-block-10
+{
+    display: inline-block;
+    width: 100%;
+}
+body
+{
+    overflow-x: hidden;
+}
+
+.c-tenders .arch
+{
+    left:34.5%
+}
+
+.c-news .views-row
+{
+    height: auto;
+    padding: 20px;
+}
+
+.c-news .views-row .views-field-field-image {
+    height: auto;
+    overflow: hidden;
+    background-size: 100%;
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    position: relative;
+    float: right;
+}
+img 
+{
+    max-width: 100%;
+}
+
+.c-news .views-row .c-news-body {
+    padding-left: 0;
+    float: left;
+    display: inline-block;
+    max-width: 100%;
+}
+
+form#webform-submission-contact-us-node-20-add-form iframe
+{
+    width: 100%;
+    height: auto;
+}
+
+.webform-submission-contact-us-form div#edit-container {
+    width: 100%;
+}
+div#block-quicktabsllmzydmnalmlwmatyrjyaltwasllyalarqamaltalyt ul li {
+    width: 100%;
+    margin: 0;
+    float: none;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.c-our-partners .views-field.views-field-field-image
+{
+    height: auto;
+}
+
+.c-vision-and-mission .views-row:first-child {
+        
+    border-left: 1px solid #aeaeae2e;
+}
+
+.c-vision-and-mission .views-row:nth-child(3) {
+    float: left;
+    border-right: 1px solid #aeaeae2e;
+}
+
+.c-achievements .views-slideshow-controls-top.clearfix .jcarousel-skin-ie7 .jcarousel-item-horizontal {
+    height: auto;
+    width: 258px !important;
+}
+
+div#block-menuformsbooks ul.quicktabs-tabs li
+{
+    margin-left: -6px;
+}
+
+.webform-submission-tqyym-form .form-item.js-form-type-radio {
+    width: 100%;
+}
+.webform-submission-shkawy-waqtrahat-form div#edit-container-01
+{
+    width: 100%;
+}
+
+.webform-submission-shkawy-waqtrahat-form div#edit-container fieldset#edit-new span {
+    font-size: 19px;
+}
+}
+@media only screen and (max-width:550px)
+{
+    
+
+    section.gallery .jcarousel-wrapper.jcarousel-skin-default {
+        max-width: 37%;
+    }
+
+    .latest_news .jcarousel-wrapper.jcarousel-skin-default {
+        max-width: 78%;
+    }
+    
+}
+@media only screen and (max-width:500px){
+
+
+.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons .webform-submission-tqyym-form .form-item.js-form-type-radio input[type=radio]::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+}
+
+
+
+
+
+.header .top-menu a {
+    transition: .6s;
+    color: #fff;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+
+.bottom_social div#block-views-block-bottom-bar-block-1 .views-row {
+    text-align: center;
+    padding: 0px 10px;
+    font-size: 6px;
+}
+
+
+.copyright p {
+
+    font-size: 11px;
+}
+
+
+
+.copyright p a {
+
+    font-size: 11px;
+
+}
+
+
+
+
+div#block-addtoanybuttons-2 {
+    position: relative;
+    display: inline-block;
+    width: 55%;
+}
+
+
+.book_now .views-field.views-field-title a {
+    font-size: 13px;
+}
+
+
+}
+@media only screen and (max-width:450px)
+{
+    .latest_news .jcarousel-skin-default .jcarousel-control-prev {
+        left: unset;
+        right: -25px;
+    }
+
+    .latest_news .jcarousel-wrapper.jcarousel-skin-default {
+        max-width: 88%;
+    }
+
+    .latest_news .jcarousel-skin-default .jcarousel-control-next {
+    right: unset;
+    left: -27px;
+}
+
+section.gallery .jcarousel-wrapper.jcarousel-skin-default {
+    max-width: 43%;
+}
+
+.latest_news .jcarousel-skin-default .jcarousel-control-next {
+    right: unset;
+    left: -35px;
+}
+}
+
+@media only screen and (max-width:400px){
+
+
+
+
+    .latest_news .jcarousel-skin-default .jcarousel li {
+        margin: 0px 15px;
+        
+        width: 225px;
+       
+    }
+
+
+    section.gallery .jcarousel-wrapper.jcarousel-skin-default {
+        max-width: 48%;
+    }
+
+.header .top-menu a {
+    transition: .6s;
+    color: #fff;
+    font-size: 10px;
+    padding: 0 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

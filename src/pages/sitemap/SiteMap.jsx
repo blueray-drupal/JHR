@@ -12,6 +12,7 @@ const SITEMAP_DATA = [
             { label: "مجلس الإدارة", path: "/board-directors" },
             { label: "الهيكل التنظيمي", path: "/organization-chart" },
             { label: "المدراء العامون", path: "/general-managers" },
+            { label: "المحطات", path: "/stations" },
         ],
     },
     {
