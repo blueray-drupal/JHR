@@ -49,8 +49,19 @@ const copyrightMenu = {
     organization: "مؤسسة الخط الحديدي الحجازي الأردني",
 };
 
+function isStaticFileHref(link) {
+    return /\.(pdf|docx?|xlsx?|pptx?|zip|rar|png|jpe?g|gif|webp|svg)(\?|#|$)/i.test(
+        String(link || "")
+    );
+}
+
 function isExternalHref(link) {
-    return /^https?:\/\//i.test(link) || link.startsWith("//") || link.startsWith("mailto:");
+    return (
+        /^https?:\/\//i.test(link) ||
+        link.startsWith("//") ||
+        link.startsWith("mailto:") ||
+        isStaticFileHref(link)
+    );
 }
 
 const NATIONAL_HUMAN_RIGHTS_PLAN_PDF =

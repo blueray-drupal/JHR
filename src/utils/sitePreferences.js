@@ -3,7 +3,7 @@ export const STORAGE_KEY = 'jhr-site-preferences';
 export const DEFAULT_PREFERENCES = {
     theme: 'light',
     fontScale: 0,
-    hideImages: false,
+    grayscale: false,
 };
 
 export const FONT_SCALE_MIN = -3;
@@ -25,7 +25,7 @@ export function loadSitePreferences() {
         return {
             theme: parsed.theme === 'dark' ? 'dark' : 'light',
             fontScale: clampFontScale(Number(parsed.fontScale) || 0),
-            hideImages: Boolean(parsed.hideImages),
+            grayscale: Boolean(parsed.grayscale),
         };
     } catch {
         return { ...DEFAULT_PREFERENCES };
@@ -67,18 +67,22 @@ function applyFontScale(root, fontScale) {
     }
 }
 
-function applyHideImages(root, body, hideImages) {
-    if (hideImages) {
-        root.setAttribute('data-hide-images', 'true');
+function applyGrayscale(root, body, grayscale) {
+    if (grayscale) {
+        root.setAttribute('data-grayscale', 'true');
     } else {
-        root.removeAttribute('data-hide-images');
+        root.removeAttribute('data-grayscale');
     }
 
-    body.classList.toggle('site-hide-images', hideImages);
+    body.classList.toggle('site-grayscale', grayscale);
+
+    // Clear legacy hide-images mode if it was previously enabled.
+    root.removeAttribute('data-hide-images');
+    body.classList.remove('site-hide-images');
 }
 
 /**
- * Applies theme, font scale, and hide-images preferences to the whole site.
+ * Applies theme, font scale, and grayscale preferences to the whole site.
  * Call on boot (main.jsx) and whenever preferences change.
  */
 export function applySitePreferences(preferences) {
@@ -88,12 +92,12 @@ export function applySitePreferences(preferences) {
     const normalized = {
         theme: preferences.theme === 'dark' ? 'dark' : 'light',
         fontScale: clampFontScale(preferences.fontScale),
-        hideImages: Boolean(preferences.hideImages),
+        grayscale: Boolean(preferences.grayscale),
     };
 
     applyThemeClasses(root, body, normalized.theme);
     applyFontScale(root, normalized.fontScale);
-    applyHideImages(root, body, normalized.hideImages);
+    applyGrayscale(root, body, normalized.grayscale);
 
     saveSitePreferences(normalized);
     return normalized;

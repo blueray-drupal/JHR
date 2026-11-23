@@ -144,8 +144,37 @@ const SEARCHABLE_CONTENT = [
   },
 ];
 
+/** Normalize Arabic letters so matching is more forgiving. */
+function normalizeArabic(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[أإآٱ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/ى/g, 'ي')
+    .replace(/\u0640/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Remove Arabic definite article ال from the start of each word. */
+function stripArabicDefiniteArticle(text) {
+  return normalizeArabic(text).replace(
+    /(^|[^\u0600-\u06FF])ال(?=[\u0600-\u06FF])/g,
+    '$1'
+  );
+}
+
 function matchesQuery(text, query) {
-  return String(text || '').toLowerCase().includes(query.toLowerCase());
+  const haystack = stripArabicDefiniteArticle(text);
+  const needle = stripArabicDefiniteArticle(query);
+  if (!needle) return false;
+  return haystack.includes(needle);
+}
+
+function searchTermVariants(query) {
+  const term = query.trim();
+  const stripped = stripArabicDefiniteArticle(term);
+  return [...new Set([term, stripped].filter(Boolean))];
 }
 
 function filterStaticPages(query) {
@@ -189,11 +218,20 @@ export async function searchSite(query) {
   const term = query.trim();
   if (!term) return [];
 
+  const variants = searchTermVariants(term);
   const staticResults = filterStaticPages(term);
 
   const drupalBatches = await Promise.allSettled(
     SEARCHABLE_CONTENT.map(async (config) => {
-      const nodes = await searchNodesByTitle(config.type, term);
+      const batches = await Promise.all(
+        variants.map((variant) => searchNodesByTitle(config.type, variant))
+      );
+      const seenIds = new Set();
+      const nodes = batches.flat().filter((node) => {
+        if (!node?.id || seenIds.has(node.id)) return false;
+        seenIds.add(node.id);
+        return true;
+      });
       return mapDrupalResults(nodes, config);
     })
   );

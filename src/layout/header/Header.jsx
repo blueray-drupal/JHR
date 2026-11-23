@@ -7,7 +7,6 @@ import lightIcon from "../../../assets/light.svg";
 import increaseIcon from "../../../assets/increase.svg";
 import decreaseIcon from "../../../assets/decrease.svg";
 import resetIcon from "../../../assets/reset.svg";
-import hideImagesIcon from "../../../assets/hide.svg";
 import searchIcon from "../../../assets/search.svg";
 import langIcon from "../../../assets/lang.svg";
 import logoIcon from "../../../assets/logo.svg";
@@ -69,9 +68,8 @@ const contactItems = [
 
 const topBarTools = [
     {
-        type: "hide-images",
-        icon: hideImagesIcon,
-        title: "إخفاء / إظهار الصور",
+        type: "grayscale",
+        title: "أبيض وأسود",
     },
     {
         type: "theme-light",
@@ -206,7 +204,7 @@ const mainNav = [
 ];
 
 const toolActionMap = {
-    "hide-images": "toggleHideImages",
+    grayscale: "toggleGrayscale",
     "theme-dark": "setDarkTheme",
     "theme-light": "setLightTheme",
     "zoom-in": "increaseFontSize",
@@ -223,14 +221,14 @@ function Header() {
         setTheme,
         increaseFontSize,
         decreaseFontSize,
-        toggleHideImages,
+        toggleGrayscale,
         resetPreferences,
     } = useSitePreferences();
 
     const handleToolClick = (type) => {
         switch (type) {
-            case "hide-images":
-                toggleHideImages();
+            case "grayscale":
+                toggleGrayscale();
                 break;
             case "theme-dark":
                 setTheme("dark");
@@ -254,8 +252,8 @@ function Header() {
 
     const isToolActive = (type) => {
         switch (type) {
-            case "hide-images":
-                return preferences.hideImages;
+            case "grayscale":
+                return preferences.grayscale;
             case "theme-dark":
                 return preferences.theme === "dark";
             case "theme-light":
@@ -345,9 +343,9 @@ function Header() {
                                             aria-label={tool.title}
                                             aria-pressed={isToolActive(tool.type)}
                                         >
-                                            {tool.type === "hide-images" ? (
+                                            {tool.type === "grayscale" ? (
                                                 <i
-                                                    className={`fa-solid ${preferences.hideImages ? "fa-eye" : "fa-eye-slash"} tool-btn-fa`}
+                                                    className={`fa-solid ${preferences.grayscale ? "fa-eye" : "fa-eye-slash"} tool-btn-fa`}
                                                     aria-hidden="true"
                                                 />
                                             ) : (

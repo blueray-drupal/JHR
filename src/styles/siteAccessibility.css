@@ -521,80 +521,11 @@
   background-color: var(--surface-muted) !important;
 }
 
-/* ─── Hide images (site-wide) ──────────────────────────────────────────── */
+/* ─── Grayscale / black & white (site-wide) ────────────────────────────── */
 
-html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
-html[data-hide-images="true"] picture,
-html[data-hide-images="true"] video,
-html[data-hide-images="true"] iframe,
-html[data-hide-images="true"] svg image,
-body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
-body.site-hide-images picture,
-body.site-hide-images video,
-body.site-hide-images iframe {
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-html[data-hide-images="true"] img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
-html[data-hide-images="true"] video,
-body.site-hide-images img:not(.keep-visible):not(.tool-btn-icon):not(.lang-btn-icon),
-body.site-hide-images video {
-  max-height: 0 !important;
-  max-width: 0 !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-}
-
-/* Keep header UI icons visible while content images are hidden */
-html[data-hide-images="true"] .site-header img,
-html[data-hide-images="true"] .site-header .tool-btn-fa,
-body.site-hide-images .site-header img,
-body.site-hide-images .site-header .tool-btn-fa {
-  visibility: visible !important;
-  opacity: 1 !important;
-  max-height: none !important;
-  max-width: none !important;
-  overflow: visible !important;
-  padding: unset !important;
-  margin: unset !important;
-  border: unset !important;
-  display: block !important;
-}
-
-html[data-hide-images="true"] .site-header .tool-btn-fa,
-body.site-hide-images .site-header .tool-btn-fa {
-  display: inline-block !important;
-}
-
-html[data-hide-images="true"] [style*="background-image"],
-html[data-hide-images="true"] .card-image-wrapper,
-html[data-hide-images="true"] .news-card-image,
-html[data-hide-images="true"] .slide-image,
-html[data-hide-images="true"] .hero-image,
-html[data-hide-images="true"] .gallery-image,
-html[data-hide-images="true"] .venue-image-wrapper,
-html[data-hide-images="true"] .about-image,
-body.site-hide-images [style*="background-image"],
-body.site-hide-images .card-image-wrapper,
-body.site-hide-images .news-card-image,
-body.site-hide-images .slide-image,
-body.site-hide-images .hero-image,
-body.site-hide-images .gallery-image,
-body.site-hide-images .venue-image-wrapper,
-body.site-hide-images .about-image {
-  background-image: none !important;
-  background-color: var(--surface-muted, #f3f4f6) !important;
-  min-height: 48px;
-}
-
-html[data-hide-images="true"] .card-image-wrapper img,
-html[data-hide-images="true"] .news-card-image img,
-body.site-hide-images .card-image-wrapper img,
-body.site-hide-images .news-card-image img {
-  display: none !important;
+html[data-grayscale="true"],
+body.site-grayscale {
+  filter: grayscale(1);
 }
 
 /* ─── Header & footer ──────────────────────────────────────────────────── */

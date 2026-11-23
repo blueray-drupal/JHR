@@ -44,10 +44,10 @@ export function SitePreferencesProvider({ children }) {
         }));
     }, [updatePreferences]);
 
-    const toggleHideImages = useCallback(() => {
+    const toggleGrayscale = useCallback(() => {
         updatePreferences((current) => ({
             ...current,
-            hideImages: !current.hideImages,
+            grayscale: !current.grayscale,
         }));
     }, [updatePreferences]);
 
@@ -61,7 +61,7 @@ export function SitePreferencesProvider({ children }) {
             setTheme,
             increaseFontSize,
             decreaseFontSize,
-            toggleHideImages,
+            toggleGrayscale,
             resetPreferences,
         }),
         [
@@ -69,7 +69,7 @@ export function SitePreferencesProvider({ children }) {
             setTheme,
             increaseFontSize,
             decreaseFontSize,
-            toggleHideImages,
+            toggleGrayscale,
             resetPreferences,
         ],
     );
