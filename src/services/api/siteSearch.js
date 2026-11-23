@@ -44,6 +44,7 @@ export const STATIC_SEARCH_PAGES = [
   { title: 'الأسئلة الأكثر تكراراً', path: '/faq', badge: 'صفحة', description: 'الأسئلة الشائعة.' },
   { title: 'روابط مفيدة', path: '/useful-links', badge: 'صفحة', description: 'روابط مفيدة.' },
   { title: 'خريطة الموقع', path: '/sitemap', badge: 'صفحة', description: 'خريطة صفحات الموقع.' },
+  { title: 'مدونة السلوك الوظيفي', path: '/code-of-conduct', badge: 'صفحة', description: 'مدونة السلوك الوظيفي.' },
 ];
 
 const MEDIA_PATHS = {

@@ -44,6 +44,7 @@ import TenderDetails from './pages/tenders/TenderDetails';
 import Search from './pages/search/Search';
 import Stations from './pages/stations/Stations';
 import StationDetails from './pages/stations/StationDetails';
+import CodeOfConduct from './pages/code_of_conduct/CodeOfConduct';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
 
 function ScrollToTop() {
@@ -103,6 +104,7 @@ function App() {
           <Route path="/freedom-of-information" element={<FreedomOfInformation />} />
           <Route path="/stations" element={<Stations />} />
           <Route path="/stations/:id" element={<StationDetails />} />
+          <Route path="/code-of-conduct" element={<CodeOfConduct />} />
           <Route path="/search" element={<Search />} />
           <Route path="*" element={<BasicPage />} />
         </Routes>

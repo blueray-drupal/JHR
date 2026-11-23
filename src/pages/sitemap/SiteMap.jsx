@@ -57,6 +57,7 @@ const SITEMAP_DATA = [
             { label: "العطاءات", path: "/tenders" },
             { label: "الشكاوى والاقتراحات", path: "/complaints" },
             { label: "حق الحصول على معلومة", path: "/freedom-of-information" },
+            { label: "مدونة السلوك الوظيفي", path: "/code-of-conduct" },
         ],
     },
 ];
