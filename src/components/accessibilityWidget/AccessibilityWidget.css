@@ -1,0 +1,193 @@
+.a11y-widget {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 12050;
+    direction: rtl;
+    font-family: Cairo, sans-serif;
+}
+
+.a11y-launcher {
+    width: 62px;
+    height: 62px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+    cursor: pointer;
+    display: block;
+}
+
+.a11y-launcher img {
+    width: 62px;
+    height: 62px;
+    display: block;
+    border-radius: 50%;
+}
+
+.a11y-launcher:hover,
+.a11y-launcher.is-open {
+    transform: translateY(-2px);
+}
+
+.a11y-panel {
+    position: absolute;
+    left: 0;
+    bottom: 74px;
+    width: min(340px, calc(100vw - 36px));
+    max-height: calc(100vh - 110px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.a11y-panel-head {
+    background: #0d748d;
+    color: #ffffff;
+    text-align: center;
+    padding: 18px 16px 16px;
+}
+
+.a11y-panel-head h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.a11y-panel-head p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.a11y-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px;
+    overflow: auto;
+}
+
+.a11y-option {
+    min-height: 92px;
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+    background: #f4f6f8;
+    color: #0d748d;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: Cairo, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.a11y-option.is-wide {
+    grid-column: 1 / -1;
+    min-height: 78px;
+}
+
+.a11y-option.is-active {
+    border-color: #0d748d;
+    background: #e7f4f7;
+    box-shadow: inset 0 0 0 1px #0d748d;
+}
+
+.a11y-option-icon {
+    width: 28px;
+    height: 28px;
+    color: #111111;
+}
+
+.a11y-option-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.a11y-reset {
+    display: block;
+    flex: none;
+    margin: 4px auto 16px;
+    min-width: 148px;
+    height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: #0d748d;
+    color: #ffffff;
+    font-family: Cairo, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.a11y-reset:hover,
+.a11y-option:hover {
+    filter: brightness(0.97);
+}
+
+.a11y-reading-guide {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 42px;
+    transform: translateY(-50%);
+    background: rgba(13, 116, 141, 0.16);
+    border-top: 2px solid #0d748d;
+    border-bottom: 2px solid #0d748d;
+    pointer-events: none;
+    z-index: 12040;
+}
+
+.a11y-launcher:focus-visible,
+.a11y-option:focus-visible,
+.a11y-reset:focus-visible {
+    outline: 2px solid #c9933b;
+    outline-offset: 3px;
+}
+
+html[data-highlight-links="true"] a {
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+    outline: 2px solid #0d748d !important;
+    outline-offset: 2px;
+    background-color: rgba(201, 147, 59, 0.22);
+}
+
+html[data-highlight-links="true"] .a11y-widget a {
+    outline: none !important;
+    background-color: transparent;
+    text-decoration: none !important;
+}
+
+html[data-letter-spacing="true"] body :where(h1, h2, h3, h4, h5, h6, p, a, li, span, label, button, td, th) {
+    letter-spacing: 0.12em !important;
+}
+
+html[data-letter-spacing="true"] .a11y-widget,
+html[data-letter-spacing="true"] .a11y-widget * {
+    letter-spacing: normal !important;
+}
+
+html[data-readable-font="true"] body,
+html[data-readable-font="true"] body :where(h1, h2, h3, h4, h5, h6, p, a, li, span, label, button, input, textarea, td, th) {
+    font-family: Verdana, Tahoma, "Segoe UI", sans-serif !important;
+}
+
+html[data-readable-font="true"] .a11y-widget,
+html[data-readable-font="true"] .a11y-widget * {
+    font-family: Cairo, sans-serif !important;
+}

@@ -3,8 +3,10 @@ import { Link, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { fetchStationById } from '../../services/api/stationsApi';
 import './Stations.css';
+import { useLanguage } from '../../context/LanguageContext';
 
 function StationDetails() {
+  const { t } = useLanguage();
   const { id } = useParams();
   const [station, setStation] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +60,7 @@ function StationDetails() {
           <div className="station-details-header">
             <h2 className="station-details-title">{station.title}</h2>
             <Link to="/stations" className="stations-detail-link stations-back-link">
-              العودة إلى الخريطة
+              {t("العودة إلى الخريطة")}
             </Link>
           </div>
 

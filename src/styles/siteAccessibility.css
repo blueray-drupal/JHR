@@ -456,7 +456,7 @@
   color: var(--muted-text) !important;
 }
 
-[data-theme="dark"] button:not(.lang-btn):not(.tool-btn):not(.nav-link):not(.slider-btn):not(.about-home-btn):not(.ticker-badge) {
+[data-theme="dark"] button:not(.lang-btn):not(.tool-btn):not(.nav-link):not(.slider-btn):not(.about-home-btn):not(.ticker-badge):not(.menu-toggle):not(.side-expand):not(.side-menu-close):not(.a11y-launcher):not(.a11y-option):not(.a11y-reset) {
   color: inherit;
 }
 

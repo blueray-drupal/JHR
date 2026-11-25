@@ -5,6 +5,7 @@ import './main.css'
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 import { BrowserRouter } from "react-router-dom";
+import { LanguageProvider } from './context/LanguageContext';
 import { applySitePreferences, loadSitePreferences } from './utils/sitePreferences';
 
 applySitePreferences(loadSitePreferences());
@@ -18,6 +19,8 @@ AOS.init({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </BrowserRouter>
 )

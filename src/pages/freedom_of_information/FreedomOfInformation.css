@@ -111,7 +111,7 @@
     font-size: 14px;
     font-weight: 700;
     color: var(--foi-label);
-    text-align: right;
+    text-align: start;
 }
 
 .foi-webform .dwf-fieldset {
@@ -151,7 +151,7 @@
     font-family: inherit;
     font-size: 13px;
     color: var(--foi-text);
-    text-align: right;
+    text-align: start;
     direction: rtl;
     outline: none;
     box-shadow: none;
@@ -172,7 +172,7 @@
 .foi-webform .dwf-input::placeholder,
 .foi-webform .dwf-textarea::placeholder {
     color: var(--foi-muted);
-    text-align: right;
+    text-align: start;
     direction: rtl;
 }
 
@@ -190,7 +190,7 @@
 .foi-webform input[type="tel"],
 .foi-webform input[type="email"] {
     direction: rtl;
-    text-align: right;
+    text-align: start;
 }
 
 /* ─── Radios ─────────────────────────────────────────────────────────────── */
@@ -341,7 +341,7 @@
     font-weight: 500;
     line-height: 1.85;
     color: #5a5340;
-    text-align: right;
+    text-align: start;
 }
 
 .foi-form .foi-notice-list li::before,
@@ -353,6 +353,18 @@
     width: 7px;
     height: 7px;
     background: #c6a84d;
+}
+
+.foi-recaptcha {
+    margin-top: 16px;
+    min-height: 78px;
+}
+
+.foi-recaptcha-error {
+    margin: 8px 0 0;
+    color: var(--foi-red);
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .foi-webform .dwf-actions {

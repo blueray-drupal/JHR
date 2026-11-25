@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import { fetchFooterData, parseContactLine } from "../../services/api/footerApi";
 import "./footer.css";
 import facebookIcon from "../../../assets/facebook.svg";
@@ -94,6 +95,43 @@ function resolvePartnerLink(item) {
     return link;
 }
 
+function looksLikeFileName(value) {
+    const text = decodeURIComponent(String(value || "")).replace(/\s+/g, " ").trim();
+    if (!text) return true;
+    if (/\.(png|jpe?g|gif|svg|webp)$/i.test(text)) return true;
+    if (/^(vector|link|icon(\s*\(\d+\))?|image|img|banner|logo)$/i.test(text)) return true;
+    if (/^icon\s*\(/i.test(text)) return true;
+    return false;
+}
+
+function nameFromImageFile(imageUrl) {
+    if (!imageUrl) return "";
+    const file = decodeURIComponent(String(imageUrl).split("/").pop() || "").replace(/\.[^.]+$/, "");
+    const wrapped = file.match(/^image\s*\((.+)\)$/i);
+    return (wrapped ? wrapped[1] : "").trim();
+}
+
+function socialLabel(item) {
+    const href = resolveSocialLink(item);
+    if (href === SOCIAL_URLS.facebook) return "فيسبوك";
+    if (href === SOCIAL_URLS.instagram) return "إنستغرام";
+    if (href === SOCIAL_URLS.youtube) return "يوتيوب";
+
+    const fromFile = nameFromImageFile(item?.image);
+    if (fromFile && !looksLikeFileName(fromFile)) return fromFile;
+    if (item?.title && !looksLikeFileName(item.title)) return item.title;
+    return "وسيلة تواصل اجتماعي";
+}
+
+function partnerLabel(item) {
+    const fromFile = nameFromImageFile(item?.image);
+    if (fromFile === "Invest Jordan") return "شعار استثمر في الأردن";
+    if (fromFile === "تواصل") return "منصة تواصل";
+    if (fromFile && !looksLikeFileName(fromFile)) return fromFile;
+    if (item?.title && !looksLikeFileName(item.title)) return item.title;
+    return "شعار جهة شريكة";
+}
+
 function resolveSocialLink(item) {
     const haystack = `${item?.link || ""} ${item?.title || ""} ${item?.image || ""}`;
 
@@ -180,6 +218,7 @@ function FooterContactLine({ text }) {
 }
 
 function Footer() {
+    const { t, lang } = useLanguage();
     const [contactItems, setContactItems] = useState(defaultContactItems);
     const [importantLinks, setImportantLinks] = useState(defaultImportantLinks);
     const [partners, setPartners] = useState([]);
@@ -218,7 +257,7 @@ function Footer() {
     }, []);
 
     return (
-        <footer className="footer" dir="rtl">
+        <footer className="footer">
 
             <div className="footer-top">
                 <div className="footer-container footer-top-container">
@@ -226,7 +265,7 @@ function Footer() {
                         {topFooterLinks.map((item) => (
                             <FooterTopMenuLink
                                 key={item.id}
-                                title={item.title}
+                                title={t(item.title)}
                                 link={item.link}
                             />
                         ))}
@@ -234,20 +273,21 @@ function Footer() {
 
                     <nav className="footer-social-menu">
                         <span className="footer-social-title">
-                            وسائل التواصل الاجتماعي
+                            {t("وسائل التواصل الاجتماعي")}
                         </span>
                         {socialIcons.map((item) => {
                             const href = resolveSocialLink(item);
+                            const label = t(socialLabel(item));
                             return (
                                 <a
                                     key={item.id}
                                     href={href}
                                     className="footer-social-link"
-                                    aria-label={item.title}
+                                    aria-label={label}
                                     target={href && href !== "#" ? "_blank" : undefined}
                                     rel={href && href !== "#" ? "noopener noreferrer" : undefined}
                                 >
-                                    <img src={item.image} alt={item.title} />
+                                    <img src={item.image} alt="" />
                                 </a>
                             );
                         })}
@@ -269,8 +309,8 @@ function Footer() {
                         ))}
 
                         <Link to="/contact-us" className="footer-more-link">
-                            اقرأ المزيد
-                            <span>←</span>
+                            {t("اقرأ المزيد")}
+                            <span>{lang === "en" ? "→" : "←"}</span>
                         </Link>
                     </div>
 
@@ -297,11 +337,17 @@ function Footer() {
                     {partners.length > 0 && (
                         <div className="footer-partners">
                             {partners.map((item) => {
+                                const label = partnerLabel(item);
+
+                                if (!item.link && !item.image) {
+                                    return null;
+                                }
+
                                 if (!item.link) {
                                     return (
                                         <div key={item.id} className="footer-partner">
                                             {item.image && (
-                                                <img src={item.image} alt={item.title} />
+                                                <img src={item.image} alt={label} />
                                             )}
                                         </div>
                                     );
@@ -309,7 +355,7 @@ function Footer() {
 
                                 const href = resolvePartnerLink(item);
                                 const image = item.image ? (
-                                    <img src={item.image} alt={item.title} />
+                                    <img src={item.image} alt="" />
                                 ) : null;
 
                                 if (!isExternalHref(href)) {
@@ -318,6 +364,7 @@ function Footer() {
                                             key={item.id}
                                             to={href}
                                             className="footer-partner"
+                                            aria-label={label}
                                             onClick={() => {
                                                 if (href === "/freedom-of-information") {
                                                     window.scrollTo({
@@ -338,6 +385,7 @@ function Footer() {
                                         key={item.id}
                                         href={href}
                                         className="footer-partner"
+                                        aria-label={label}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -359,18 +407,18 @@ function Footer() {
                                 bottomLinks.map((item, index) => (
                                     <React.Fragment key={item.id}>
                                         {index > 0 && " - "}
-                                        <FooterPolicyLink title={item.title} link={item.link} />
+                                        <FooterPolicyLink title={t(item.title)} link={item.link} />
                                     </React.Fragment>
                                 ))
                             ) : (
                                 copyrightMenu.policyLinksFallback
                             )}
                         </p>
-                        <p>{copyrightMenu.year} - {copyrightMenu.organization}</p>
+                        <p>{t(copyrightMenu.year)} - {t(copyrightMenu.organization)}</p>
                     </div>
 
                     <div className="footer-developer">
-                        <span>{developerMenu.text}</span>
+                        <span>{t(developerMenu.text)}</span>
                         <a href={developerMenu.link}>{developerMenu.name}</a>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { FactsHomeSkeleton } from '../../components/skeleton/PageSkeletons';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { useLanguage } from '../../context/LanguageContext';
 
 const baseUrl = drupalBaseUrl;
 
@@ -61,6 +62,7 @@ function isHistoryYearsFact(label) {
 }
 
 function LiveElapsedTicker({ elapsed }) {
+    const { t } = useLanguage();
     const units = [
         { value: elapsed.months, label: 'أشهر' },
         { value: elapsed.days, label: 'أيام' },
@@ -74,7 +76,7 @@ function LiveElapsedTicker({ elapsed }) {
             {units.map((unit) => (
                 <div className="fact-live-unit" key={unit.label}>
                     <span className="fact-live-value">{pad2(unit.value)}</span>
-                    <span className="fact-live-label">{unit.label}</span>
+                    <span className="fact-live-label">{t(unit.label)}</span>
                 </div>
             ))}
         </div>

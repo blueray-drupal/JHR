@@ -104,7 +104,7 @@
 .main-content .tender-date,
 .full-content .tender-date {
     color: #0C6F8C !important;
-    text-align: right;
+    text-align: start;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;

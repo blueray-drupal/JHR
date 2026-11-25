@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: 28px;
     direction: rtl;
-    text-align: right;
+    text-align: start;
     max-width: 420px;
 }
 

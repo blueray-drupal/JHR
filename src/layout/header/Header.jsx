@@ -1,7 +1,8 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useSitePreferences } from "../../context/SitePreferencesContext";
+import { useLanguage } from "../../context/LanguageContext";
 import darkIcon from "../../../assets/dark.svg";
 import lightIcon from "../../../assets/light.svg";
 import increaseIcon from "../../../assets/increase.svg";
@@ -216,6 +217,10 @@ const toolActionMap = {
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { t, lang, toggleLanguage } = useLanguage();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [openSection, setOpenSection] = useState(null);
     const {
         preferences,
         setTheme,
@@ -224,6 +229,47 @@ function Header() {
         toggleGrayscale,
         resetPreferences,
     } = useSitePreferences();
+
+    const closeMenu = () => setMenuOpen(false);
+
+    const isCurrentPath = (path) => location.pathname === path;
+
+    const isSectionCurrent = (item) =>
+        item.path === location.pathname ||
+        item.dropdown?.some((child) => child.path === location.pathname);
+
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
+
+    useEffect(() => {
+        if (!menuOpen) return undefined;
+
+        const activeSection = mainNav.find((item) => isSectionCurrent(item));
+        setOpenSection(activeSection?.path || null);
+
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") setMenuOpen(false);
+        };
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        window.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener("keydown", onKeyDown);
+        };
+    }, [menuOpen, location.pathname]);
+
+    useEffect(() => {
+        const onResize = () => {
+            if (window.innerWidth > 1200) setMenuOpen(false);
+        };
+
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
 
     const handleToolClick = (type) => {
         switch (type) {
@@ -264,7 +310,7 @@ function Header() {
     };
 
     return (
-        <header className="site-header" dir="rtl" id="header">
+        <header className="site-header" id="header">
 
             {/* ================= TOP BAR ================= */}
 
@@ -297,7 +343,8 @@ function Header() {
                             <button
                                 type="button"
                                 className="lang-btn"
-                                aria-label="English"
+                                aria-label={lang === "en" ? "العربية" : "English"}
+                                onClick={toggleLanguage}
                             >
                                 <img
                                     src={langIcon}
@@ -305,14 +352,14 @@ function Header() {
                                     className="lang-btn-icon keep-visible"
                                     aria-hidden="true"
                                 />
-                                English
+                                {lang === "en" ? "العربية" : "English"}
                             </button>
                             <span className="top-bar-tools-divider" aria-hidden="true" />
                             <button
                                 type="button"
                                 className="tool-btn tool-btn-search"
-                                title="البحث"
-                                aria-label="البحث"
+                                title={t("البحث")}
+                                aria-label={t("البحث")}
                                 onClick={() => navigate("/search")}
                             >
                                 <img
@@ -339,8 +386,8 @@ function Header() {
                                             type="button"
                                             className={`tool-btn ${hasAction && isToolActive(tool.type) ? "tool-btn-active" : ""}`}
                                             onClick={() => handleToolClick(tool.type)}
-                                            title={tool.title}
-                                            aria-label={tool.title}
+                                            title={t(tool.title)}
+                                            aria-label={t(tool.title)}
                                             aria-pressed={isToolActive(tool.type)}
                                         >
                                             {tool.type === "grayscale" ? (
@@ -374,19 +421,19 @@ function Header() {
 
                     {/* Brand */}
 
-                    <Link to="/" className="brand" aria-label="الصفحة الرئيسية">
+                    <Link to="/" className="brand" aria-label={t("الصفحة الرئيسية")}>
 
                         <div className="brand-logo">
                             <img
                                 src={logoIcon}
-                                alt="Jordan Hejaz Railway Logo"
+                                alt=""
                                 className="keep-visible"
                             />
                         </div>
 
                         <div className="brand-text">
                             <h2>
-                                مؤسسة الخط الحديدي الحجازي الأردني
+                                {t("مؤسسة الخط الحديدي الحجازي الأردني")}
                             </h2>
 
                             <span>
@@ -395,6 +442,21 @@ function Header() {
                         </div>
 
                     </Link>
+
+                    <button
+                        type="button"
+                        className={`menu-toggle${menuOpen ? " is-open" : ""}`}
+                        aria-label={menuOpen ? t("إغلاق القائمة") : t("فتح القائمة")}
+                        aria-expanded={menuOpen}
+                        aria-controls="mobile-side-menu"
+                        onClick={() => setMenuOpen((open) => !open)}
+                    >
+                        <span className="menu-toggle-box" aria-hidden="true">
+                            <span />
+                            <span />
+                            <span />
+                        </span>
+                    </button>
 
 
                     {/* Secondary Navigation */}
@@ -408,7 +470,7 @@ function Header() {
 
                                     <li>
                                         <Link to={item.path}>
-                                            {item.title}
+                                            {t(item.title)}
                                         </Link>
                                     </li>
 
@@ -450,7 +512,7 @@ function Header() {
                                     to={item.path}
                                     className="nav-link"
                                 >
-                                    {item.title}
+                                    {t(item.title)}
 
                                     {item.dropdown?.length > 0 && (
                                         <i className="fa-solid fa-chevron-down icon-arrow"></i>
@@ -469,7 +531,7 @@ function Header() {
                                                 <Link
                                                     to={dropdownItem.path}
                                                 >
-                                                    {dropdownItem.title}
+                                                    {t(dropdownItem.title)}
                                                 </Link>
 
                                             </li>
@@ -489,6 +551,134 @@ function Header() {
                 </div>
 
             </nav>
+
+            <button
+                type="button"
+                className={`nav-backdrop${menuOpen ? " is-open" : ""}`}
+                aria-label={t("إغلاق القائمة")}
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={closeMenu}
+            />
+
+            <aside
+                id="mobile-side-menu"
+                className={`side-menu${menuOpen ? " is-open" : ""}`}
+                aria-hidden={!menuOpen}
+                aria-label={t("قائمة الموقع")}
+                inert={menuOpen ? undefined : ""}
+            >
+                <div className="side-menu-head">
+                    <div className="side-menu-brand">
+                        <img src={logoIcon} alt="" />
+                        <div>
+                            <strong>{t("الخط الحديدي الحجازي")}</strong>
+                            <span>{t("تصفح الموقع")}</span>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        className="side-menu-close"
+                        aria-label={t("إغلاق القائمة")}
+                        onClick={closeMenu}
+                    >
+                        <i className="fa-solid fa-xmark" aria-hidden="true" />
+                    </button>
+                </div>
+
+                <div className="side-menu-body">
+                    <ul className="side-menu-list">
+                        {mainNav.map((item) => {
+                            const hasChildren = item.dropdown?.length > 0;
+                            const expanded = openSection === item.path;
+
+                            return (
+                                <li
+                                    key={item.path}
+                                    className={`side-item${expanded ? " is-open" : ""}${isSectionCurrent(item) ? " is-current" : ""}`}
+                                >
+                                    <div className="side-row">
+                                        <Link
+                                            to={item.path}
+                                            className={`side-link${isCurrentPath(item.path) ? " is-active" : ""}`}
+                                            onClick={closeMenu}
+                                        >
+                                            {t(item.title)}
+                                        </Link>
+                                        {hasChildren && (
+                                            <button
+                                                type="button"
+                                                className="side-expand"
+                                                aria-expanded={expanded}
+                                                aria-label={expanded ? `${t("طي")} ${t(item.title)}` : `${t("توسيع")} ${t(item.title)}`}
+                                                onClick={() =>
+                                                    setOpenSection((current) =>
+                                                        current === item.path ? null : item.path
+                                                    )
+                                                }
+                                            >
+                                                <i className="fa-solid fa-chevron-down" aria-hidden="true" />
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {hasChildren && (
+                                        <div
+                                            className={`side-sub${expanded ? " is-open" : ""}`}
+                                            aria-hidden={!expanded}
+                                            inert={expanded ? undefined : ""}
+                                        >
+                                            <ul>
+                                                {item.dropdown.map((dropdownItem) => (
+                                                    <li key={dropdownItem.path}>
+                                                        <Link
+                                                            to={dropdownItem.path}
+                                                            className={isCurrentPath(dropdownItem.path) ? "is-active" : undefined}
+                                                            onClick={closeMenu}
+                                                        >
+                                                            {t(dropdownItem.title)}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+
+                    <div className="side-section">
+                        <p className="side-section-label">{t("روابط سريعة")}</p>
+                        <ul className="side-quick-list">
+                            {secondaryNav.map((item) => (
+                                <li key={item.path}>
+                                    <Link
+                                        to={item.path}
+                                        className={isCurrentPath(item.path) ? "is-active" : undefined}
+                                        onClick={closeMenu}
+                                    >
+                                        {t(item.title)}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="side-menu-foot">
+                    {contactItems.map((item) => (
+                        <a
+                            key={item.type}
+                            href={item.href}
+                            className="side-contact"
+                            dir="ltr"
+                        >
+                            <span className="side-contact-icon">{item.icon}</span>
+                            <span>{item.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </aside>
 
         </header>
     );

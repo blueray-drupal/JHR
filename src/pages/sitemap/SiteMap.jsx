@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageLayout from "../../layout/page_layout/PageLayout";
+import { useLanguage } from "../../context/LanguageContext";
 import "./SiteMap.css";
 
 const SITEMAP_DATA = [
@@ -63,6 +64,7 @@ const SITEMAP_DATA = [
 ];
 
 function SiteMap() {
+    const { t } = useLanguage();
     const breadcrumb = [
         { title: "الرئيسية", link: "/" },
         { title: "خريطة الموقع", link: null },
@@ -73,12 +75,12 @@ function SiteMap() {
             <div className="sitemap-container">
                 {SITEMAP_DATA.map((section) => (
                     <section key={section.title} className="sitemap-section">
-                        <h2 className="sitemap-section-title">{section.title}</h2>
+                        <h2 className="sitemap-section-title">{t(section.title)}</h2>
                         <ul className="sitemap-list">
                             {section.links.map((item) => (
                                 <li key={item.path} className="sitemap-item">
                                     <Link to={item.path} className="sitemap-link">
-                                        {item.label}
+                                        {t(item.label)}
                                     </Link>
                                 </li>
                             ))}

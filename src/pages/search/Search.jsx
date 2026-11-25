@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import { searchSite } from "../../services/api/siteSearch";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Search.css";
 
 function Search() {
     const navigate = useNavigate();
+    const { t, lang } = useLanguage();
     const [searchParams, setSearchParams] = useSearchParams();
     const initialQuery = searchParams.get("q") || "";
 
@@ -75,42 +77,46 @@ function Search() {
             isLoading={false}
             loadingType="content"
         >
-            <div className="site-search-page" dir="rtl">
+            <div className="site-search-page">
                 <form className="site-search-form" onSubmit={handleSubmit}>
                     <label htmlFor="site-search-input" className="site-search-label">
-                        ابحث في الموقع
+                        {t("ابحث في الموقع")}
                     </label>
                     <div className="site-search-row">
                         <input
                             id="site-search-input"
                             type="search"
                             className="site-search-input"
-                            placeholder="اكتب كلمة البحث..."
+                            placeholder={t("اكتب كلمة البحث...")}
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             autoFocus
                         />
                         <button type="submit" className="site-search-submit">
-                            بحث
+                            {t("بحث")}
                         </button>
                     </div>
                 </form>
 
                 {loading && (
-                    <p className="site-search-status">جاري البحث...</p>
+                    <p className="site-search-status">{t("جاري البحث...")}</p>
                 )}
 
                 {!loading && query.trim() && (
                     <p className="site-search-status">
                         {results.length > 0
-                            ? `تم العثور على ${results.length} نتيجة لـ "${query.trim()}"`
-                            : `لا توجد نتائج لـ "${query.trim()}"`}
+                            ? (lang === "en"
+                                ? `Found ${results.length} ${results.length === 1 ? "result" : "results"} for "${query.trim()}"`
+                                : `تم العثور على ${results.length} نتيجة لـ "${query.trim()}"`)
+                            : (lang === "en"
+                                ? `No results for "${query.trim()}"`
+                                : `لا توجد نتائج لـ "${query.trim()}"`)}
                     </p>
                 )}
 
                 {!loading && !query.trim() && (
                     <p className="site-search-status">
-                        أدخل كلمة للبحث في صفحات ومحتوى الموقع.
+                        {t("أدخل كلمة للبحث في صفحات ومحتوى الموقع.")}
                     </p>
                 )}
 
@@ -119,20 +125,20 @@ function Search() {
                         {results.map((item) => (
                             <li key={`${item.id}-${item.path}`} className="site-search-result">
                                 <div className="site-search-result-top">
-                                    <span className="site-search-badge">{item.badge}</span>
+                                    <span className="site-search-badge">{t(item.badge)}</span>
                                     <Link to={item.path} className="site-search-title">
-                                        {item.title}
+                                        {t(item.title)}
                                     </Link>
                                 </div>
                                 {item.description && (
-                                    <p className="site-search-description">{item.description}</p>
+                                    <p className="site-search-description">{t(item.description)}</p>
                                 )}
                                 <button
                                     type="button"
                                     className="site-search-open"
                                     onClick={() => navigate(item.path)}
                                 >
-                                    عرض النتيجة
+                                    {t("عرض النتيجة")}
                                 </button>
                             </li>
                         ))}

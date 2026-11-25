@@ -4,11 +4,13 @@ import './home.css';
 import { fetchMediaCenterNews } from '../../services/api/mediaCenterApi';
 import { NewsTickerSkeleton } from '../../components/skeleton/PageSkeletons';
 import { toPlainText } from '../../utils/drupalParser';
+import { useLanguage } from '../../context/LanguageContext';
 
 const TICKER_LIMIT = 12;
 const SECONDS_PER_ITEM = 6;
 
 function NewsTicker({ newsItems }) {
+    const { t } = useLanguage();
     const [fetchedNews, setFetchedNews] = useState([]);
     const [loading, setLoading] = useState(!newsItems?.length);
 
@@ -47,7 +49,7 @@ function NewsTicker({ newsItems }) {
 
     if (loading) {
         return (
-            <div className="news-ticker-bar" dir="rtl">
+            <div className="news-ticker-bar">
                 <NewsTickerSkeleton />
             </div>
         );
@@ -61,9 +63,9 @@ function NewsTicker({ newsItems }) {
     const animationDuration = Math.max(items.length * SECONDS_PER_ITEM, 40);
 
     return (
-        <div className="news-ticker-bar" dir="rtl">
+        <div className="news-ticker-bar">
             <div className="ticker-badge">
-                <span>جديد المؤسسة</span>
+                <span>{t("جديد المؤسسة")}</span>
             </div>
 
             <div className="ticker-content">

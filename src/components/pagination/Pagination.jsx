@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./pagination.css";
 
 const getVisiblePages = (current, total, maxVisible = 5) => {
@@ -20,6 +21,7 @@ export default function Pagination({
     onPageChange,
     totalItems = 0,
 }) {
+    const { t, lang } = useLanguage();
     const pages = useMemo(
         () => getVisiblePages(currentPage, totalPages),
         [currentPage, totalPages]
@@ -30,7 +32,9 @@ export default function Pagination({
     return (
         <div className="pagination-container">
             <span className="pagination-info">
-                صفحة {currentPage} من {totalPages}
+                {lang === "en"
+                    ? `Page ${currentPage} of ${totalPages}`
+                    : `صفحة ${currentPage} من ${totalPages}`}
                 {totalItems > 0 ? ` (${totalItems})` : ""}
             </span>
             <div className="pagination-controls">
@@ -39,7 +43,7 @@ export default function Pagination({
                     className="page-nav-btn"
                     onClick={() => onPageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    aria-label="الصفحة السابقة"
+                    aria-label={t("الصفحة السابقة")}
                 >
                     &lsaquo;
                 </button>
@@ -88,7 +92,7 @@ export default function Pagination({
                     className="page-nav-btn"
                     onClick={() => onPageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    aria-label="الصفحة التالية"
+                    aria-label={t("الصفحة التالية")}
                 >
                     &rsaquo;
                 </button>

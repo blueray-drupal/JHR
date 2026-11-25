@@ -3,10 +3,12 @@ import PageLayout from "../../layout/page_layout/PageLayout";
 import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from "../../utils/drupalParser";
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 4;
 
 function Agreements() {
+    const { t } = useLanguage();
     const [searchInput, setSearchInput] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
@@ -103,18 +105,18 @@ function Agreements() {
                 <div className="filter-controls-row">
                     <form className="search-form" onSubmit={handleSearchSubmit}>
                         <label htmlFor="agreement-search" className="search-label">
-                            الدولة
+                            {t("الدولة")}
                         </label>
                         <input
                             id="agreement-search"
                             type="text"
                             className="search-input"
-                            placeholder="ابحث عن دولة أو اتفاقية..."
+                            placeholder={t("ابحث عن دولة أو اتفاقية...")}
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
                         <button type="submit" className="search-btn">
-                            بحث
+                            {t("بحث")}
                         </button>
                     </form>
                 </div>
@@ -154,14 +156,14 @@ function Agreements() {
                                                 className="item-action-link"
                                                 download
                                             >
-                                                عرض وتحميل
+                                                {t("عرض وتحميل")}
                                             </a>
                                         ) : (
                                             <a
                                                 href={`/info-center/agreements/${item.id}`}
                                                 className="item-action-link"
                                             >
-                                                عرض وتحميل
+                                                {t("عرض وتحميل")}
                                             </a>
                                         )}
                                     </div>
@@ -171,7 +173,7 @@ function Agreements() {
                             );
                         })
                     ) : !loading ? (
-                        <div className="no-results">لا توجد نتائج مطابقة لبحثك</div>
+                        <div className="no-results">{t("لا توجد نتائج مطابقة لبحثك")}</div>
                     ) : null}
                 </div>
 

@@ -4,6 +4,7 @@ import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
 import FileSize from '../../components/fileSize/FileSize';
+import { useLanguage } from '../../context/LanguageContext';
 
 const BUDGET_DATA = [
     {
@@ -51,6 +52,7 @@ const BUDGET_DATA = [
 ];
 
 function Budget() {
+    const { t } = useLanguage();
     const baseUrl = drupalBaseUrl;
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -173,7 +175,7 @@ function Budget() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <span>تحميل PDF</span>
+                                <span>{t("تحميل PDF")}</span>
                                 <svg
                                     width="16"
                                     height="16"

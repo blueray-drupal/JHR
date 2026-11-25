@@ -1,6 +1,8 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import PageLayout from "../../layout/page_layout/PageLayout";
 import DrupalWebform from "../../components/drupalWebForm/DrupalWebform";
+import RecaptchaWidget from "../../components/recaptcha/RecaptchaWidget";
+import { useLanguage } from "../../context/LanguageContext";
 import "./FreedomOfInformation.css";
 
 const FORM_MESSAGES = {
@@ -48,6 +50,11 @@ const FOI_NOTICE_ITEMS = [
 ];
 
 function FreedomOfInformation() {
+    const { t, lang } = useLanguage();
+    const recaptchaRef = useRef(null);
+    const [captchaToken, setCaptchaToken] = useState("");
+    const [captchaError, setCaptchaError] = useState("");
+
     const breadcrumb = [
         { title: "الرئيسية", link: "/" },
         { title: "حق الحصول على معلومة", link: null },
@@ -55,13 +62,28 @@ function FreedomOfInformation() {
 
     const today = new Intl.DateTimeFormat("en-GB").format(new Date());
 
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token || "");
+        if (token) setCaptchaError("");
+    };
+
+    const beforeSubmit = async () => {
+        if (!captchaToken) {
+            setCaptchaError("يرجى تأكيد أنك لست روبوتاً");
+            document.querySelector(".foi-recaptcha")?.scrollIntoView({ behavior: "smooth", block: "center" });
+            return false;
+        }
+
+        return true;
+    };
+
     useLayoutEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }, []);
 
     return (
         <PageLayout pageTitle="حق الحصول على معلومة" breadcrumb={breadcrumb}>
-            <div id="foi-form-top" className="foi-form" dir="rtl">
+            <div id="foi-form-top" className="foi-form">
                 <div className="foi-card">
                     <div className="foi-date-bar">
                         <span className="foi-date-label">تاريخ تقديم الطلب</span>
@@ -75,15 +97,28 @@ function FreedomOfInformation() {
                         fieldRows={FIELD_ROWS}
                         fieldOverrides={FIELD_OVERRIDES}
                         messages={FORM_MESSAGES}
+                        beforeSubmit={beforeSubmit}
+                        extraData={{ "g-recaptcha-response": captchaToken }}
+                        onSuccess={() => recaptchaRef.current?.reset()}
                         afterFields={{
                             additional_documents: (
-                                <div className="foi-notice" role="note">
-                                    <ul className="foi-notice-list">
-                                        {FOI_NOTICE_ITEMS.map((item) => (
-                                            <li key={item}>{item}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                <>
+                                    <div className="foi-notice" role="note">
+                                        <ul className="foi-notice-list">
+                                            {FOI_NOTICE_ITEMS.map((item) => (
+                                                <li key={item}>{item}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <RecaptchaWidget
+                                        ref={recaptchaRef}
+                                        hl={lang === "en" ? "en" : "ar"}
+                                        onChange={handleCaptchaChange}
+                                    />
+                                    {captchaError ? (
+                                        <p className="foi-recaptcha-error" role="alert">{t(captchaError)}</p>
+                                    ) : null}
+                                </>
                             ),
                         }}
                     />

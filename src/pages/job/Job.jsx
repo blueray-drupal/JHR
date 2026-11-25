@@ -4,6 +4,7 @@ import PageLayout from '../../layout/page_layout/PageLayout';
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import './Job.css';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { useLanguage } from '../../context/LanguageContext';
 
 const formatDate = (date) => {
     if (!date) return '';
@@ -12,6 +13,7 @@ const formatDate = (date) => {
 };
 
 function Job() {
+    const { t } = useLanguage();
     const baseUrl = drupalBaseUrl;
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -68,7 +70,7 @@ function Job() {
                             state={{ jobData: job }}
                             className="link-job"
                         >
-                            اقرأ المزيد
+                            {t("اقرأ المزيد")}
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0C6F8C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                 <polyline points="15 18 9 12 15 6" />
                             </svg>

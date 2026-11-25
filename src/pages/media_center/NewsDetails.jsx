@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
-import { parseDrupalSingleNode } from '../../utils/drupalParser';
+import { excerptText, parseDrupalSingleNode } from '../../utils/drupalParser';
 import './NewsDetails.css';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
 
@@ -9,18 +9,28 @@ function NewsDetails() {
     const { id } = useParams();
     const location = useLocation();
     const baseUrl = drupalBaseUrl;
-    const [news, setNews] = useState(location.state?.newsData || null);
-    const [loading, setLoading] = useState(!location.state?.newsData);
+    const stateNews = location.state?.newsData;
+    const stateMatches = stateNews && String(stateNews.id) === String(id);
+    const [news, setNews] = useState(stateMatches ? stateNews : null);
+    const [loading, setLoading] = useState(!stateMatches);
 
-    useEffect(() => {
-        if (location.state?.newsData) {
-            setNews(location.state.newsData);
+    useLayoutEffect(() => {
+        if (stateMatches) {
+            setNews(stateNews);
             setLoading(false);
             return;
         }
 
+        setNews(null);
+        setLoading(true);
+    }, [id, stateMatches, stateNews]);
+
+    useEffect(() => {
+        if (stateMatches) return undefined;
+
+        let cancelled = false;
+
         const fetchData = async () => {
-            setLoading(true);
             try {
                 const response = await fetch(`${baseUrl}/jsonapi/node/media_center/${id}?include=field_media_image,field_media_image.field_media_image`);
                 if (!response.ok) {
@@ -30,19 +40,34 @@ function NewsDetails() {
                 const data = await response.json()
                 const parsed = parseDrupalSingleNode(data, baseUrl)
 
-                setNews(parsed);
+                if (!cancelled) setNews(parsed);
 
             }
             catch (error) {
                 console.log(error)
             } finally {
-                setLoading(false);
+                if (!cancelled) setLoading(false);
             }
         }
         fetchData()
-    }, [baseUrl, id, location.state?.newsData])
+
+        return () => {
+            cancelled = true;
+        };
+    }, [baseUrl, id, stateMatches])
 
     const body = news?.field_body?.processed || news?.field_body?.value || '';
+    const detailDescription = news
+        ? excerptText(
+            news.field_body?.summary ||
+            news.summary ||
+            news.field_body?.processed ||
+            news.field_body?.value ||
+            news.body ||
+            "",
+            180
+        )
+        : "";
 
     const breadcrumb = [
         { title: "الرئيسية", link: "/" },
@@ -54,6 +79,8 @@ function NewsDetails() {
     return (
         <PageLayout
             pageTitle={news?.title || "المركز الإعلامي"}
+            pageMetaTitle={news?.title || "الأخبار"}
+            pageMetaDescription={detailDescription}
             breadcrumb={breadcrumb}
             isLoading={loading}
             loadingType="detail"

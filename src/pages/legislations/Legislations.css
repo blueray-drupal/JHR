@@ -8,7 +8,7 @@
 .reports-table {
     width: 100%;
     border-collapse: collapse;
-    text-align: right;
+    text-align: start;
 }
 
 .reports-table th {

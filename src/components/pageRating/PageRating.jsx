@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./pageRating.css";
 
 const STARS = [1, 2, 3, 4, 5];
@@ -10,6 +11,7 @@ function storageKey(pathname) {
 
 export default function PageRating() {
     const { pathname } = useLocation();
+    const { t, lang } = useLanguage();
     const [rating, setRating] = useState(0);
     const [hovered, setHovered] = useState(0);
 
@@ -35,14 +37,14 @@ export default function PageRating() {
     const activeValue = hovered || rating;
 
     return (
-        <section className="page-rating" dir="rtl" aria-label="تقييم محتوى الصفحة">
+        <section className="page-rating" aria-label={t("تقييم محتوى الصفحة")}>
             <div className="page-rating-inner">
-                <p className="page-rating-label">كيف تقيم محتوى الصفحة</p>
+                <p className="page-rating-label">{t("كيف تقيم محتوى الصفحة")}</p>
 
                 <div
                     className="page-rating-stars"
                     role="radiogroup"
-                    aria-label="تقييم من 1 إلى 5 نجوم"
+                    aria-label={t("تقييم من 1 إلى 5 نجوم")}
                     onMouseLeave={() => setHovered(0)}
                 >
                     {STARS.map((value) => {
@@ -55,7 +57,7 @@ export default function PageRating() {
                                 className={`page-rating-star${filled ? " is-filled" : ""}`}
                                 role="radio"
                                 aria-checked={rating === value}
-                                aria-label={`${value} من 5`}
+                                aria-label={lang === "en" ? `${value} of 5` : `${value} من 5`}
                                 onMouseEnter={() => setHovered(value)}
                                 onFocus={() => setHovered(value)}
                                 onBlur={() => setHovered(0)}

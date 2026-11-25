@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 32px;
     direction: rtl;
-    text-align: right;
+    text-align: start;
 }
 
 .faq-question {

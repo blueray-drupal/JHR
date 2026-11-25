@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { parseDrupalMultipleNodes, toPlainText } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { useLanguage } from '../../context/LanguageContext';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -64,6 +65,7 @@ const isExternalLink = (href) =>
     /^https?:\/\//i.test(href) || href.startsWith('//') || href.startsWith('mailto:') || href.startsWith('tel:');
 
 export default function Slider() {
+    const { t } = useLanguage();
     const [sliderData, setSliderData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -155,11 +157,11 @@ export default function Slider() {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    {linkLabel}
+                                                    {t(linkLabel)}
                                                 </a>
                                             ) : (
                                                 <Link to={href} className="slider-btn">
-                                                    {linkLabel}
+                                                    {t(linkLabel)}
                                                 </Link>
                                             )
                                         ) : null}

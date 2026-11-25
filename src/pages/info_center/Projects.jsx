@@ -4,6 +4,7 @@ import "./InfoCenter.css";
 import { Link } from "react-router-dom";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ITEMS_PER_PAGE = 3;
 
@@ -14,6 +15,7 @@ const stripHtml = (htmlString) => {
 };
 
 function Projects() {
+    const { t } = useLanguage();
     const [searchInput, setSearchInput] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -108,12 +110,12 @@ function Projects() {
 
                 <div className="filter-controls-row">
                     <p className="filter-instruction">
-                        للاطلاع على مشاريع المؤسسة، يرجى اختيار التصنيف
+                        {t("للاطلاع على مشاريع المؤسسة، يرجى اختيار التصنيف")}
                     </p>
 
                     <form className="search-form" onSubmit={handleSearchSubmit}>
                         <label htmlFor="project-search" className="search-label">
-                            اسم المشروع
+                            {t("اسم المشروع")}
                         </label>
                         <input
                             id="project-search"
@@ -123,7 +125,7 @@ function Projects() {
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
                         <button type="submit" className="search-btn">
-                            بحث
+                            {t("بحث")}
                         </button>
                     </form>
                 </div>
@@ -156,7 +158,7 @@ function Projects() {
                                             className="item-action-link"
                                             state={project}
                                         >
-                                            عرض المزيد
+                                            {t("عرض المزيد")}
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="6"
@@ -179,7 +181,7 @@ function Projects() {
                             );
                         })
                     ) : !isLoading ? (
-                        <div className="no-results">لا توجد نتائج مطابقة لبحثك</div>
+                        <div className="no-results">{t("لا توجد نتائج مطابقة لبحثك")}</div>
                     ) : null}
                 </div>
 

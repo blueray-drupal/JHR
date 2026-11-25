@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import './Home.css';
 import aboutImage from '../../../assets/about.png';
 
 function AboutHome() {
+    const { t } = useLanguage();
+
     return (
         <section className="about-home-section">
             <div className="about-home-container">
 
                 <div className="about-home-wrapper">
-                    <h2 className="about-home-title">نبذة عن المؤسسة</h2>
+                    <h2 className="about-home-title">{t("نبذة عن المؤسسة")}</h2>
                     <p className="about-home-body">
                         تأسست مؤسسة خط الحديد الحجازي في بداية القرن العشرين، وتعتبر من أهم المشاريع
                         التاريخية في المنطقة. يمتد الخط من دمشق إلى المدينة المنورة، بطول يزيد عن 1300
@@ -21,11 +24,11 @@ function AboutHome() {
                         بالتاريخ.
                     </p>
                     <Link to="/about" className="about-home-btn">
-                        اقرأ المزيد
+                        {t("اقرأ المزيد")}
                     </Link>
                 </div>
                 <div className="about-image">
-                    <img src={aboutImage} alt="نبذة عن المؤسسة - محطة عمان" />
+                    <img src={aboutImage} alt={t("نبذة عن المؤسسة - محطة عمان")} />
                 </div>
             </div>
         </section>

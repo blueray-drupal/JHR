@@ -7,8 +7,10 @@ import LatestNews from './LatestNews';
 import Slider from './slider';
 import ExploreSection from './ExploreSection';
 import { fetchMediaCenterNews } from '../../services/api/mediaCenterApi';
+import { HOME_DESCRIPTION, SITE_NAME, usePageMeta } from '../../utils/pageMeta';
 
 function Home() {
+    usePageMeta({ title: SITE_NAME, description: HOME_DESCRIPTION });
     const [news, setNews] = useState([]);
 
     useEffect(() => {

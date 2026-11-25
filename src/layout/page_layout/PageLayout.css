@@ -70,7 +70,7 @@
     align-items: center;
     gap: 8px;
     color: #181818 !important;
-    text-align: right;
+    text-align: start;
     font-family: Cairo, sans-serif;
     font-size: 35px;
     font-style: normal;
@@ -150,7 +150,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 24px;
-    text-align: right;
+    text-align: start;
     padding: 8px 10px;
     border-radius: 6px;
     cursor: pointer;

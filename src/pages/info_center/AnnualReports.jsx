@@ -4,6 +4,7 @@ import "./InfoCenter.css";
 import { parseDrupalMultipleNodes } from '../../utils/drupalParser';
 import { drupalBaseUrl } from '../../services/api/drupalUrl';
 import FileSize from '../../components/fileSize/FileSize';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ANNUAL_REPORTS_DATA = [
     {
@@ -57,6 +58,7 @@ const ANNUAL_REPORTS_DATA = [
 ];
 
 function AnnualReports() {
+    const { t } = useLanguage();
 
     const baseUrl = drupalBaseUrl;
 
@@ -125,10 +127,10 @@ function AnnualReports() {
                     <table className="reports-table">
                         <thead>
                             <tr>
-                                <th className="col-file-name">اسم الملف</th>
-                                <th className="col-type">النوع</th>
-                                <th className="col-size">الحجم</th>
-                                <th className="col-action">عرض وتحميل</th>
+                                <th className="col-file-name">{t("اسم الملف")}</th>
+                                <th className="col-type">{t("النوع")}</th>
+                                <th className="col-size">{t("الحجم")}</th>
+                                <th className="col-action">{t("عرض وتحميل")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -156,14 +158,14 @@ function AnnualReports() {
                                         </span>
                                     </td>
                                     <td className="col-size">
-                                        <FileSize bytes={item.file.filesize} className="file-size" locale="ar" />
+                                        <FileSize bytes={item.file.filesize} className="file-size" />
                                     </td>
                                     <td className="col-action">
                                         <a
                                             href={item.file.url}
                                             download
                                             className="table-download-btn"
-                                            title="تحميل"
+                                            title={t("تحميل")}
                                             target="_blank"
                                         >
                                             <svg

@@ -4,11 +4,13 @@ import Card from "../../components/card/Card";
 import { fetchMediaCenterNews } from "../../services/api/mediaCenterApi";
 import { excerptText } from "../../utils/drupalParser";
 import "./News.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const INITIAL_VISIBLE = 8;
 const LOAD_MORE_STEP = 8;
 
 const News = () => {
+    const { t } = useLanguage();
     const breadcrumb = [
         { title: "الرئيسية", link: "/" },
         { title: "المركز الإعلامي", link: null },
@@ -89,7 +91,7 @@ const News = () => {
                         className="news-load-more-btn"
                         onClick={handleLoadMore}
                     >
-                        عرض المزيد
+                        {t("عرض المزيد")}
                     </button>
                 </div>
             )}

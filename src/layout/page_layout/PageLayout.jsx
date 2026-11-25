@@ -2,10 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { Link, useLocation } from "react-router-dom";
 import { renderPageSkeleton, SidebarNavSkeleton } from "../../components/skeleton/PageSkeletons";
+import { resolveRouteMeta, usePageMeta } from "../../utils/pageMeta";
+import { useLanguage } from "../../context/LanguageContext";
 import "./PageLayout.css";
 
 const PageLayout = ({
     pageTitle,
+    pageMetaTitle,
+    pageMetaDescription,
     breadcrumb = [],
     sidebarTitle,
     sidebarItems = [],
@@ -15,6 +19,12 @@ const PageLayout = ({
     children,
 }) => {
     const location = useLocation();
+    const { t, lang } = useLanguage();
+    const routeMeta = resolveRouteMeta(location.pathname);
+    usePageMeta({
+        title: pageMetaTitle || routeMeta.title || pageTitle,
+        description: pageMetaDescription || routeMeta.description,
+    });
     const backButton = location.pathname.startsWith("/gallery/")
     const shareMenuRef = useRef(null);
 
@@ -100,9 +110,9 @@ const PageLayout = ({
 
         <div className="inner-page-wrapper">
             <div className="page-header-band">
-                <div className="page-header-inner" dir="rtl">
+                <div className="page-header-inner">
                     <div className="page-header-wrapper">
-                        <h1 className="main-page-title">{pageTitle}</h1>
+                        <h1 className="main-page-title">{t(pageTitle)}</h1>
                         <div className="page-header-row">
                             <nav className="breadcrumb">
                                 {breadcrumb.map((item, index) => {
@@ -110,12 +120,12 @@ const PageLayout = ({
 
                                     return (
                                         <span key={index}>
-                                            {index > 0 && <span className="separator"> ◂ </span>}
+                                            {index > 0 && <span className="separator">{lang === "en" ? " ▸ " : " ◂ "}</span>}
                                             {item.link && !isCurrent ? (
-                                                <Link to={item.link}>{item.title}</Link>
+                                                <Link to={item.link}>{t(item.title)}</Link>
                                             ) : (
                                                 <span className={isCurrent ? "breadcrumb-current" : undefined}>
-                                                    {item.title}
+                                                    {t(item.title)}
                                                 </span>
                                             )}
                                         </span>
@@ -132,7 +142,7 @@ const PageLayout = ({
                                         aria-expanded={shareOpen}
                                         aria-haspopup="menu"
                                     >
-                                        شارك
+                                        {t("شارك")}
                                     </button>
                                     {shareOpen ? (
                                         <div className="page-share-menu" role="menu">
@@ -142,7 +152,7 @@ const PageLayout = ({
                                                 role="menuitem"
                                                 onClick={shareToFacebook}
                                             >
-                                                فيسبوك
+                                                {t("فيسبوك")}
                                             </button>
                                             <button
                                                 type="button"
@@ -150,7 +160,7 @@ const PageLayout = ({
                                                 role="menuitem"
                                                 onClick={shareToWhatsApp}
                                             >
-                                                واتساب
+                                                {t("واتساب")}
                                             </button>
                                             <button
                                                 type="button"
@@ -158,7 +168,7 @@ const PageLayout = ({
                                                 role="menuitem"
                                                 onClick={shareToInstagram}
                                             >
-                                                إنستغرام
+                                                {t("إنستغرام")}
                                             </button>
                                         </div>
                                     ) : null}
@@ -169,24 +179,24 @@ const PageLayout = ({
                 </div>
             </div>
 
-            <div className="inner-page-container" dir="rtl">
+            <div className="inner-page-container">
                 {showSideBar ? (
                     <div className="page-content-grid">
                         <div className="sidebar-wrapper">
                             {isLoading ? (
                                 <SidebarNavSkeleton count={Math.max(sidebarItems.length, 4)} />
                             ) : (
-                                <Sidebar title={sidebarTitle} items={sidebarItems} />
+                                <Sidebar title={t(sidebarTitle)} items={sidebarItems} />
                             )}
                         </div>
 
                         <main className="main-content" aria-busy={isLoading}>
                             <div className="section-title">
-                                {breadcrumb[breadcrumb.length - 1].title}
+                                {t(breadcrumb[breadcrumb.length - 1].title)}
                             </div>
                             {backButton ? (
                                 <Link to="/gallery" className="back-link">
-                                    ‹ العودة إلى الألبومات
+                                    {t("‹ العودة إلى الألبومات")}
                                 </Link>
                             ) : null}
                             {isLoading ? renderPageSkeleton(loadingType) : children}

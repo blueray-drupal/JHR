@@ -1,4 +1,5 @@
 import { drupalApi } from './axios.config.js';
+import { EN } from '../../i18n/dictionary.js';
 
 const stripHtml = (html = '') =>
   String(html || '')
@@ -165,11 +166,21 @@ function stripArabicDefiniteArticle(text) {
   );
 }
 
+function englishLabel(text) {
+  return Object.prototype.hasOwnProperty.call(EN, text) ? EN[text] : '';
+}
+
 function matchesQuery(text, query) {
   const haystack = stripArabicDefiniteArticle(text);
   const needle = stripArabicDefiniteArticle(query);
   if (!needle) return false;
   return haystack.includes(needle);
+}
+
+function fieldMatches(text, query) {
+  if (matchesQuery(text, query)) return true;
+  const english = englishLabel(text);
+  return Boolean(english) && matchesQuery(english, query);
 }
 
 function searchTermVariants(query) {
@@ -181,9 +192,9 @@ function searchTermVariants(query) {
 function filterStaticPages(query) {
   return STATIC_SEARCH_PAGES.filter(
     (page) =>
-      matchesQuery(page.title, query) ||
-      matchesQuery(page.description, query) ||
-      matchesQuery(page.badge, query)
+      fieldMatches(page.title, query) ||
+      fieldMatches(page.description, query) ||
+      fieldMatches(page.badge, query)
   ).map((page) => ({
     id: `static-${page.path}`,
     ...page,

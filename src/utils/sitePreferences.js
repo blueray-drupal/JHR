@@ -4,6 +4,11 @@ export const DEFAULT_PREFERENCES = {
     theme: 'light',
     fontScale: 0,
     grayscale: false,
+    highlightLinks: false,
+    contrast: false,
+    letterSpacing: false,
+    readableFont: false,
+    readingGuide: false,
 };
 
 export const FONT_SCALE_MIN = -3;
@@ -26,6 +31,11 @@ export function loadSitePreferences() {
             theme: parsed.theme === 'dark' ? 'dark' : 'light',
             fontScale: clampFontScale(Number(parsed.fontScale) || 0),
             grayscale: Boolean(parsed.grayscale),
+            highlightLinks: Boolean(parsed.highlightLinks),
+            contrast: Boolean(parsed.contrast),
+            letterSpacing: Boolean(parsed.letterSpacing),
+            readableFont: Boolean(parsed.readableFont),
+            readingGuide: Boolean(parsed.readingGuide),
         };
     } catch {
         return { ...DEFAULT_PREFERENCES };
@@ -67,6 +77,26 @@ function applyFontScale(root, fontScale) {
     }
 }
 
+function setFlag(root, name, enabled) {
+    if (enabled) {
+        root.setAttribute(name, 'true');
+    } else {
+        root.removeAttribute(name);
+    }
+}
+
+function applyVisualFilters(root, preferences) {
+    const filters = [];
+    if (preferences.grayscale) filters.push('grayscale(1)');
+    if (preferences.contrast) filters.push('contrast(1.45)');
+
+    if (filters.length) {
+        root.style.filter = filters.join(' ');
+    } else {
+        root.style.removeProperty('filter');
+    }
+}
+
 function applyGrayscale(root, body, grayscale) {
     if (grayscale) {
         root.setAttribute('data-grayscale', 'true');
@@ -93,11 +123,22 @@ export function applySitePreferences(preferences) {
         theme: preferences.theme === 'dark' ? 'dark' : 'light',
         fontScale: clampFontScale(preferences.fontScale),
         grayscale: Boolean(preferences.grayscale),
+        highlightLinks: Boolean(preferences.highlightLinks),
+        contrast: Boolean(preferences.contrast),
+        letterSpacing: Boolean(preferences.letterSpacing),
+        readableFont: Boolean(preferences.readableFont),
+        readingGuide: Boolean(preferences.readingGuide),
     };
 
     applyThemeClasses(root, body, normalized.theme);
     applyFontScale(root, normalized.fontScale);
     applyGrayscale(root, body, normalized.grayscale);
+    applyVisualFilters(root, normalized);
+    setFlag(root, 'data-highlight-links', normalized.highlightLinks);
+    setFlag(root, 'data-contrast', normalized.contrast);
+    setFlag(root, 'data-letter-spacing', normalized.letterSpacing);
+    setFlag(root, 'data-readable-font', normalized.readableFont);
+    setFlag(root, 'data-reading-guide', normalized.readingGuide);
 
     saveSitePreferences(normalized);
     return normalized;

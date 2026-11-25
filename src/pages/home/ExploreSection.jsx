@@ -11,6 +11,7 @@ import servicesBanner from "../../../assets/services.png";
 import dataImageIcon from "../../../assets/data_image.svg";
 import { parseDrupalMultipleNodes, toPlainText } from "../../utils/drupalParser";
 import { drupalBaseUrl } from "../../services/api/drupalUrl";
+import { useLanguage } from "../../context/LanguageContext";
 
 const DEFAULT_BANNER = {
     image: servicesBanner,
@@ -71,6 +72,7 @@ const parseSectionLinks = (linksField = []) => {
 };
 
 const BackToTop = () => {
+    const { t } = useLanguage();
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -82,7 +84,7 @@ const BackToTop = () => {
         <button
             className="back-to-top"
             onClick={scrollToTop}
-            aria-label="العودة إلى أعلى الصفحة"
+            aria-label={t("العودة إلى أعلى الصفحة")}
         >
             <img src={toTopIcon} alt="" />
         </button>
@@ -90,12 +92,13 @@ const BackToTop = () => {
 };
 
 const ExploreLink = ({ item }) => {
+    const { t } = useLanguage();
     const content = (
         <>
             <span className="explore-link-icon">
                 <img src={dataImageIcon} alt="" />
             </span>
-            <span className="explore-link-title">{item.title}</span>
+            <span className="explore-link-title">{t(item.title)}</span>
         </>
     );
 
@@ -120,6 +123,7 @@ const ExploreLink = ({ item }) => {
 };
 
 const ExploreSection = () => {
+    const { t } = useLanguage();
     const [bannerData, setBannerData] = useState(DEFAULT_BANNER);
     const [linksList, setLinksList] = useState(DEFAULT_LINKS);
 
@@ -172,7 +176,7 @@ const ExploreSection = () => {
     const isSliderEnabled = linksList.length > 4;
 
     return (
-        <section className="explore-section" dir="rtl">
+        <section className="explore-section">
             <BackToTop />
 
             <div className="explore-container">
@@ -180,7 +184,7 @@ const ExploreSection = () => {
                     <div className="explore-banner-wrapper">
                         <img
                             src={bannerData.image}
-                            alt="Banner"
+                            alt=""
                             className="explore-banner-image"
                         />
 
@@ -194,13 +198,13 @@ const ExploreSection = () => {
 
                 <div className="explore-links">
                     <div className="explore-header">
-                        <h2 className="explore-title">تصفح في الموقع</h2>
+                        <h2 className="explore-title">{t("تصفح في الموقع")}</h2>
                         {isSliderEnabled && (
                             <div className="explore-navigation">
                                 <button
                                     id="custom-prev-btn"
                                     className="explore-navigation-button"
-                                    aria-label="السابق"
+                                    aria-label={t("السابق")}
                                 >
                                     &#10094;
                                 </button>
@@ -208,7 +212,7 @@ const ExploreSection = () => {
                                 <button
                                     id="custom-next-btn"
                                     className="explore-navigation-button"
-                                    aria-label="التالي"
+                                    aria-label={t("التالي")}
                                 >
                                     &#10095;
                                 </button>

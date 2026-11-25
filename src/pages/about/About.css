@@ -187,7 +187,7 @@
 .about-table th,
 .about-table td {
     padding: 12px 14px;
-    text-align: right;
+    text-align: start;
     border-bottom: 1px solid var(--border-color);
     white-space: nowrap;
     vertical-align: middle;
@@ -210,7 +210,7 @@
 .about-table .col-index,
 .about-table td:first-child {
     width: 48px;
-    text-align: right;
+    text-align: start;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;
@@ -229,7 +229,7 @@
 
 .about-table td:nth-child(2) {
     color: #1E2939;
-    text-align: right;
+    text-align: start;
     font-family: Cairo, sans-serif;
     font-size: 16px;
     font-style: normal;

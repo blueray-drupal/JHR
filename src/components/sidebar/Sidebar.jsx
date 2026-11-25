@@ -1,21 +1,23 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./sidebar.css";
 import learnMoreIcon from "../../../assets/learn-more.png";
 
 const Sidebar = ({ title, items = [] }) => {
     const location = useLocation();
+    const { t } = useLanguage();
 
     return (
         <aside className="sidebar-container">
-            {title && <div className="sidebar-header">{title}</div>}
+            {title && <div className="sidebar-header">{t(title)}</div>}
             <ul className="sidebar-menu">
                 {items.map((item) => {
                     const isActive = location.pathname === item.link;
                     return (
                         <li key={item.id || item.link} className={`sidebar-item ${isActive ? "active" : ""}`}>
                             <Link to={item.link}>
-                                <span>{item.title}</span>
+                                <span>{t(item.title)}</span>
                                 <span className="arrow"><img src={learnMoreIcon} alt="" /></span>
                             </Link>
                         </li>

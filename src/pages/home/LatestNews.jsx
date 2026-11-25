@@ -4,6 +4,7 @@ import './home.css';
 import { fetchMediaCenterNews } from '../../services/api/mediaCenterApi';
 import { NewsRowSkeleton } from '../../components/skeleton/PageSkeletons';
 import { excerptText } from '../../utils/drupalParser';
+import { useLanguage } from '../../context/LanguageContext';
 
 const CalendarIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -62,6 +63,7 @@ const mapNewsItem = (item) => ({
 });
 
 function LatestNews({ newsData }) {
+    const { t } = useLanguage();
     const [newsList, setNewsList] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -89,7 +91,7 @@ function LatestNews({ newsData }) {
 
     if (loading) {
         return (
-            <section className="latest-news-section" dir="rtl">
+            <section className="latest-news-section">
                 <div className="news-container">
                     <NewsRowSkeleton />
                 </div>
@@ -102,9 +104,9 @@ function LatestNews({ newsData }) {
     }
 
     return (
-        <section className="latest-news-section" dir="rtl">
+        <section className="latest-news-section">
             <div className="news-container">
-                <h2 className="news-section-title">آخر الأخبار</h2>
+                <h2 className="news-section-title">{t("آخر الأخبار")}</h2>
 
                 <div className="news-grid">
                     {newsList.map((item) => (
@@ -124,7 +126,7 @@ function LatestNews({ newsData }) {
                                 <h3 className="news-card-title">{item.title}</h3>
                                 <p className="news-card-summary">{item.summary}</p>
                                 <Link to={item.link} className="news-card-link">
-                                    اقرأ المزيد
+                                    {t("اقرأ المزيد")}
                                 </Link>
                             </div>
                         </article>

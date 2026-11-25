@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./card.css";
 import learnMoreIcon from "../../../assets/learn-more.png";
 
@@ -15,6 +16,7 @@ const Card = ({
     className = "",
 }) => {
     const location = useLocation();
+    const { t } = useLanguage();
     const isNews = location.pathname === "/news";
     const isEvents = location.pathname === "/events";
     const isConferences = location.pathname === "/conferences";
@@ -41,7 +43,7 @@ const Card = ({
 
                 {link && (
                     <Link to={link} className="card-link">
-                        {linkText} <span className="arrow"><img src={learnMoreIcon} alt="" /></span>
+                        {t(linkText)} <span className="arrow"><img src={learnMoreIcon} alt="" /></span>
                     </Link>
                 )}
             </div>

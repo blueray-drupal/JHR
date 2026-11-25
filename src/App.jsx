@@ -46,6 +46,7 @@ import Stations from './pages/stations/Stations';
 import StationDetails from './pages/stations/StationDetails';
 import CodeOfConduct from './pages/code_of_conduct/CodeOfConduct';
 import { SitePreferencesProvider } from './context/SitePreferencesContext';
+import AccessibilityWidget from './components/accessibilityWidget/AccessibilityWidget';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -111,6 +112,7 @@ function App() {
 
         <PageRating />
         <Footer />
+        <AccessibilityWidget />
       </div>
     </SitePreferencesProvider>
   );

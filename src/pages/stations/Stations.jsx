@@ -7,8 +7,10 @@ import {
   STATIONS_MARKER_IMG,
 } from '../../services/api/stationsApi';
 import './Stations.css';
+import { useLanguage } from '../../context/LanguageContext';
 
 function Stations() {
+  const { t } = useLanguage();
   const [stations, setStations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeBranch, setActiveBranch] = useState(1);
@@ -64,7 +66,7 @@ function Stations() {
       loadingType="content"
     >
       {!loading && stations.length === 0 && (
-        <p className="stations-empty">لا توجد محطات متاحة حالياً.</p>
+        <p className="stations-empty">{t("لا توجد محطات متاحة حالياً.")}</p>
       )}
 
       {!loading && stations.length > 0 && (

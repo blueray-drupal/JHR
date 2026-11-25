@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchServices } from '../../services/api/servicesApi';
 import { ServicesHomeSkeleton } from '../../components/skeleton/PageSkeletons';
+import { useLanguage } from '../../context/LanguageContext';
 
 const stripHtml = (html) => {
     if (!html) return '';
@@ -8,6 +9,7 @@ const stripHtml = (html) => {
 };
 
 function Services() {
+    const { t } = useLanguage();
     const [section, setSection] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -28,7 +30,7 @@ function Services() {
     }, []);
 
     const servicesItems = section?.files ?? [];
-    const sectionTitle = section?.title ?? 'خدماتنا';
+    const sectionTitle = section?.title ?? t('خدماتنا');
 
     if (loading) {
         return (

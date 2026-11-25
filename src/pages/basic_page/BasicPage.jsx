@@ -14,6 +14,7 @@ function BasicPage() {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
+            setPage(null);
             try {
                 const response = await fetch(`${baseUrl}/jsonapi/node/basic_page`);
 

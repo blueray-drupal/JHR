@@ -3,6 +3,7 @@ import {
     applySitePreferences,
     clampFontScale,
     DEFAULT_PREFERENCES,
+    FONT_SCALE_MAX,
     loadSitePreferences,
     resetSitePreferences,
 } from '../utils/sitePreferences';
@@ -51,6 +52,22 @@ export function SitePreferencesProvider({ children }) {
         }));
     }, [updatePreferences]);
 
+    const togglePreference = useCallback((key) => {
+        updatePreferences((current) => ({
+            ...current,
+            [key]: !current[key],
+        }));
+    }, [updatePreferences]);
+
+    const cycleFontSize = useCallback(() => {
+        updatePreferences((current) => ({
+            ...current,
+            fontScale: current.fontScale >= FONT_SCALE_MAX
+                ? 0
+                : clampFontScale(current.fontScale + 1),
+        }));
+    }, [updatePreferences]);
+
     const resetPreferences = useCallback(() => {
         setPreferences(resetSitePreferences());
     }, []);
@@ -62,6 +79,8 @@ export function SitePreferencesProvider({ children }) {
             increaseFontSize,
             decreaseFontSize,
             toggleGrayscale,
+            togglePreference,
+            cycleFontSize,
             resetPreferences,
         }),
         [
@@ -70,6 +89,8 @@ export function SitePreferencesProvider({ children }) {
             increaseFontSize,
             decreaseFontSize,
             toggleGrayscale,
+            togglePreference,
+            cycleFontSize,
             resetPreferences,
         ],
     );

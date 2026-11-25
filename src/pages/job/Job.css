@@ -48,7 +48,7 @@
 .main-content .jobs-wrapper .job-date,
 .full-content .jobs-wrapper .job-date {
     color: #0C6F8C !important;
-    text-align: right;
+    text-align: start;
     font-family: Cairo, sans-serif;
     font-size: 14px;
     font-style: normal;

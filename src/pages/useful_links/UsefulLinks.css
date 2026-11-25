@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     direction: rtl;
-    text-align: right;
+    text-align: start;
 }
 
 .useful-links-group {

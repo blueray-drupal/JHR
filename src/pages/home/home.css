@@ -258,7 +258,7 @@
 
 .explore-title {
   color: #0C6F8C !important;
-  text-align: right;
+  text-align: start;
   font-family: Cairo, sans-serif;
   font-size: var(--font-size-35, 35px);
   font-style: normal;
@@ -348,7 +348,7 @@
 
   line-height: 1.5;
 
-  text-align: right;
+  text-align: start;
 
   transition: color 0.2s ease;
 }
@@ -593,7 +593,7 @@
 
 .slider-wrapper {
   color: #ffffff;
-  text-align: right;
+  text-align: start;
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -692,7 +692,7 @@ a.slider-btn:hover,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: right;
+  text-align: start;
 }
 
 .about-home-title {
@@ -865,7 +865,7 @@ a.slider-btn:hover,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: right;
+  text-align: start;
 }
 
 .fact-number {

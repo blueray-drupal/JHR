@@ -36,6 +36,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Swal from 'sweetalert2';
 import { fetchWebformElements, submitWebform, submitWebformWithFile } from '../../services/api/drupalWebformApi';
 import { buildFieldList } from '../../utils/webformSchema';
+import { useLanguage } from '../../context/LanguageContext';
 import './DrupalWebform.css';
 
 // ─── Initial Values ───────────────────────────────────────────────────────────
@@ -255,6 +256,7 @@ const DEFAULT_MESSAGES = {
  * @param {React.ReactNode} [beforeActions] - Optional content rendered after fields, before submit
  * @param {React.ReactNode} [submitIcon] - Optional icon rendered inside submit button
  * @param {object}   [swalProps]     - Extra SweetAlert2 options merged into every Swal.fire() call
+ * @param {Function} [beforeSubmit]  - Return false to cancel submit after field validation
  * @param {Function} [onSuccess]     - Called with Drupal response after success
  * @param {Function} [onError]       - Called with Error object on submission failure
  */
@@ -274,9 +276,11 @@ const DrupalWebform = ({
   beforeActions,
   submitIcon,
   swalProps,
+  beforeSubmit,
   onSuccess,
   onError,
 }) => {
+  const { t } = useLanguage();
   const messages = useMemo(
     () => ({ ...DEFAULT_MESSAGES, ...messagesProp }),
     [messagesProp]
@@ -315,7 +319,7 @@ const DrupalWebform = ({
         if (!cancelled) {
           const msg = err.message || messages.loadError;
           setLoadError(msg);
-          Swal.fire({ icon: 'error', title: messages.errorTitle, text: msg, confirmButtonText: messages.ok, ...swalProps });
+          Swal.fire({ icon: 'error', title: t(messages.errorTitle), text: t(msg), confirmButtonText: t(messages.ok), ...swalProps });
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -368,6 +372,11 @@ const DrupalWebform = ({
       return;
     }
 
+    if (beforeSubmit) {
+      const allowed = await beforeSubmit();
+      if (allowed === false) return;
+    }
+
     setSubmitting(true);
     setErrors({});
 
@@ -407,9 +416,9 @@ const DrupalWebform = ({
 
       await Swal.fire({
         icon: 'success',
-        title: messages.successTitle,
-        text: messages.successText,
-        confirmButtonText: messages.ok,
+        title: t(messages.successTitle),
+        text: t(messages.successText),
+        confirmButtonText: t(messages.ok),
         ...swalProps,
       });
 
@@ -421,9 +430,9 @@ const DrupalWebform = ({
 
       Swal.fire({
         icon: 'error',
-        title: messages.errorTitle,
-        text: err.message || messages.errorGeneric,
-        confirmButtonText: messages.ok,
+        title: t(messages.errorTitle),
+        text: t(err.message || messages.errorGeneric),
+        confirmButtonText: t(messages.ok),
         ...swalProps,
       });
       onError?.(err);
@@ -547,10 +556,10 @@ const DrupalWebform = ({
                 ? formData[field.key].map((f) => f.name).join(', ')
                 : formData[field.key] instanceof File
                   ? formData[field.key].name
-                  : field.placeholder || 'اضغط لاختيار ملف'}
+                  : field.placeholder || t('اضغط لاختيار ملف')}
             </span>
             {(field.fileAccept || field.description) && (
-              <span className="dwf-file-hint">{field.description || `الملفات المسموح بها: ${field.fileAccept}`}</span>
+              <span className="dwf-file-hint">{field.description || `${t('الملفات المسموح بها')}: ${field.fileAccept}`}</span>
             )}
           </label>
         ) : (
@@ -576,7 +585,7 @@ const DrupalWebform = ({
         )}
 
         {hasError && (
-          <span role="alert" className="dwf-error">{errors[field.key]}</span>
+          <span role="alert" className="dwf-error">{t(errors[field.key])}</span>
         )}
       </div>
     );
@@ -612,7 +621,7 @@ const DrupalWebform = ({
     return (
       <div className="dwf dwf--loading" role="status" aria-live="polite">
         <span className="dwf-spinner" aria-hidden="true" />
-        <span>{messages.loading}</span>
+        <span>{t(messages.loading)}</span>
       </div>
     );
   }
@@ -620,7 +629,7 @@ const DrupalWebform = ({
   if (loadError) {
     return (
       <div className="dwf dwf--error" role="alert">
-        <p className="dwf-message dwf-message--error">{loadError}</p>
+        <p className="dwf-message dwf-message--error">{t(loadError)}</p>
       </div>
     );
   }
@@ -628,7 +637,7 @@ const DrupalWebform = ({
   if (fields.length === 0) {
     return (
       <div className="dwf dwf--empty">
-        <p className="dwf-message">{messages.empty}</p>
+        <p className="dwf-message">{t(messages.empty)}</p>
       </div>
     );
   }
@@ -647,7 +656,7 @@ const DrupalWebform = ({
       <div className="dwf-actions">
         <button type="submit" className="dwf-btn" disabled={submitting} aria-busy={submitting}>
           {submitIcon ? <span className="dwf-btn-icon" aria-hidden="true">{submitIcon}</span> : null}
-          {submitting ? messages.submitting : (submitLabel ?? messages.submitLabel)}
+          {submitting ? t(messages.submitting) : (submitLabel ?? t(messages.submitLabel))}
         </button>
       </div>
     </form>

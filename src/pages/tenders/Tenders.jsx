@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../layout/page_layout/PageLayout';
 import { fetchTenders } from '../../services/api/tendersApi';
 import './Tenders.css';
+import { useLanguage } from '../../context/LanguageContext';
 
 const formatDateRange = (startDate, endDate) => {
     if (startDate && endDate) {
@@ -12,6 +13,7 @@ const formatDateRange = (startDate, endDate) => {
 };
 
 function Tenders() {
+    const { t } = useLanguage();
     const [tenders, setTenders] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -45,7 +47,7 @@ function Tenders() {
             loadingType="tenders"
         >
             {!loading && tenders.length === 0 && (
-                <p className="tenders-empty">لا توجد عطاءات متاحة حالياً.</p>
+                <p className="tenders-empty">{t("لا توجد عطاءات متاحة حالياً.")}</p>
             )}
 
             {!loading && tenders.length > 0 && (
@@ -62,7 +64,7 @@ function Tenders() {
                                     state={{ tenderData: tender }}
                                     className="tender-card-link"
                                 >
-                                    اقرأ المزيد
+                                    {t("اقرأ المزيد")}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
